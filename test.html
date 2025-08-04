@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resume Button Test</title>
+    <style>
+        body { 
+            background: #000; 
+            color: #fff; 
+            font-family: Arial, sans-serif;
+            height: 200vh;
+        }
+        .floating-resume-btn {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            z-index: 1000;
+            opacity: 1;
+            background: #00caff;
+            padding: 10px 20px;
+            border-radius: 25px;
+        }
+        .floating-resume-btn a {
+            color: #000;
+            text-decoration: none;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <h1>Resume Button Test</h1>
+    <p>Scroll down to test the button visibility...</p>
+    <div style="height: 100vh;"></div>
+    
+    <div class="floating-resume-btn">
+        <a href="resume-unmesh-achar.pdf" target="_blank">
+            <i class="fas fa-download"></i>
+            My Resume
+        </a>
+    </div>
+    
+    <p>The resume button should be visible in the bottom right corner.</p>
+</body>
+</html>

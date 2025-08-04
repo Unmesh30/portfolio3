@@ -1,0 +1,568 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Unmesh Achar - Computer Engineering Graduate</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Orbitron:wght@400;700;900&family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <h2>Unmesh Achar</h2>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="#home" class="nav-link">Home</a></li>
+                <li><a href="#about" class="nav-link">About Me</a></li>
+                <li><a href="#education" class="nav-link">Education</a></li>
+                <li><a href="#toolbox" class="nav-link">Toolbox</a></li>
+                <li><a href="#projects" class="nav-link">Projects</a></li>
+                <li><a href="#experience" class="nav-link">Experience</a></li>
+                <li><a href="#publications" class="nav-link">Publications</a></li>
+                <li><a href="#bucket-list" class="nav-link">Bucket List</a></li>
+                <li><a href="#contact" class="nav-link">Contact</a></li>
+            </ul>
+            <div class="hamburger">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+        </div>
+    </nav>
+
+    <section id="home" class="hero">
+        <div id="three-canvas"></div>
+        <div class="floating-elements">
+            <div class="floating-cube cube-1"></div>
+            <div class="floating-cube cube-2"></div>
+            <div class="floating-cube cube-3"></div>
+            <div class="floating-sphere sphere-1"></div>
+            <div class="floating-sphere sphere-2"></div>
+        </div>
+        <div class="neural-network">
+            <div class="node node-1"></div>
+            <div class="node node-2"></div>
+            <div class="node node-3"></div>
+            <div class="node node-4"></div>
+            <div class="node node-5"></div>
+            <div class="connection conn-1"></div>
+            <div class="connection conn-2"></div>
+            <div class="connection conn-3"></div>
+            <div class="connection conn-4"></div>
+        </div>
+        <div class="hero-content">
+            <div class="glitch-text">
+                <h1>Hello, I'm <span class="highlight neon-text">Unmesh Achar</span></h1>
+                <h1 class="glitch-layer" data-text="Hello, I'm Unmesh Achar">Hello, I'm <span class="highlight">Unmesh Achar</span></h1>
+            </div>
+            <h2 class="cyber-subtitle">
+                I <span class="typewriter-text" id="typewriter">Code</span><span class="cursor-zer0">|</span>
+            </h2>
+            <p class="hero-description">Computer Engineering Graduate Student passionate about Machine Learning, Computer Vision, and developing AI solutions for real-world problems.</p>
+            <div class="hero-buttons">
+                <a href="#projects" class="btn btn-primary neon-btn">
+                    <span class="btn-text">View My Work</span>
+                    <div class="btn-glow"></div>
+                </a>
+                <a href="#contact" class="btn btn-secondary hologram-btn">
+                    <span class="btn-text">Get In Touch</span>
+                    <div class="hologram-effect"></div>
+                </a>
+            </div>
+        </div>
+        <div class="scroll-indicator">
+            <div class="scroll-dot"></div>
+            <div class="scroll-text">Scroll</div>
+        </div>
+    </section>
+
+    <section id="about" class="about">
+        <div class="container">
+            <h2 class="section-title">About Me</h2>
+            <div class="about-content">
+                <div class="about-left">
+                    <div class="profile-photo-container">
+                        <div class="profile-photo">
+                            <img src="profile-photo.jpg" alt="Unmesh Achar" id="profile-img">
+                            <div class="photo-glow"></div>
+                        </div>
+                    </div>
+                    <div class="social-links-about">
+                        <a href="https://www.linkedin.com/in/unmesh-achar-319467210/" class="social-link-new" target="_blank">
+                            <i class="fab fa-linkedin"></i>
+                        </a>
+                        <a href="https://github.com/Unmesh30" class="social-link-new" target="_blank">
+                            <i class="fab fa-github"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="about-right">
+                    <div class="about-text">
+                        <h3>Hello! I'm Unmesh Achar</h3>
+                        <p>I'm a Computer Engineering graduate student at New York University with a strong background in Machine Learning, Computer Vision, and AI research. My work focuses on developing clinically validated AI systems for medical diagnosis and real-world applications.</p>
+                        <p>I have published research in Nature Scientific Reports and contributed to cutting-edge projects in dermatology AI, achieving 99.43% accuracy in psoriasis detection systems.</p>
+                        <p>When I'm not coding, I enjoy exploring new technologies, contributing to open-source projects, and staying up-to-date with the latest advancements in AI and machine learning.</p>
+                    </div>
+                    <div class="about-stats">
+                        <div class="stat">
+                            <h3>3.83</h3>
+                            <p>NYU GPA</p>
+                        </div>
+                        <div class="stat">
+                            <h3>2</h3>
+                            <p>Publications</p>
+                        </div>
+                        <div class="stat">
+                            <h3>5+</h3>
+                            <p>Major Projects</p>
+                        </div>
+                        <div class="stat">
+                            <h3>3+</h3>
+                            <p>Years Experience</p>
+                        </div>
+                    </div>
+                    
+                    <div class="activity-stats">
+                        <h4>Live Activity</h4>
+                        <div class="live-stats-grid">
+                            <!-- GitHub Stats Card -->
+                            <div class="stats-card github-card">
+                                <div class="stats-header">
+                                    <div class="stats-icon">
+                                        <i class="fab fa-github"></i>
+                                    </div>
+                                    <div class="stats-info">
+                                        <h3>GitHub</h3>
+                                        <span class="username">@Unmesh30</span>
+                                    </div>
+                                </div>
+                                
+                                <div class="stats-content">
+                                    <div class="main-stat">
+                                        <span class="stat-number" id="github-repos">--</span>
+                                        <span class="stat-label">Public Repositories</span>
+                                    </div>
+                                    
+                                    <div class="sub-stats">
+                                        <div class="sub-stat">
+                                            <span class="sub-number" id="github-followers">--</span>
+                                            <span class="sub-label">Followers</span>
+                                        </div>
+                                        <div class="sub-stat">
+                                            <span class="sub-number" id="github-stars">--</span>
+                                            <span class="sub-label">Total Stars</span>
+                                        </div>
+                                        <div class="sub-stat">
+                                            <span class="sub-number" id="github-commits">--</span>
+                                            <span class="sub-label">Commits (2025)</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="languages-section" id="github-languages">
+                                    <div class="loading-text">Loading languages...</div>
+                                </div>
+                            </div>
+                            
+                            <!-- LeetCode Stats Card -->
+                            <div class="stats-card leetcode-card">
+                                <div class="stats-header">
+                                    <div class="stats-icon leetcode-icon">
+                                        <i class="fas fa-code"></i>
+                                    </div>
+                                    <div class="stats-info">
+                                        <h3>LeetCode</h3>
+                                        <span class="username">@UnmeshXD</span>
+                                    </div>
+                                </div>
+                                
+                                <div class="stats-content">
+                                    <div class="main-stat">
+                                        <span class="stat-number" id="leetcode-total">--</span>
+                                        <span class="stat-label">Problems Solved</span>
+                                    </div>
+                                    
+                                    <div class="difficulty-stats">
+                                        <div class="difficulty-item easy">
+                                            <span class="difficulty-count" id="leetcode-easy">--</span>
+                                            <span class="difficulty-label">Easy</span>
+                                        </div>
+                                        <div class="difficulty-item medium">
+                                            <span class="difficulty-count" id="leetcode-medium">--</span>
+                                            <span class="difficulty-label">Medium</span>
+                                        </div>
+                                        <div class="difficulty-item hard">
+                                            <span class="difficulty-count" id="leetcode-hard">--</span>
+                                            <span class="difficulty-label">Hard</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="recent-activities" id="leetcode-activities">
+                                    <h4>Recent Activities</h4>
+                                    <div class="activity-list">
+                                        <div class="loading-text">Loading recent activities...</div>
+                                    </div>
+                                </div>
+                                
+                                <div class="leetcode-links">
+                                    <a href="https://leetcode.com/u/UnmeshXD/" target="_blank" class="leetcode-link">
+                                        View Profile <i class="fas fa-external-link-alt"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="education" class="education">
+        <div class="container">
+            <h2 class="section-title">Education</h2>
+            <div class="education-timeline">
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <h3>Master's in Computer Engineering</h3>
+                        <h4>New York University</h4>
+                        <span class="timeline-date">09/2024 - 05/2026</span>
+                        <p>Cumulative GPA: 3.833/4.0</p>
+                        <p>Relevant Coursework: Machine Learning, Computer System Architecture, Big Data, Java, System Engineering, Data Visualization</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <h3>Bachelor's in Computer Science and Engineering</h3>
+                        <h4>Kalinga Institute of Industrial Technology</h4>
+                        <span class="timeline-date">08/2020 - 06/2024</span>
+                        <p>Cumulative CGPA: 8.24/10</p>
+                        <p>Relevant Coursework: Engineering Mathematics, DBMS, AI, Software Engineering, Operating System</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="toolbox" class="toolbox">
+        <div class="container">
+            <h2 class="section-title">Toolbox</h2>
+            <div class="skills-3d-container">
+                <div class="skills-orbit">
+                    <div class="skill-cube programming">
+                        <div class="cube-face front">
+                            <i class="fas fa-code"></i>
+                            <span>Programming</span>
+                        </div>
+                        <div class="cube-face back">Python</div>
+                        <div class="cube-face right">C++</div>
+                        <div class="cube-face left">Java</div>
+                        <div class="cube-face top">SQL</div>
+                        <div class="cube-face bottom">Spark</div>
+                    </div>
+                    
+                    <div class="skill-cube database">
+                        <div class="cube-face front">
+                            <i class="fas fa-database"></i>
+                            <span>Database</span>
+                        </div>
+                        <div class="cube-face back">MySQL</div>
+                        <div class="cube-face right">MongoDB</div>
+                        <div class="cube-face left">Data</div>
+                        <div class="cube-face top">NoSQL</div>
+                        <div class="cube-face bottom">SQL</div>
+                    </div>
+                    
+                    <div class="skill-cube ai-ml">
+                        <div class="cube-face front">
+                            <i class="fas fa-brain"></i>
+                            <span>AI & ML</span>
+                        </div>
+                        <div class="cube-face back">CNN</div>
+                        <div class="cube-face right">Transfer Learning</div>
+                        <div class="cube-face left">Computer Vision</div>
+                        <div class="cube-face top">Deep Learning</div>
+                        <div class="cube-face bottom">Neural Networks</div>
+                    </div>
+                    
+                    <div class="skill-cube cloud-tech">
+                        <div class="cube-face front">
+                            <i class="fas fa-cloud"></i>
+                            <span>Cloud & Big Data</span>
+                        </div>
+                        <div class="cube-face back">Microsoft Azure</div>
+                        <div class="cube-face right">Hadoop</div>
+                        <div class="cube-face left">Hive</div>
+                        <div class="cube-face top">Big Data</div>
+                        <div class="cube-face bottom">Cloud Computing</div>
+                    </div>
+                    
+                    <div class="skill-cube tools">
+                        <div class="cube-face front">
+                            <i class="fas fa-tools"></i>
+                            <span>Tools & Frameworks</span>
+                        </div>
+                        <div class="cube-face back">MediaPipe</div>
+                        <div class="cube-face right">Fluidsynth</div>
+                        <div class="cube-face left">Computer Vision</div>
+                        <div class="cube-face top">Data Processing</div>
+                        <div class="cube-face bottom">Audio Processing</div>
+                    </div>
+                </div>
+                
+                <div class="skills-info-panel">
+                    <h3 id="skill-title">Hover over a cube to explore</h3>
+                    <p id="skill-description">Discover the technologies and frameworks I work with</p>
+                    <div id="skill-tags"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="projects" class="projects">
+        <div class="container">
+            <h2 class="section-title">Projects</h2>
+            <div class="projects-grid">
+                <div class="project-card">
+                    <div class="project-image">
+                        <i class="fas fa-map-marked-alt"></i>
+                    </div>
+                    <div class="project-content">
+                        <h3>NYC Risk & Route Prediction Application</h3>
+                        <p>Deployed an interactive Streamlit app with integrated GoMaps & Geopy APIs for real-time visual navigation and incident heatmaps across 200+ geozones using Random Forests (92% accuracy).</p>
+                        <div class="project-tech">
+                            <span class="tech-tag">Python</span>
+                            <span class="tech-tag">Streamlit</span>
+                            <span class="tech-tag">Random Forest</span>
+                            <span class="tech-tag">GoMaps API</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="https://github.com/Unmesh30" class="project-link"><i class="fab fa-github"></i> Code</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <div class="project-image">
+                        <i class="fas fa-user-md"></i>
+                    </div>
+                    <div class="project-content">
+                        <h3>Detection of Acne Disease Prediction</h3>
+                        <p>Achieved 95.64% accuracy using fine-tuned MobileNet for facial acne classification. Built a Gradio-based interface for real-time inference with 90%+ validation precision.</p>
+                        <div class="project-tech">
+                            <span class="tech-tag">MobileNet</span>
+                            <span class="tech-tag">Gradio</span>
+                            <span class="tech-tag">CNN</span>
+                            <span class="tech-tag">Computer Vision</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="https://github.com/Unmesh30" class="project-link"><i class="fab fa-github"></i> Code</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <div class="project-image">
+                        <i class="fas fa-brain"></i>
+                    </div>
+                    <div class="project-content">
+                        <h3>Mind Controlled Smart Home System</h3>
+                        <p>Proposed a non-invasive BCI-powered smart home concept leveraging EEG signal acquisition and CNN-RNN modeling to detect intent and trigger IoT-based appliance control.</p>
+                        <div class="project-tech">
+                            <span class="tech-tag">BCI</span>
+                            <span class="tech-tag">CNN-RNN</span>
+                            <span class="tech-tag">IoT</span>
+                            <span class="tech-tag">Jetson Xavier</span>
+                            <span class="tech-tag">System Engineering</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="#" class="project-link report-link"><i class="fas fa-file-alt"></i> Report</a>
+                            <a href="#" class="project-link demo-link"><i class="fas fa-play-circle"></i> Demo</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <div class="project-image">
+                        <i class="fas fa-hand-paper"></i>
+                    </div>
+                    <div class="project-content">
+                        <h3>Air-Piano: Touchless MIDI Instrument</h3>
+                        <p>Implemented a real-time, touchless MIDI instrument using cvzone/MediaPipe hand tracking to detect finger gestures and trigger chord playback via Fluidsynth, with multi-threaded sustain logic for smooth audio output.</p>
+                        <div class="project-tech">
+                            <span class="tech-tag">MediaPipe</span>
+                            <span class="tech-tag">Fluidsynth</span>
+                            <span class="tech-tag">Computer Vision</span>
+                            <span class="tech-tag">MIDI</span>
+                            <span class="tech-tag">CVZone</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="https://github.com/Unmesh30/Aeras-Piano" class="project-link"><i class="fab fa-github"></i> Code</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <div class="project-image">
+                        <i class="fas fa-terminal"></i>
+                    </div>
+                    <div class="project-content">
+                        <h3>Nexus Shell</h3>
+                        <p>A complete shell implementation in C featuring command parsing, process management, and built-in commands. Demonstrates systems programming concepts and low-level process control.</p>
+                        <div class="project-tech">
+                            <span class="tech-tag">C</span>
+                            <span class="tech-tag">Systems Programming</span>
+                            <span class="tech-tag">Process Management</span>
+                            <span class="tech-tag">Unix Shell</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="https://github.com/Unmesh30/nexus-shell" class="project-link"><i class="fab fa-github"></i> Code</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="bucket-list" class="bucket-list">
+        <div class="container">
+            <h2 class="section-title">Bucket List</h2>
+            <p class="bucket-intro">Goals and dreams I'm working towards - both personal and professional aspirations that drive my journey.</p>
+            <div class="bucket-grid">
+                <!-- Bucket list items will be added here -->
+                <div class="bucket-placeholder">
+                    <div class="placeholder-icon">
+                        <i class="fas fa-plus-circle"></i>
+                    </div>
+                    <h3>Add Your Goals</h3>
+                    <p>Your bucket list items will appear here</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="experience" class="experience">
+        <div class="container">
+            <h2 class="section-title">Work Experience</h2>
+            <div class="experience-timeline">
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <h3>Research Intern</h3>
+                        <h4>National Institute of Technical Teachers' Training and Research, Kolkata</h4>
+                        <span class="timeline-date">05/2023 - 07/2023</span>
+                        <p><strong>Project:</strong> "Deep Transfer Learning for Computer-Assisted Diagnosis of Skin Psoriasis Infection"</p>
+                        <ul>
+                            <li>Built a clinically validated psoriasis detection system using deep transfer learning (MobileNet, VGG16, VGG19, ResNet-50) on 893 curated image patches</li>
+                            <li>Engineered patch-based preprocessing and image normalization workflows, optimizing model performance</li>
+                            <li>Led cross-functional collaboration with dermatologists and AI researchers, contributing to a published Scientific Reports paper (AUC: 0.994, Acc: 99.43%)</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <h3>Nesternship Intern — AI-ML in Data Quality and Governance</h3>
+                        <h4>Nestlé India Ltd. (Indian Headquarters)</h4>
+                        <span class="timeline-date">05/2025 - 07/2025</span>
+                        <ul>
+                            <li>Developed a secure, branch-level order response system using Power Apps and SharePoint Lists, enforcing region-specific access and real-time validation</li>
+                            <li>Automated ingestion of multi-sheet Excel files with Power Automate, ensuring duplicate-free updates to SharePoint via daily ID-based syncs</li>
+                            <li>Designed email automation logic for dynamic links and attachments, improving response turnaround and reducing manual overhead by 60%</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="publications" class="publications">
+        <div class="container">
+            <h2 class="section-title">Publications</h2>
+            <div class="publications-grid">
+                <div class="publication-card">
+                    <div class="publication-content">
+                        <h3>CAD-PsorNet: deep transfer learning for computer-assisted diagnosis of skin Psoriasis</h3>
+                        <h4>Nature Scientific Reports</h4>
+                        <span class="publication-date">November 2024</span>
+                        <p>Achieved 99.43% accuracy and AUC of 0.994 with fine-tuned MobileNet on psoriasis vs. healthy skin patch classification.</p>
+                        <div class="publication-links">
+                            <a href="https://www.nature.com/articles/s41598-024-76852-6" class="publication-link"><i class="fas fa-external-link-alt"></i> View Paper</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="publication-card">
+                    <div class="publication-content">
+                        <h3>Artificial Intelligence in Dermatology: A Systematized Review</h3>
+                        <h4>Indian Journal of Dermatology & Venereology</h4>
+                        <span class="publication-date">March 2025</span>
+                        <p>Analyzed 27 studies; highlighted AI's accuracy (up to 99.5%) and challenges across skin types, including bias in Fitzpatrick Type 6.</p>
+                        <div class="publication-links">
+                            <a href="https://journals.lww.com/ijdv/abstract/9900/artificial_intelligence in dermatology a.152.aspx" class="publication-link"><i class="fas fa-external-link-alt"></i> View Paper</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="contact">
+        <div class="container">
+            <h2 class="section-title">Get In Touch</h2>
+            <div class="contact-content">
+                <div class="contact-info">
+                    <h3>Let's Connect</h3>
+                    <p>I'm always open to discussing new opportunities, research collaborations, or just having a chat about AI and technology!</p>
+                    <div class="contact-item">
+                        <i class="fas fa-envelope"></i>
+                        <span>unmeshachar02@gmail.com</span>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-phone"></i>
+                        <span>+1 (646) 592-5245</span>
+                    </div>
+                    <div class="social-links">
+                        <a href="https://www.linkedin.com/in/unmesh-achar-319467210/" class="social-link"><i class="fab fa-linkedin"></i></a>
+                        <a href="https://github.com/Unmesh30" class="social-link"><i class="fab fa-github"></i></a>
+                    </div>
+                </div>
+                <form class="contact-form">
+                    <div class="form-group">
+                        <input type="text" name="name" placeholder="Your Name" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="email" name="email" placeholder="Your Email" required>
+                    </div>
+                    <div class="form-group">
+                        <textarea name="message" placeholder="Your Message" rows="5" required></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Send Message</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2024 Unmesh Achar. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Floating Resume Button -->
+    <div class="floating-resume-btn">
+        <a href="resume-unmesh-achar.pdf" class="resume-floating-link" target="_blank">
+            <i class="fas fa-download"></i>
+            <span>My Resume</span>
+        </a>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
