@@ -494,6 +494,16 @@ class MobileOptimizationController {
         const animatedElements = document.querySelectorAll('.floating-cube, .floating-sphere, .neural-network');
         animatedElements.forEach(element => {
             element.style.animationDuration = '20s'; // Slower animations
+            element.style.willChange = 'auto'; // Remove will-change to save memory
+        });
+        
+        // Optimize canvas rendering
+        const canvases = document.querySelectorAll('canvas');
+        canvases.forEach(canvas => {
+            const ctx = canvas.getContext('2d');
+            if (ctx) {
+                ctx.imageSmoothingEnabled = false; // Disable antialiasing for performance
+            }
         });
         
         // Disable some particle effects
@@ -1201,12 +1211,390 @@ function typeWriter(element, text, speed = 80) {
     type();
 }
 
-// Initialize typing effect
+// Enhanced Loading Screen Controller
+class LoadingController {
+    constructor() {
+        this.loadingScreen = document.getElementById('loading-screen');
+        this.progressBar = document.getElementById('loading-progress-bar');
+        this.percentageText = document.getElementById('loading-percentage');
+        this.loadedAssets = 0;
+        this.totalAssets = 0;
+        this.init();
+    }
+    
+    init() {
+        if (!this.loadingScreen) return;
+        
+        // Count total assets to load
+        this.countAssets();
+        
+        // Start loading simulation
+        this.simulateLoading();
+    }
+    
+    countAssets() {
+        const images = document.querySelectorAll('img');
+        const scripts = document.querySelectorAll('script[src]');
+        const stylesheets = document.querySelectorAll('link[rel="stylesheet"]');
+        
+        this.totalAssets = images.length + scripts.length + stylesheets.length;
+    }
+    
+    simulateLoading() {
+        let progress = 0;
+        const interval = setInterval(() => {
+            progress += Math.random() * 15;
+            if (progress >= 100) {
+                progress = 100;
+                clearInterval(interval);
+                setTimeout(() => this.hideLoadingScreen(), 500);
+            }
+            
+            this.updateProgress(progress);
+        }, 100);
+    }
+    
+    updateProgress(progress) {
+        const roundedProgress = Math.round(progress);
+        if (this.progressBar) {
+            this.progressBar.style.width = `${roundedProgress}%`;
+        }
+        if (this.percentageText) {
+            this.percentageText.textContent = `${roundedProgress}%`;
+        }
+    }
+    
+    hideLoadingScreen() {
+        if (this.loadingScreen) {
+            this.loadingScreen.style.opacity = '0';
+            this.loadingScreen.style.pointerEvents = 'none';
+            
+            setTimeout(() => {
+                this.loadingScreen.style.display = 'none';
+                this.initializeApp();
+            }, 300);
+        }
+    }
+    
+    initializeApp() {
+        // Initialize typing effect
+        const heroTitle = document.querySelector('.hero-content h1');
+        if (heroTitle) {
+            const fullText = heroTitle.textContent;
+            typeWriter(heroTitle, fullText, 60);
+        }
+        
+        // Trigger entrance animations
+        document.body.classList.add('app-loaded');
+    }
+}
+
+// Project Details Modal System
+function showProjectDetails(projectId) {
+    const projectData = {
+        'nyc-risk': {
+            title: 'NYC Risk & Route Prediction',
+            description: 'Advanced real-time navigation system with machine learning-powered risk assessment.',
+            features: [
+                'Real-time incident heatmaps across 200+ NYC geozones',
+                'Random Forest ML model achieving 92% accuracy',
+                'Integrated GoMaps & Geopy APIs for visual navigation',
+                'Interactive Streamlit interface with live data feeds',
+                'Predictive routing based on historical incident patterns'
+            ],
+            tech: ['Python', 'Random Forest', 'Streamlit', 'GoMaps API', 'Geopy', 'Pandas', 'NumPy'],
+            metrics: {
+                'Accuracy': '92%',
+                'Geozones Covered': '200+',
+                'Response Time': '<2s',
+                'Data Points': '50K+'
+            }
+        },
+        'acne-detection': {
+            title: 'Acne Disease Detection System',
+            description: 'AI-powered dermatological analysis using fine-tuned MobileNet architecture.',
+            features: [
+                'Fine-tuned MobileNet for facial acne classification',
+                'Real-time inference with Gradio interface',
+                '95.64% classification accuracy on test dataset',
+                'Optimized for mobile deployment',
+                'Clinical validation pipeline'
+            ],
+            tech: ['MobileNet', 'TensorFlow', 'Computer Vision', 'Gradio', 'Python', 'OpenCV'],
+            metrics: {
+                'Accuracy': '95.64%',
+                'Precision': '90%+',
+                'Inference Time': '<500ms',
+                'Model Size': '16MB'
+            }
+        },
+        'air-piano': {
+            title: 'Air-Piano: Touchless MIDI Controller',
+            description: 'Revolutionary gesture-controlled musical instrument using computer vision.',
+            features: [
+                'MediaPipe hand tracking for gesture recognition',
+                'Real-time MIDI chord generation',
+                'Multi-threaded sustain logic for natural playback',
+                'Fluidsynth integration for high-quality audio',
+                'Customizable chord progressions'
+            ],
+            tech: ['MediaPipe', 'Python', 'MIDI', 'Fluidsynth', 'OpenCV', 'Threading'],
+            metrics: {
+                'Latency': '<50ms',
+                'Accuracy': '95%+',
+                'Chord Library': '100+',
+                'FPS': '30+'
+            }
+        },
+        'nexus-shell': {
+            title: 'Nexus Shell - Custom Unix Shell',
+            description: 'Complete shell implementation with advanced process management.',
+            features: [
+                'Full command parsing and execution',
+                'Built-in commands (cd, pwd, exit, etc.)',
+                'Process management and job control',
+                'Signal handling and error recovery',
+                'Memory-efficient design'
+            ],
+            tech: ['C', 'Unix System Calls', 'Process Control', 'Signal Handling', 'Memory Management'],
+            metrics: {
+                'Memory Usage': '<1MB',
+                'Commands': '15+',
+                'Performance': 'Native Speed',
+                'Compatibility': 'POSIX'
+            }
+        }
+    };
+    
+    createProjectModal(projectData[projectId]);
+}
+
+function createProjectModal(project) {
+    if (!project) return;
+    
+    // Remove existing modal
+    const existingModal = document.querySelector('.project-modal');
+    if (existingModal) {
+        existingModal.remove();
+    }
+    
+    const modal = document.createElement('div');
+    modal.className = 'project-modal';
+    modal.innerHTML = `
+        <div class="modal-backdrop" onclick="closeProjectModal()"></div>
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>${project.title}</h3>
+                <button class="modal-close" onclick="closeProjectModal()">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p class="project-description">${project.description}</p>
+                
+                <div class="project-features">
+                    <h4>Key Features</h4>
+                    <ul>
+                        ${project.features.map(feature => `<li>${feature}</li>`).join('')}
+                    </ul>
+                </div>
+                
+                <div class="project-tech">
+                    <h4>Technologies Used</h4>
+                    <div class="tech-tags">
+                        ${project.tech.map(tech => `<span class="tech-tag">${tech}</span>`).join('')}
+                    </div>
+                </div>
+                
+                <div class="project-metrics">
+                    <h4>Performance Metrics</h4>
+                    <div class="metrics-grid">
+                        ${Object.entries(project.metrics).map(([key, value]) => 
+                            `<div class="metric-item">
+                                <span class="metric-label">${key}</span>
+                                <span class="metric-value">${value}</span>
+                            </div>`
+                        ).join('')}
+                    </div>
+                </div>
+            </div>
+        </div>
+    `;
+    
+    document.body.appendChild(modal);
+    
+    // Trigger animation
+    requestAnimationFrame(() => {
+        modal.classList.add('active');
+    });
+}
+
+function closeProjectModal() {
+    const modal = document.querySelector('.project-modal');
+    if (modal) {
+        modal.classList.remove('active');
+        setTimeout(() => modal.remove(), 300);
+    }
+}
+
+// Citation Modal System
+function showCitation(paperId) {
+    const citationData = {
+        'nature-paper': {
+            title: 'CAD-PsorNet: deep transfer learning for computer-assisted diagnosis of skin Psoriasis',
+            authors: 'Unmesh Achar, Soumya Ranjan Nayak, Sanjay Agrawal',
+            journal: 'Nature Scientific Reports',
+            year: '2024',
+            doi: '10.1038/s41598-024-76852-6',
+            apa: 'Achar, U., Nayak, S. R., & Agrawal, S. (2024). CAD-PsorNet: deep transfer learning for computer-assisted diagnosis of skin Psoriasis. Scientific Reports, 14, 26501. https://doi.org/10.1038/s41598-024-76852-6',
+            bibtex: `@article{achar2024cadpsornet,
+    title={CAD-PsorNet: deep transfer learning for computer-assisted diagnosis of skin Psoriasis},
+    author={Achar, Unmesh and Nayak, Soumya Ranjan and Agrawal, Sanjay},
+    journal={Scientific Reports},
+    volume={14},
+    number={1},
+    pages={26501},
+    year={2024},
+    publisher={Nature Publishing Group UK London},
+    doi={10.1038/s41598-024-76852-6}
+}`
+        },
+        'ijdv-paper': {
+            title: 'Artificial Intelligence in Dermatology: A Systematized Review',
+            authors: 'Unmesh Achar, et al.',
+            journal: 'Indian Journal of Dermatology',
+            year: '2025',
+            doi: 'TBD',
+            apa: 'Achar, U., et al. (2025). Artificial Intelligence in Dermatology: A Systematized Review. Indian Journal of Dermatology. [In Press]',
+            bibtex: `@article{achar2025artificial,
+    title={Artificial Intelligence in Dermatology: A Systematized Review},
+    author={Achar, Unmesh and others},
+    journal={Indian Journal of Dermatology},
+    year={2025},
+    note={In Press}
+}`
+        }
+    };
+    
+    createCitationModal(citationData[paperId]);
+}
+
+function createCitationModal(citation) {
+    if (!citation) return;
+    
+    // Remove existing modal
+    const existingModal = document.querySelector('.citation-modal');
+    if (existingModal) {
+        existingModal.remove();
+    }
+    
+    const modal = document.createElement('div');
+    modal.className = 'citation-modal';
+    modal.innerHTML = `
+        <div class="modal-backdrop" onclick="closeCitationModal()"></div>
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Citation Information</h3>
+                <button class="modal-close" onclick="closeCitationModal()">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="citation-format">
+                    <h4>APA Format</h4>
+                    <div class="citation-text">
+                        <p>${citation.apa}</p>
+                        <button class="copy-btn" onclick="copyCitation('${citation.apa.replace(/'/g, "\\'")}')">
+                            <i class="fas fa-copy"></i> Copy
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="citation-format">
+                    <h4>BibTeX Format</h4>
+                    <div class="citation-text">
+                        <pre>${citation.bibtex}</pre>
+                        <button class="copy-btn" onclick="copyCitation(\`${citation.bibtex}\`)">
+                            <i class="fas fa-copy"></i> Copy
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="paper-info">
+                    <div class="info-item">
+                        <strong>DOI:</strong> ${citation.doi}
+                    </div>
+                    <div class="info-item">
+                        <strong>Year:</strong> ${citation.year}
+                    </div>
+                </div>
+            </div>
+        </div>
+    `;
+    
+    document.body.appendChild(modal);
+    
+    // Trigger animation
+    requestAnimationFrame(() => {
+        modal.classList.add('active');
+    });
+}
+
+function closeCitationModal() {
+    const modal = document.querySelector('.citation-modal');
+    if (modal) {
+        modal.classList.remove('active');
+        setTimeout(() => modal.remove(), 300);
+    }
+}
+
+function copyCitation(text) {
+    navigator.clipboard.writeText(text).then(() => {
+        // Show success feedback
+        const button = event.target.closest('.copy-btn');
+        const originalText = button.innerHTML;
+        button.innerHTML = '<i class="fas fa-check"></i> Copied!';
+        button.style.background = 'var(--neon-green)';
+        
+        setTimeout(() => {
+            button.innerHTML = originalText;
+            button.style.background = '';
+        }, 2000);
+    }).catch(err => {
+        console.error('Failed to copy citation:', err);
+    });
+}
+
+// Initialize loading controller and typing effect
 window.addEventListener('load', () => {
-    const heroTitle = document.querySelector('.hero-content h1');
-    if (heroTitle) {
-        const fullText = heroTitle.textContent;
-        typeWriter(heroTitle, fullText, 60);
+    new LoadingController();
+    
+    // Performance optimization: Add device detection
+    const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+    const isLowEndDevice = navigator.hardwareConcurrency <= 2 || window.deviceMemory <= 2;
+    
+    if (isMobile || isLowEndDevice) {
+        document.body.classList.add('performance-mode');
+        console.log('Performance mode enabled for optimal experience');
+    }
+    
+    // Initialize Web Vitals monitoring
+    if ('performance' in window && 'observe' in PerformanceObserver.prototype) {
+        const observer = new PerformanceObserver((list) => {
+            list.getEntries().forEach((entry) => {
+                if (entry.entryType === 'largest-contentful-paint') {
+                    console.log('LCP:', entry.startTime);
+                }
+                if (entry.entryType === 'first-input') {
+                    console.log('FID:', entry.processingStart - entry.startTime);
+                }
+                if (entry.entryType === 'layout-shift') {
+                    console.log('CLS:', entry.value);
+                }
+            });
+        });
+        
+        observer.observe({ entryTypes: ['largest-contentful-paint', 'first-input', 'layout-shift'] });
     }
 });
 
@@ -2602,3 +2990,906 @@ function initPageTransitions() {
         });
     });
 }
+
+// ================================================
+// AI SHOWCASE & LEETCODE PLAYGROUND FUNCTIONALITY
+// ================================================
+
+// Neural Network Visualizer Class
+class NeuralNetworkVisualizer {
+    constructor() {
+        this.isAnimating = false;
+        this.connectionsSvg = document.getElementById('connections-svg');
+        this.neurons = document.querySelectorAll('.neuron');
+        this.playBtn = document.getElementById('nn-play-btn');
+        this.resetBtn = document.getElementById('nn-reset-btn');
+        
+        this.init();
+    }
+    
+    init() {
+        if (!this.connectionsSvg) return;
+        
+        this.drawConnections();
+        this.setupEventListeners();
+        this.animateNeurons();
+    }
+    
+    setupEventListeners() {
+        this.playBtn?.addEventListener('click', () => this.toggleAnimation());
+        this.resetBtn?.addEventListener('click', () => this.resetNetwork());
+    }
+    
+    drawConnections() {
+        const layers = document.querySelectorAll('.layer-group');
+        const svg = this.connectionsSvg;
+        
+        // Clear existing connections
+        svg.innerHTML = '';
+        
+        for (let i = 0; i < layers.length - 1; i++) {
+            const currentLayer = layers[i];
+            const nextLayer = layers[i + 1];
+            
+            const currentNeurons = currentLayer.querySelectorAll('.neuron');
+            const nextNeurons = nextLayer.querySelectorAll('.neuron');
+            
+            currentNeurons.forEach(neuron1 => {
+                nextNeurons.forEach(neuron2 => {
+                    this.createConnection(neuron1, neuron2, svg);
+                });
+            });
+        }
+    }
+    
+    createConnection(neuron1, neuron2, svg) {
+        const rect1 = neuron1.getBoundingClientRect();
+        const rect2 = neuron2.getBoundingClientRect();
+        const svgRect = svg.getBoundingClientRect();
+        
+        const line = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+        line.setAttribute('x1', rect1.left - svgRect.left + rect1.width / 2);
+        line.setAttribute('y1', rect1.top - svgRect.top + rect1.height / 2);
+        line.setAttribute('x2', rect2.left - svgRect.left + rect2.width / 2);
+        line.setAttribute('y2', rect2.top - svgRect.top + rect2.height / 2);
+        line.setAttribute('stroke', '#00caff');
+        line.setAttribute('stroke-width', '1');
+        line.setAttribute('opacity', '0.3');
+        line.classList.add('neural-connection');
+        
+        svg.appendChild(line);
+    }
+    
+    toggleAnimation() {
+        this.isAnimating = !this.isAnimating;
+        const icon = this.playBtn.querySelector('i');
+        
+        if (this.isAnimating) {
+            icon.className = 'fas fa-pause';
+            this.startDataFlow();
+        } else {
+            icon.className = 'fas fa-play';
+            this.stopDataFlow();
+        }
+    }
+    
+    startDataFlow() {
+        this.animateDataFlow();
+        this.animationInterval = setInterval(() => {
+            this.animateDataFlow();
+        }, 3000);
+    }
+    
+    stopDataFlow() {
+        if (this.animationInterval) {
+            clearInterval(this.animationInterval);
+        }
+    }
+    
+    animateDataFlow() {
+        const connections = document.querySelectorAll('.neural-connection');
+        
+        connections.forEach((connection, index) => {
+            setTimeout(() => {
+                connection.style.stroke = '#ff6b35';
+                connection.style.strokeWidth = '2';
+                connection.style.opacity = '0.8';
+                
+                setTimeout(() => {
+                    connection.style.stroke = '#00caff';
+                    connection.style.strokeWidth = '1';
+                    connection.style.opacity = '0.3';
+                }, 200);
+            }, index * 50);
+        });
+    }
+    
+    animateNeurons() {
+        this.neurons.forEach((neuron, index) => {
+            const value = parseFloat(neuron.dataset.value);
+            const intensity = Math.min(value * 100, 100);
+            
+            neuron.style.boxShadow = `0 0 ${intensity * 0.3}px rgba(0, 202, 255, ${value})`;
+            
+            // Pulse animation
+            setTimeout(() => {
+                neuron.style.transform = `scale(${1 + value * 0.2})`;
+                setTimeout(() => {
+                    neuron.style.transform = 'scale(1)';
+                }, 500);
+            }, index * 100);
+        });
+    }
+    
+    resetNetwork() {
+        this.isAnimating = false;
+        const icon = this.playBtn.querySelector('i');
+        icon.className = 'fas fa-play';
+        this.stopDataFlow();
+        
+        // Reset neuron states
+        this.neurons.forEach(neuron => {
+            neuron.style.transform = 'scale(1)';
+            neuron.style.boxShadow = '0 0 10px rgba(0, 202, 255, 0.3)';
+        });
+    }
+}
+
+// Research Impact Dashboard
+class ResearchDashboard {
+    constructor() {
+        this.refreshBtn = document.getElementById('refresh-metrics-btn');
+        this.impactChart = null;
+        
+        this.init();
+    }
+    
+    init() {
+        this.setupEventListeners();
+        this.loadResearchMetrics();
+        this.createImpactChart();
+        this.animateTimeline();
+    }
+    
+    setupEventListeners() {
+        this.refreshBtn?.addEventListener('click', () => this.refreshMetrics());
+    }
+    
+    async loadResearchMetrics() {
+        // Simulate loading research metrics
+        const metrics = {
+            nature: { citations: 15, reads: 1250 },
+            ijdv: { citations: 8, reads: 890 }
+        };
+        
+        this.updateMetricsDisplay(metrics);
+    }
+    
+    updateMetricsDisplay(metrics) {
+        const natureCitations = document.getElementById('nature-citations');
+        const natureReads = document.getElementById('nature-reads');
+        const ijdvCitations = document.getElementById('ijdv-citations');
+        const ijdvReads = document.getElementById('ijdv-reads');
+        
+        if (natureCitations) this.animateCounter(natureCitations, metrics.nature.citations);
+        if (natureReads) this.animateCounter(natureReads, metrics.nature.reads);
+        if (ijdvCitations) this.animateCounter(ijdvCitations, metrics.ijdv.citations);
+        if (ijdvReads) this.animateCounter(ijdvReads, metrics.ijdv.reads);
+    }
+    
+    animateCounter(element, target) {
+        let current = 0;
+        const increment = target / 50;
+        const timer = setInterval(() => {
+            current += increment;
+            if (current >= target) {
+                current = target;
+                clearInterval(timer);
+            }
+            element.textContent = Math.floor(current);
+        }, 30);
+    }
+    
+    createImpactChart() {
+        const canvas = document.getElementById('research-impact-chart');
+        if (!canvas) return;
+        
+        const ctx = canvas.getContext('2d');
+        
+        this.impactChart = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: ['Nov 2024', 'Dec 2024', 'Jan 2025', 'Feb 2025', 'Mar 2025', 'Apr 2025'],
+                datasets: [{
+                    label: 'Citations',
+                    data: [2, 5, 8, 12, 18, 23],
+                    borderColor: '#00caff',
+                    backgroundColor: 'rgba(0, 202, 255, 0.1)',
+                    tension: 0.4
+                }, {
+                    label: 'Reads',
+                    data: [50, 180, 420, 750, 1100, 1500],
+                    borderColor: '#ff6b35',
+                    backgroundColor: 'rgba(255, 107, 53, 0.1)',
+                    tension: 0.4,
+                    yAxisID: 'y1'
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        display: false
+                    }
+                },
+                scales: {
+                    y: {
+                        type: 'linear',
+                        display: true,
+                        position: 'left',
+                        grid: {
+                            color: 'rgba(0, 202, 255, 0.1)'
+                        },
+                        ticks: {
+                            color: '#00caff'
+                        }
+                    },
+                    y1: {
+                        type: 'linear',
+                        display: true,
+                        position: 'right',
+                        grid: {
+                            drawOnChartArea: false,
+                        },
+                        ticks: {
+                            color: '#ff6b35'
+                        }
+                    },
+                    x: {
+                        grid: {
+                            color: 'rgba(255, 255, 255, 0.1)'
+                        },
+                        ticks: {
+                            color: '#ffffff'
+                        }
+                    }
+                }
+            }
+        });
+    }
+    
+    animateTimeline() {
+        const timelineItems = document.querySelectorAll('.timeline-item');
+        
+        timelineItems.forEach((item, index) => {
+            setTimeout(() => {
+                item.style.opacity = '1';
+                item.style.transform = 'translateX(0)';
+            }, index * 300);
+        });
+    }
+    
+    refreshMetrics() {
+        const icon = this.refreshBtn.querySelector('i');
+        icon.style.animation = 'spin 1s linear infinite';
+        
+        setTimeout(() => {
+            this.loadResearchMetrics();
+            icon.style.animation = '';
+        }, 1000);
+    }
+}
+
+// AI Algorithm Playground
+class AlgorithmPlayground {
+    constructor() {
+        this.algorithmSelector = document.getElementById('algorithm-selector');
+        this.runCnnBtn = document.getElementById('run-cnn-demo');
+        this.learningRateSlider = document.getElementById('learning-rate');
+        this.batchSizeSlider = document.getElementById('batch-size');
+        
+        this.init();
+    }
+    
+    init() {
+        this.setupEventListeners();
+        this.drawReluGraph();
+        this.setupParameterControls();
+    }
+    
+    setupEventListeners() {
+        this.algorithmSelector?.addEventListener('change', (e) => this.switchAlgorithm(e.target.value));
+        this.runCnnBtn?.addEventListener('click', () => this.runCnnDemo());
+        
+        // Copy code functionality
+        const copyBtn = document.querySelector('.copy-code-btn');
+        copyBtn?.addEventListener('click', () => this.copyCode());
+    }
+    
+    setupParameterControls() {
+        this.learningRateSlider?.addEventListener('input', (e) => {
+            document.getElementById('lr-value').textContent = e.target.value;
+        });
+        
+        this.batchSizeSlider?.addEventListener('input', (e) => {
+            document.getElementById('bs-value').textContent = e.target.value;
+        });
+    }
+    
+    drawReluGraph() {
+        const canvas = document.getElementById('relu-graph');
+        if (!canvas) return;
+        
+        const ctx = canvas.getContext('2d');
+        const width = canvas.width;
+        const height = canvas.height;
+        
+        // Clear canvas
+        ctx.clearRect(0, 0, width, height);
+        
+        // Draw axes
+        ctx.strokeStyle = '#00caff';
+        ctx.lineWidth = 1;
+        ctx.beginPath();
+        ctx.moveTo(width/2, 0);
+        ctx.lineTo(width/2, height);
+        ctx.moveTo(0, height/2);
+        ctx.lineTo(width, height/2);
+        ctx.stroke();
+        
+        // Draw ReLU function
+        ctx.strokeStyle = '#ff6b35';
+        ctx.lineWidth = 2;
+        ctx.beginPath();
+        ctx.moveTo(0, height/2);
+        ctx.lineTo(width/2, height/2);
+        ctx.lineTo(width, 0);
+        ctx.stroke();
+        
+        // Add labels
+        ctx.fillStyle = '#ffffff';
+        ctx.font = '12px Space Mono';
+        ctx.fillText('ReLU(x)', width - 50, 15);
+        ctx.fillText('x', width - 15, height/2 + 15);
+    }
+    
+    runCnnDemo() {
+        const btn = this.runCnnBtn;
+        btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Processing...';
+        btn.disabled = true;
+        
+        // Animate convolution operation
+        this.animateConvolution();
+        
+        setTimeout(() => {
+            btn.innerHTML = '<i class="fas fa-play"></i> Run CNN Demo';
+            btn.disabled = false;
+        }, 3000);
+    }
+    
+    animateConvolution() {
+        const filterCells = document.querySelectorAll('.matrix-cell');
+        const operationArrow = document.querySelector('.operation-arrow');
+        
+        // Animate filter highlighting
+        filterCells.forEach((cell, index) => {
+            setTimeout(() => {
+                cell.style.background = '#ff6b35';
+                cell.style.color = '#000';
+                setTimeout(() => {
+                    cell.style.background = '';
+                    cell.style.color = '';
+                }, 200);
+            }, index * 100);
+        });
+        
+        // Animate arrow
+        setTimeout(() => {
+            operationArrow.style.transform = 'scale(1.2)';
+            operationArrow.style.color = '#ff6b35';
+            setTimeout(() => {
+                operationArrow.style.transform = 'scale(1)';
+                operationArrow.style.color = '';
+            }, 500);
+        }, 800);
+    }
+    
+    switchAlgorithm(algorithm) {
+        // Update explanation content based on selected algorithm
+        const explanations = {
+            'cnn': {
+                title: 'Convolutional Neural Networks (CNN)',
+                description: 'CNNs are specialized neural networks for processing grid-like data such as images.',
+                points: [
+                    'Convolution Layer: Applies filters to detect features like edges, textures',
+                    'Pooling Layer: Reduces spatial dimensions while retaining important information',
+                    'ReLU Activation: Introduces non-linearity, helping the network learn complex patterns',
+                    'Transfer Learning: Uses pre-trained models (ImageNet) for medical image classification'
+                ]
+            },
+            'transfer-learning': {
+                title: 'Transfer Learning',
+                description: 'Transfer learning leverages pre-trained models to solve new but related problems.',
+                points: [
+                    'Pre-trained Models: Start with models trained on large datasets like ImageNet',
+                    'Feature Extraction: Use lower layers as fixed feature extractors',
+                    'Fine-tuning: Adjust higher layers for specific tasks',
+                    'Domain Adaptation: Bridge the gap between source and target domains'
+                ]
+            }
+        };
+        
+        const explanation = explanations[algorithm];
+        if (explanation) {
+            this.updateExplanation(explanation);
+        }
+    }
+    
+    updateExplanation(explanation) {
+        const content = document.getElementById('explanation-content');
+        if (!content) return;
+        
+        content.innerHTML = `
+            <h4>${explanation.title}</h4>
+            <p>${explanation.description}</p>
+            <ul>
+                ${explanation.points.map(point => `<li><strong>${point.split(':')[0]}:</strong>${point.split(':')[1] || ''}</li>`).join('')}
+            </ul>
+        `;
+    }
+    
+    copyCode() {
+        const codeElement = document.getElementById('algorithm-code');
+        const text = codeElement.textContent;
+        
+        navigator.clipboard.writeText(text).then(() => {
+            const copyBtn = document.querySelector('.copy-code-btn');
+            const originalText = copyBtn.innerHTML;
+            copyBtn.innerHTML = '<i class="fas fa-check"></i>';
+            
+            setTimeout(() => {
+                copyBtn.innerHTML = originalText;
+            }, 2000);
+        });
+    }
+}
+
+// LeetCode Dashboard
+class LeetCodeDashboard {
+    constructor() {
+        this.refreshBtn = document.getElementById('refresh-leetcode-stats');
+        this.difficultyChart = null;
+        this.performanceChart = null;
+        
+        this.init();
+    }
+    
+    init() {
+        this.setupEventListeners();
+        this.loadLeetCodeStats();
+        this.createDifficultyChart();
+        this.createPerformanceChart();
+        this.generateActivityHeatmap();
+    }
+    
+    setupEventListeners() {
+        this.refreshBtn?.addEventListener('click', () => this.refreshStats());
+    }
+    
+    async loadLeetCodeStats() {
+        // Simulate loading LeetCode stats
+        const stats = {
+            ranking: 125000,
+            streak: 15,
+            acceptance: 85.2,
+            easy: 45,
+            medium: 32,
+            hard: 8,
+            total: 85
+        };
+        
+        this.updateStatsDisplay(stats);
+    }
+    
+    updateStatsDisplay(stats) {
+        const elements = {
+            'leetcode-ranking': this.formatRanking(stats.ranking),
+            'leetcode-streak': stats.streak,
+            'leetcode-acceptance': stats.acceptance + '%',
+            'lc-easy-count': stats.easy,
+            'lc-medium-count': stats.medium,
+            'lc-hard-count': stats.hard
+        };
+        
+        Object.entries(elements).forEach(([id, value]) => {
+            const element = document.getElementById(id);
+            if (element) {
+                if (typeof value === 'number') {
+                    this.animateCounter(element, value);
+                } else {
+                    element.textContent = value;
+                }
+            }
+        });
+    }
+    
+    formatRanking(ranking) {
+        if (ranking > 1000000) return `${(ranking / 1000000).toFixed(1)}M`;
+        if (ranking > 1000) return `${(ranking / 1000).toFixed(0)}K`;
+        return ranking.toString();
+    }
+    
+    animateCounter(element, target) {
+        let current = 0;
+        const increment = target / 30;
+        const timer = setInterval(() => {
+            current += increment;
+            if (current >= target) {
+                current = target;
+                clearInterval(timer);
+            }
+            element.textContent = Math.floor(current);
+        }, 50);
+    }
+    
+    createDifficultyChart() {
+        const canvas = document.getElementById('difficulty-donut-chart');
+        if (!canvas) return;
+        
+        const ctx = canvas.getContext('2d');
+        
+        this.difficultyChart = new Chart(ctx, {
+            type: 'doughnut',
+            data: {
+                labels: ['Easy', 'Medium', 'Hard'],
+                datasets: [{
+                    data: [45, 32, 8],
+                    backgroundColor: ['#00caff', '#ff6b35', '#ff3366'],
+                    borderWidth: 0,
+                    cutout: '70%'
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: true,
+                plugins: {
+                    legend: {
+                        display: false
+                    }
+                }
+            }
+        });
+    }
+    
+    createPerformanceChart() {
+        const canvas = document.getElementById('performance-trend-chart');
+        if (!canvas) return;
+        
+        const ctx = canvas.getContext('2d');
+        
+        this.performanceChart = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+                datasets: [{
+                    label: 'Problems Solved',
+                    data: [2, 4, 3, 5, 2, 6, 4],
+                    borderColor: '#00caff',
+                    backgroundColor: 'rgba(0, 202, 255, 0.1)',
+                    tension: 0.4,
+                    fill: true
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        display: false
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        grid: {
+                            color: 'rgba(0, 202, 255, 0.1)'
+                        },
+                        ticks: {
+                            color: '#00caff'
+                        }
+                    },
+                    x: {
+                        grid: {
+                            color: 'rgba(255, 255, 255, 0.1)'
+                        },
+                        ticks: {
+                            color: '#ffffff'
+                        }
+                    }
+                }
+            }
+        });
+    }
+    
+    generateActivityHeatmap() {
+        const heatmapContainer = document.getElementById('activity-heatmap');
+        if (!heatmapContainer) return;
+        
+        const weeks = 20;
+        const daysPerWeek = 7;
+        
+        for (let week = 0; week < weeks; week++) {
+            const weekDiv = document.createElement('div');
+            weekDiv.className = 'heatmap-week';
+            
+            for (let day = 0; day < daysPerWeek; day++) {
+                const dayDiv = document.createElement('div');
+                const activity = Math.floor(Math.random() * 5);
+                dayDiv.className = `heatmap-day level-${activity}`;
+                dayDiv.title = `${activity} problems solved`;
+                weekDiv.appendChild(dayDiv);
+            }
+            
+            heatmapContainer.appendChild(weekDiv);
+        }
+    }
+    
+    refreshStats() {
+        const icon = this.refreshBtn.querySelector('i');
+        icon.style.animation = 'spin 1s linear infinite';
+        
+        setTimeout(() => {
+            this.loadLeetCodeStats();
+            icon.style.animation = '';
+        }, 1000);
+    }
+}
+
+// Algorithm Visualizer
+class AlgorithmVisualizer {
+    constructor() {
+        this.algorithmType = document.getElementById('algorithm-type');
+        this.searchBtn = document.getElementById('start-binary-search');
+        this.searchTarget = document.getElementById('search-target');
+        this.currentStep = 0;
+        this.totalSteps = 0;
+        
+        this.init();
+    }
+    
+    init() {
+        this.setupEventListeners();
+        this.updateComplexity('binary-search');
+    }
+    
+    setupEventListeners() {
+        this.algorithmType?.addEventListener('change', (e) => this.switchAlgorithm(e.target.value));
+        this.searchBtn?.addEventListener('click', () => this.startBinarySearch());
+    }
+    
+    switchAlgorithm(algorithm) {
+        const complexities = {
+            'binary-search': { time: 'O(log n)', space: 'O(1)' },
+            'merge-sort': { time: 'O(n log n)', space: 'O(n)' },
+            'dfs': { time: 'O(V + E)', space: 'O(V)' },
+            'bfs': { time: 'O(V + E)', space: 'O(V)' },
+            'dp': { time: 'O(n²)', space: 'O(n)' }
+        };
+        
+        this.updateComplexity(algorithm);
+    }
+    
+    updateComplexity(algorithm) {
+        const complexities = {
+            'binary-search': { time: 'O(log n)', space: 'O(1)' },
+            'merge-sort': { time: 'O(n log n)', space: 'O(n)' },
+            'dfs': { time: 'O(V + E)', space: 'O(V)' },
+            'bfs': { time: 'O(V + E)', space: 'O(V)' },
+            'dp': { time: 'O(n²)', space: 'O(n)' }
+        };
+        
+        const complexity = complexities[algorithm];
+        if (complexity) {
+            document.getElementById('time-complexity').textContent = complexity.time;
+            document.getElementById('space-complexity').textContent = complexity.space;
+        }
+    }
+    
+    async startBinarySearch() {
+        const target = parseInt(this.searchTarget.value);
+        const arrayElements = document.querySelectorAll('.array-element');
+        const array = Array.from(arrayElements).map(el => parseInt(el.dataset.value));
+        
+        this.resetArray();
+        this.currentStep = 0;
+        this.totalSteps = Math.ceil(Math.log2(array.length));
+        
+        let left = 0;
+        let right = array.length - 1;
+        let found = false;
+        
+        while (left <= right && !found) {
+            this.currentStep++;
+            this.updateStepCounter();
+            
+            const mid = Math.floor((left + right) / 2);
+            
+            // Highlight current search range
+            this.highlightRange(left, right);
+            await this.delay(800);
+            
+            // Highlight middle element
+            this.highlightElement(mid, 'checking');
+            this.updateStepDescription(`Checking middle element at index ${mid}: ${array[mid]}`);
+            await this.delay(1000);
+            
+            if (array[mid] === target) {
+                this.highlightElement(mid, 'found');
+                this.updateStepDescription(`Found target ${target} at index ${mid}!`);
+                found = true;
+            } else if (array[mid] < target) {
+                this.updateStepDescription(`${array[mid]} < ${target}, searching right half`);
+                left = mid + 1;
+            } else {
+                this.updateStepDescription(`${array[mid]} > ${target}, searching left half`);
+                right = mid - 1;
+            }
+            
+            await this.delay(1000);
+        }
+        
+        if (!found) {
+            this.updateStepDescription(`Target ${target} not found in array`);
+        }
+    }
+    
+    resetArray() {
+        const elements = document.querySelectorAll('.array-element');
+        elements.forEach(el => {
+            el.className = 'array-element';
+        });
+    }
+    
+    highlightRange(left, right) {
+        const elements = document.querySelectorAll('.array-element');
+        elements.forEach((el, index) => {
+            if (index >= left && index <= right) {
+                el.classList.add('in-range');
+            } else {
+                el.classList.add('out-of-range');
+            }
+        });
+    }
+    
+    highlightElement(index, type) {
+        const elements = document.querySelectorAll('.array-element');
+        elements[index].classList.add(type);
+    }
+    
+    updateStepCounter() {
+        document.getElementById('current-step').textContent = this.currentStep;
+        document.getElementById('total-steps').textContent = this.totalSteps;
+    }
+    
+    updateStepDescription(description) {
+        document.getElementById('step-description').textContent = description;
+    }
+    
+    delay(ms) {
+        return new Promise(resolve => setTimeout(resolve, ms));
+    }
+}
+
+// Initialize all AI & LeetCode components when page loads
+document.addEventListener('DOMContentLoaded', () => {
+    // Initialize AI Showcase components
+    new NeuralNetworkVisualizer();
+    new ResearchDashboard();
+    new AlgorithmPlayground();
+    
+    // Initialize LeetCode components
+    new LeetCodeDashboard();
+    new AlgorithmVisualizer();
+    
+    // Add scroll animations for showcase sections
+    const observerOptions = {
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px'
+    };
+    
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('animate-in');
+            }
+        });
+    }, observerOptions);
+    
+    // Observe showcase cards
+    const showcaseCards = document.querySelectorAll('.showcase-card, .overview-card, .analysis-card, .stats-card');
+    showcaseCards.forEach(card => observer.observe(card));
+});
+
+// Add CSS keyframes for animations
+const style = document.createElement('style');
+style.textContent = `
+@keyframes spin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+.animate-in {
+    animation: slideInUp 0.6s ease-out forwards;
+}
+
+@keyframes slideInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.array-element.in-range {
+    background: linear-gradient(135deg, #00caff, #0099cc);
+    color: #000;
+    box-shadow: 0 0 20px rgba(0, 202, 255, 0.6);
+}
+
+.array-element.out-of-range {
+    opacity: 0.3;
+    background: #333;
+}
+
+.array-element.checking {
+    background: linear-gradient(135deg, #ff6b35, #ff4422);
+    animation: pulse 1s infinite;
+}
+
+.array-element.found {
+    background: linear-gradient(135deg, #00ff88, #00cc66);
+    animation: celebration 1s ease-out;
+}
+
+@keyframes pulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+}
+
+@keyframes celebration {
+    0%, 100% { transform: scale(1); }
+    25% { transform: scale(1.2) rotate(-5deg); }
+    75% { transform: scale(1.2) rotate(5deg); }
+}
+
+.heatmap-week {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.heatmap-day {
+    width: 12px;
+    height: 12px;
+    border-radius: 2px;
+    background: #1a1a1a;
+    border: 1px solid #333;
+}
+
+.heatmap-day.level-1 { background: rgba(0, 202, 255, 0.2); }
+.heatmap-day.level-2 { background: rgba(0, 202, 255, 0.4); }
+.heatmap-day.level-3 { background: rgba(0, 202, 255, 0.6); }
+.heatmap-day.level-4 { background: rgba(0, 202, 255, 0.8); }
+
+#activity-heatmap {
+    display: flex;
+    gap: 2px;
+    padding: 20px;
+    overflow-x: auto;
+}
+`;
+document.head.appendChild(style);
