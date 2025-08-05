@@ -56,7 +56,14 @@ class MobileNavigationController {
         // Prevent body scroll when nav is open
         this.mobileNavOverlay.addEventListener('touchmove', (e) => {
             if (this.isOpen) {
-                e.preventDefault();
+                // Only prevent default for vertical scrolling
+                const touch = e.touches[0];
+                const target = e.target;
+                
+                // Allow horizontal swipe gestures to work
+                if (!this.isHorizontalSwipe(e)) {
+                    e.preventDefault();
+                }
             }
         }, { passive: false });
     }
@@ -136,6 +143,18 @@ class MobileNavigationController {
     handleTouchStart(e) {
         this.touchStartX = e.touches[0].clientX;
         this.touchStartY = e.touches[0].clientY;
+    }
+    
+    isHorizontalSwipe(e) {
+        if (!this.touchStartX || !this.touchStartY) return false;
+        
+        const touchX = e.touches[0].clientX;
+        const touchY = e.touches[0].clientY;
+        const diffX = Math.abs(this.touchStartX - touchX);
+        const diffY = Math.abs(this.touchStartY - touchY);
+        
+        // Consider it horizontal if X movement is significantly larger than Y
+        return diffX > diffY && diffX > 10;
     }
     
     handleTouchMove(e) {
@@ -1227,6 +1246,14 @@ function init3DScene() {
         return;
     }
     
+    // Completely disable 3D on mobile to prevent performance issues
+    const isMobile = window.innerWidth <= 768;
+    if (isMobile) {
+        canvas.style.display = 'none';
+        console.log('🚫 3D scene disabled on mobile for performance');
+        return;
+    }
+    
     if (typeof THREE === 'undefined') {
         console.error('❌ THREE.js not loaded!');
         return;
@@ -2250,18 +2277,20 @@ function enhanceContactForm() {
     }
 }
 
-// 3D Skills Cubes Interaction
+// 3D Skills Cubes Interaction - Enhanced for Mobile
 function init3DSkillCubes() {
     console.log('🎲 Initializing 3D skill cubes...');
     const skillCubes = document.querySelectorAll('.skill-cube');
     const skillTitle = document.getElementById('skill-title');
     const skillDescription = document.getElementById('skill-description');
     const skillTags = document.getElementById('skill-tags');
+    const isMobile = window.innerWidth <= 768;
     
     console.log('Found skill cubes:', skillCubes.length);
     console.log('Found skill title element:', !!skillTitle);
     console.log('Found skill description element:', !!skillDescription);
     console.log('Found skill tags element:', !!skillTags);
+    console.log('Is mobile device:', isMobile);
     
     const skillData = {
         programming: {
@@ -2291,38 +2320,125 @@ function init3DSkillCubes() {
         }
     };
     
-    skillCubes.forEach(cube => {
-        cube.addEventListener('mouseenter', () => {
-            const skillType = cube.classList[1]; // Get the second class (skill type)
-            const data = skillData[skillType];
-            
-            if (data) {
-                skillTitle.textContent = data.title;
-                skillDescription.textContent = data.description;
-                
-                // Clear existing tags
-                skillTags.innerHTML = '';
-                
-                // Add new tags
-                data.tags.forEach(tag => {
-                    const tagElement = document.createElement('span');
-                    tagElement.className = 'skill-tag';
-                    tagElement.textContent = tag;
-                    skillTags.appendChild(tagElement);
-                });
-                
-                // Add glow effect to cube
-                cube.style.filter = 'drop-shadow(0 0 20px var(--neon-cyan))';
-            }
-        });
+    // Mobile-specific initialization
+    if (isMobile) {
+        // Set default content for mobile
+        if (skillTitle) skillTitle.textContent = 'Tap any skill card to explore';
+        if (skillDescription) skillDescription.textContent = 'Touch the skill cards below to see technologies and frameworks';
         
-        cube.addEventListener('mouseleave', () => {
-            skillTitle.textContent = 'Hover over a cube to explore';
-            skillDescription.textContent = 'Discover the technologies and frameworks I work with';
-            skillTags.innerHTML = '';
-            cube.style.filter = 'none';
+        // Add mobile-specific attributes
+        skillCubes.forEach(cube => {
+            cube.setAttribute('role', 'button');
+            cube.setAttribute('tabindex', '0');
+            cube.setAttribute('aria-label', 'Skill category - tap to explore');
         });
+    }
+    
+    skillCubes.forEach((cube, index) => {
+        const skillType = cube.classList[1]; // Get the second class (skill type)
+        const data = skillData[skillType];
+        
+        if (!data) return;
+        
+        // Mobile touch events
+        if (isMobile) {
+            cube.addEventListener('touchstart', (e) => {
+                e.preventDefault();
+                updateSkillInfo(data);
+                
+                // Visual feedback
+                cube.style.transform = 'translateY(-5px) scale(1.02)';
+                cube.style.borderColor = 'var(--neon-pink)';
+                cube.style.boxShadow = '0 10px 30px rgba(0, 202, 255, 0.3)';
+                
+                // Haptic feedback
+                if ('vibrate' in navigator) {
+                    navigator.vibrate(10);
+                }
+                
+                // Auto-reset after delay
+                setTimeout(() => {
+                    resetSkillCube(cube);
+                }, 2000);
+            }, { passive: false });
+            
+            cube.addEventListener('touchend', (e) => {
+                e.preventDefault();
+            });
+            
+            // Accessibility: Support keyboard navigation
+            cube.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    updateSkillInfo(data);
+                    cube.focus();
+                }
+            });
+        } else {
+            // Desktop hover events
+            cube.addEventListener('mouseenter', () => {
+                updateSkillInfo(data);
+                cube.style.filter = 'drop-shadow(0 0 20px var(--neon-cyan))';
+            });
+            
+            cube.addEventListener('mouseleave', () => {
+                resetSkillInfo();
+                cube.style.filter = 'none';
+            });
+        }
     });
+    
+    function updateSkillInfo(data) {
+        if (!skillTitle || !skillDescription || !skillTags) return;
+        
+        skillTitle.textContent = data.title;
+        skillDescription.textContent = data.description;
+        
+        // Clear existing tags
+        skillTags.innerHTML = '';
+        
+        // Add new tags with animation delay
+        data.tags.forEach((tag, index) => {
+            const tagElement = document.createElement('span');
+            tagElement.className = 'skill-tag';
+            tagElement.textContent = tag;
+            tagElement.style.opacity = '0';
+            tagElement.style.transform = 'translateY(10px)';
+            skillTags.appendChild(tagElement);
+            
+            // Animate in
+            setTimeout(() => {
+                tagElement.style.transition = 'all 0.3s ease';
+                tagElement.style.opacity = '1';
+                tagElement.style.transform = 'translateY(0)';
+            }, index * 50);
+        });
+    }
+    
+    function resetSkillInfo() {
+        if (!skillTitle || !skillDescription || !skillTags) return;
+        
+        skillTitle.textContent = isMobile ? 'Tap any skill card to explore' : 'Hover over a cube to explore';
+        skillDescription.textContent = isMobile ? 'Touch the skill cards to see technologies and frameworks' : 'Discover the technologies and frameworks I work with';
+        skillTags.innerHTML = '';
+    }
+    
+    function resetSkillCube(cube) {
+        cube.style.transform = '';
+        cube.style.borderColor = '';
+        cube.style.boxShadow = '';
+        cube.style.filter = '';
+    }
+    
+    // Handle orientation changes on mobile
+    if (isMobile) {
+        window.addEventListener('orientationchange', () => {
+            setTimeout(() => {
+                console.log('Orientation changed - reinitializing skill cubes');
+                resetSkillInfo();
+            }, 300);
+        });
+    }
 }
 
 // Enhanced Scroll Effects with Parallax and Navbar Changes
