@@ -2,2123 +2,568 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
-    <meta name="mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <meta name="theme-color" content="#00caff">
-    <meta name="apple-mobile-web-app-title" content="Unmesh Achar">
-    
-    <!-- SEO Optimization -->
-    <meta name="description" content="Unmesh Achar - Computer Engineering Graduate | AI/ML Engineer | Published Researcher in Nature Scientific Reports | 99.43% accuracy in medical AI systems">
-    <meta name="keywords" content="Unmesh Achar, Computer Engineering, Machine Learning, AI, Neural Networks, CNN, Transfer Learning, Computer Vision, NYU, Research, Publications">
-    <meta name="author" content="Unmesh Achar">
-    
-    <!-- Open Graph -->
-    <meta property="og:title" content="Unmesh Achar - AI Engineer & Researcher">
-    <meta property="og:description" content="Computer Engineering Graduate specializing in AI/ML with published research achieving 99.43% accuracy in medical diagnosis">
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://unmeshachar.dev">
-    <meta property="og:image" content="profile-photo.jpg">
-    
-    <!-- Twitter Card -->
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Unmesh Achar - AI Engineer & Researcher">
-    <meta name="twitter:description" content="Computer Engineering Graduate specializing in AI/ML with published research">
-    <meta name="twitter:image" content="profile-photo.jpg">
-    
-    <!-- PWA Icons -->
-    <link rel="apple-touch-icon" sizes="180x180" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 180 180'%3E%3Crect fill='%23000' width='180' height='180'/%3E%3Ctext x='90' y='100' text-anchor='middle' fill='%2300caff' font-size='60' font-family='monospace'%3EUA%3C/text%3E%3C/svg%3E">
-    <link rel="icon" type="image/png" sizes="32x32" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect fill='%23000' width='32' height='32'/%3E%3Ctext x='16' y='20' text-anchor='middle' fill='%2300caff' font-size='12' font-family='monospace'%3EUA%3C/text%3E%3C/svg%3E">
-    <link rel="manifest" href="/manifest.json">
-    
-    <title>Unmesh Achar - AI Engineer & Computer Vision Researcher</title>
-    
-    <!-- Preload Critical Resources -->
-    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Orbitron:wght@400;700;900&family=Poppins:wght@300;400;600;700&display=swap" as="style">
-    <link rel="preload" href="styles.css" as="style">
-    <link rel="preload" href="script.js" as="script">
-    
-    <!-- Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Orbitron:wght@400;700;900&family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
-    
-    <!-- Critical CSS (inlined for performance) -->
-    <style>
-        /* Critical above-the-fold styles */
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: 'Poppins', sans-serif; background: #0a0a0a; color: #ffffff; overflow-x: hidden; }
-        .hero { min-height: 100vh; display: flex; align-items: center; justify-content: center; position: relative; }
-        .hero-content { text-align: center; z-index: 10; position: relative; }
-        .loading-screen { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #0a0a0a; display: flex; align-items: center; justify-content: center; z-index: 9999; }
-    </style>
-    
-    <!-- Main Stylesheet -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Restored to original version -->
+    <title>Unmesh Achar - Computer Engineering Graduate</title>
     <link rel="stylesheet" href="styles.css">
-    
-    <!-- Service Worker Registration -->
-    <script>
-        if ('serviceWorker' in navigator) {
-            window.addEventListener('load', () => {
-                navigator.serviceWorker.register('/sw.js')
-                    .then(registration => console.log('SW registered'))
-                    .catch(registrationError => console.log('SW registration failed'));
-            });
-        }
-    </script>
-    
-    <!-- Performance Monitoring -->
-    <script>
-        window.performance.mark('page-start');
-        
-        // Web Vitals tracking
-        function sendToAnalytics({name, value, id}) {
-            // Analytics implementation would go here
-            console.log(`${name}: ${value} (${id})`);
-        }
-        
-        // FPS Counter setup
-        let fps = 0, lastTime = 0;
-        function updateFPS() {
-            const now = performance.now();
-            fps = Math.round(1000 / (now - lastTime));
-            lastTime = now;
-            requestAnimationFrame(updateFPS);
-        }
-        requestAnimationFrame(updateFPS);
-    </script>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Orbitron:wght@400;700;900&family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
 </head>
 <body>
-    <!-- Loading Screen -->
-    <div class="loading-screen" id="loading-screen">
-        <div class="cyber-loader">
-            <div class="loader-core"></div>
-            <div class="loader-rings">
-                <div class="loader-ring"></div>
-                <div class="loader-ring"></div>
-                <div class="loader-ring"></div>
-            </div>
-            <div class="loader-text">
-                <span class="loading-text">INITIALIZING NEURAL INTERFACE</span>
-                <div class="loading-progress">
-                    <div class="progress-bar" id="loading-progress-bar"></div>
-                </div>
-                <span class="loading-percentage" id="loading-percentage">0%</span>
-            </div>
-        </div>
-    </div>
-
-    <!-- Performance HUD (toggleable) -->
-    <div class="performance-hud" id="performance-hud">
-        <div class="hud-item">
-            <span class="hud-label">FPS</span>
-            <span class="hud-value" id="fps-counter">60</span>
-        </div>
-        <div class="hud-item">
-            <span class="hud-label">PING</span>
-            <span class="hud-value" id="ping-counter">--</span>
-        </div>
-        <div class="hud-item">
-            <span class="hud-label">MEM</span>
-            <span class="hud-value" id="memory-usage">--</span>
-        </div>
-        <button class="hud-toggle" id="hud-toggle">
-            <i class="fas fa-chart-line"></i>
-        </button>
-    </div>
-
-    <!-- Navigation -->
-    <nav class="navbar" id="navbar">
+    <nav class="navbar">
         <div class="nav-container">
             <div class="nav-logo">
-                <div class="logo-container">
-                    <div class="logo-hologram">
-                        <span class="logo-text">Unmesh Achar</span>
-                        <div class="logo-scan-line"></div>
-                    </div>
-                    <div class="logo-subtitle">AI Engineer</div>
-                </div>
+                <h2>Unmesh Achar</h2>
             </div>
-            
-            <ul class="nav-menu" id="nav-menu">
-                <li><a href="#home" class="nav-link" data-section="home">
-                    <i class="fas fa-home nav-icon"></i>
-                    <span>Home</span>
-                </a></li>
-                <li><a href="#about" class="nav-link" data-section="about">
-                    <i class="fas fa-user nav-icon"></i>
-                    <span>About</span>
-                </a></li>
-                <li><a href="#education" class="nav-link" data-section="education">
-                    <i class="fas fa-graduation-cap nav-icon"></i>
-                    <span>Education</span>
-                </a></li>
-                <li><a href="#skills" class="nav-link" data-section="skills">
-                    <i class="fas fa-cogs nav-icon"></i>
-                    <span>Skills</span>
-                </a></li>
-                <li><a href="#ai-showcase" class="nav-link" data-section="ai-showcase">
-                    <i class="fas fa-brain nav-icon"></i>
-                    <span>AI Showcase</span>
-                </a></li>
-                <li><a href="#leetcode" class="nav-link" data-section="leetcode">
-                    <i class="fas fa-code nav-icon"></i>
-                    <span>LeetCode</span>
-                </a></li>
-                <li><a href="#projects" class="nav-link" data-section="projects">
-                    <i class="fas fa-rocket nav-icon"></i>
-                    <span>Projects</span>
-                </a></li>
-                <li><a href="#experience" class="nav-link" data-section="experience">
-                    <i class="fas fa-briefcase nav-icon"></i>
-                    <span>Experience</span>
-                </a></li>
-                <li><a href="#publications" class="nav-link" data-section="publications">
-                    <i class="fas fa-file-alt nav-icon"></i>
-                    <span>Publications</span>
-                </a></li>
-                <li><a href="#contact" class="nav-link" data-section="contact">
-                    <i class="fas fa-envelope nav-icon"></i>
-                    <span>Contact</span>
-                </a></li>
+            <ul class="nav-menu">
+                <li><a href="#home" class="nav-link">Home</a></li>
+                <li><a href="#about" class="nav-link">About Me</a></li>
+                <li><a href="#education" class="nav-link">Education</a></li>
+                <li><a href="#toolbox" class="nav-link">Toolbox</a></li>
+                <li><a href="#projects" class="nav-link">Projects</a></li>
+                <li><a href="#experience" class="nav-link">Experience</a></li>
+                <li><a href="#publications" class="nav-link">Publications</a></li>
+                <li><a href="#bucket-list" class="nav-link">Bucket List</a></li>
+                <li><a href="#contact" class="nav-link">Contact</a></li>
             </ul>
-            
-            <!-- Mobile Menu Button -->
-            <div class="mobile-menu-toggle" id="mobile-menu-toggle">
-                <div class="hamburger-icon">
-                    <span class="line line-1"></span>
-                    <span class="line line-2"></span>
-                    <span class="line line-3"></span>
-                </div>
-                <div class="menu-text">MENU</div>
+            <div class="hamburger">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
             </div>
         </div>
-        
-        <!-- Neural network background -->
-        <canvas class="nav-neural-bg" id="nav-neural-bg"></canvas>
     </nav>
 
-    <!-- Mobile Navigation Overlay -->
-    <div class="mobile-nav-overlay" id="mobile-nav-overlay">
-        <div class="mobile-nav-bg">
-            <canvas class="mobile-nav-canvas" id="mobile-nav-canvas"></canvas>
+    <section id="home" class="hero">
+        <div id="three-canvas"></div>
+        <div class="floating-elements">
+            <div class="floating-cube cube-1"></div>
+            <div class="floating-cube cube-2"></div>
+            <div class="floating-cube cube-3"></div>
+            <div class="floating-sphere sphere-1"></div>
+            <div class="floating-sphere sphere-2"></div>
         </div>
-        
-        <div class="mobile-nav-content">
-            <div class="mobile-nav-header">
-                <div class="mobile-nav-title">
-                    <span class="title-main">NEURAL INTERFACE</span>
-                    <span class="title-sub">Navigation System</span>
-                </div>
-                <button class="mobile-nav-close" id="mobile-nav-close">
-                    <div class="close-icon">
-                        <span></span>
-                        <span></span>
-                    </div>
-                </button>
+        <div class="neural-network">
+            <div class="node node-1"></div>
+            <div class="node node-2"></div>
+            <div class="node node-3"></div>
+            <div class="node node-4"></div>
+            <div class="node node-5"></div>
+            <div class="connection conn-1"></div>
+            <div class="connection conn-2"></div>
+            <div class="connection conn-3"></div>
+            <div class="connection conn-4"></div>
+        </div>
+        <div class="hero-content">
+            <div class="glitch-text">
+                <h1>Hello, I'm <span class="highlight neon-text">Unmesh Achar</span></h1>
+                <h1 class="glitch-layer" data-text="Hello, I'm Unmesh Achar">Hello, I'm <span class="highlight">Unmesh Achar</span></h1>
             </div>
-            
-            <nav class="mobile-nav-menu">
-                <a href="#home" class="mobile-nav-link" data-section="home">
-                    <div class="nav-link-wrapper">
-                        <div class="nav-link-icon"><i class="fas fa-home"></i></div>
-                        <div class="nav-link-content">
-                            <span class="nav-link-title">Home</span>
-                            <span class="nav-link-desc">Neural Interface</span>
-                        </div>
-                        <div class="nav-link-arrow">
-                            <div class="arrow-graphic"></div>
-                        </div>
-                    </div>
-                    <div class="nav-link-glow"></div>
+            <h2 class="cyber-subtitle">
+                I <span class="typewriter-text" id="typewriter">Code</span><span class="cursor-zer0">|</span>
+            </h2>
+            <p class="hero-description">Computer Engineering Graduate Student passionate about Machine Learning, Computer Vision, and developing AI solutions for real-world problems.</p>
+            <div class="hero-buttons">
+                <a href="#projects" class="btn btn-primary neon-btn">
+                    <span class="btn-text">View My Work</span>
+                    <div class="btn-glow"></div>
                 </a>
-                
-                <a href="#about" class="mobile-nav-link" data-section="about">
-                    <div class="nav-link-wrapper">
-                        <div class="nav-link-icon"><i class="fas fa-user"></i></div>
-                        <div class="nav-link-content">
-                            <span class="nav-link-title">About</span>
-                            <span class="nav-link-desc">Profile Data</span>
-                        </div>
-                        <div class="nav-link-arrow">
-                            <div class="arrow-graphic"></div>
-                        </div>
-                    </div>
-                    <div class="nav-link-glow"></div>
+                <a href="#contact" class="btn btn-secondary hologram-btn">
+                    <span class="btn-text">Get In Touch</span>
+                    <div class="hologram-effect"></div>
                 </a>
-                
-                <a href="#education" class="mobile-nav-link" data-section="education">
-                    <div class="nav-link-wrapper">
-                        <div class="nav-link-icon"><i class="fas fa-graduation-cap"></i></div>
-                        <div class="nav-link-content">
-                            <span class="nav-link-title">Education</span>
-                            <span class="nav-link-desc">Academic Records</span>
-                        </div>
-                        <div class="nav-link-arrow">
-                            <div class="arrow-graphic"></div>
-                        </div>
-                    </div>
-                    <div class="nav-link-glow"></div>
-                </a>
-                
-                <a href="#skills" class="mobile-nav-link" data-section="skills">
-                    <div class="nav-link-wrapper">
-                        <div class="nav-link-icon"><i class="fas fa-cogs"></i></div>
-                        <div class="nav-link-content">
-                            <span class="nav-link-title">Skills</span>
-                            <span class="nav-link-desc">Tech Arsenal</span>
-                        </div>
-                        <div class="nav-link-arrow">
-                            <div class="arrow-graphic"></div>
-                        </div>
-                    </div>
-                    <div class="nav-link-glow"></div>
-                </a>
-                
-                <a href="#ai-showcase" class="mobile-nav-link" data-section="ai-showcase">
-                    <div class="nav-link-wrapper">
-                        <div class="nav-link-icon"><i class="fas fa-brain"></i></div>
-                        <div class="nav-link-content">
-                            <span class="nav-link-title">AI Showcase</span>
-                            <span class="nav-link-desc">Neural Networks</span>
-                        </div>
-                        <div class="nav-link-arrow">
-                            <div class="arrow-graphic"></div>
-                        </div>
-                    </div>
-                    <div class="nav-link-glow"></div>
-                </a>
-                
-                <a href="#leetcode" class="mobile-nav-link" data-section="leetcode">
-                    <div class="nav-link-wrapper">
-                        <div class="nav-link-icon"><i class="fas fa-code"></i></div>
-                        <div class="nav-link-content">
-                            <span class="nav-link-title">LeetCode</span>
-                            <span class="nav-link-desc">Algorithm Mastery</span>
-                        </div>
-                        <div class="nav-link-arrow">
-                            <div class="arrow-graphic"></div>
-                        </div>
-                    </div>
-                    <div class="nav-link-glow"></div>
-                </a>
-                
-                <a href="#projects" class="mobile-nav-link" data-section="projects">
-                    <div class="nav-link-wrapper">
-                        <div class="nav-link-icon"><i class="fas fa-rocket"></i></div>
-                        <div class="nav-link-content">
-                            <span class="nav-link-title">Projects</span>
-                            <span class="nav-link-desc">Digital Creations</span>
-                        </div>
-                        <div class="nav-link-arrow">
-                            <div class="arrow-graphic"></div>
-                        </div>
-                    </div>
-                    <div class="nav-link-glow"></div>
-                </a>
-                
-                <a href="#experience" class="mobile-nav-link" data-section="experience">
-                    <div class="nav-link-wrapper">
-                        <div class="nav-link-icon"><i class="fas fa-briefcase"></i></div>
-                        <div class="nav-link-content">
-                            <span class="nav-link-title">Experience</span>
-                            <span class="nav-link-desc">Work History</span>
-                        </div>
-                        <div class="nav-link-arrow">
-                            <div class="arrow-graphic"></div>
-                        </div>
-                    </div>
-                    <div class="nav-link-glow"></div>
-                </a>
-                
-                <a href="#publications" class="mobile-nav-link" data-section="publications">
-                    <div class="nav-link-wrapper">
-                        <div class="nav-link-icon"><i class="fas fa-file-alt"></i></div>
-                        <div class="nav-link-content">
-                            <span class="nav-link-title">Publications</span>
-                            <span class="nav-link-desc">Research Papers</span>
-                        </div>
-                        <div class="nav-link-arrow">
-                            <div class="arrow-graphic"></div>
-                        </div>
-                    </div>
-                    <div class="nav-link-glow"></div>
-                </a>
-                
-                <a href="#contact" class="mobile-nav-link" data-section="contact">
-                    <div class="nav-link-wrapper">
-                        <div class="nav-link-icon"><i class="fas fa-envelope"></i></div>
-                        <div class="nav-link-content">
-                            <span class="nav-link-title">Contact</span>
-                            <span class="nav-link-desc">Connect</span>
-                        </div>
-                        <div class="nav-link-arrow">
-                            <div class="arrow-graphic"></div>
-                        </div>
-                    </div>
-                    <div class="nav-link-glow"></div>
-                </a>
-            </nav>
-            
-            <div class="mobile-nav-footer">
-                <div class="social-links">
-                    <a href="https://www.linkedin.com/in/unmesh-achar-319467210/" target="_blank" class="social-link">
-                        <i class="fab fa-linkedin"></i>
-                    </a>
-                    <a href="https://github.com/Unmesh30" target="_blank" class="social-link">
-                        <i class="fab fa-github"></i>
-                    </a>
-                    <a href="mailto:unmeshachar02@gmail.com" class="social-link">
-                        <i class="fas fa-envelope"></i>
-                    </a>
-                </div>
-                <div class="nav-footer-text">
-                    <span>&copy; 2025 Unmesh Achar</span>
-                    <span class="status-indicator">ONLINE</span>
-                </div>
             </div>
         </div>
-    </div>
+        <div class="scroll-indicator">
+            <div class="scroll-dot"></div>
+            <div class="scroll-text">Scroll</div>
+        </div>
+    </section>
 
-    <!-- Main Content -->
-    <main>
-        <!-- Hero Section -->
-        <section id="home" class="hero">
-            <!-- Animated Background -->
-            <div class="hero-bg">
-                <canvas class="hero-canvas" id="hero-canvas"></canvas>
-                <div class="matrix-rain" id="matrix-rain"></div>
-                <div class="floating-particles" id="floating-particles"></div>
-            </div>
-            
-            <!-- Neural Network Visualization -->
-            <div class="neural-network-bg" id="neural-network-bg">
-                <svg class="neural-svg" id="neural-svg">
-                    <!-- Dynamic neural connections -->
-                </svg>
-            </div>
-            
-            <div class="hero-content">
-                <div class="hero-text">
-                    <div class="intro-sequence">
-                        <div class="system-boot">
-                            <span class="boot-text">[SYSTEM BOOT]</span>
-                            <span class="boot-cursor">_</span>
-                        </div>
-                        <div class="ai-greeting">
-                            <span class="greeting-text">NEURAL INTERFACE ACTIVATED</span>
+    <section id="about" class="about">
+        <div class="container">
+            <h2 class="section-title">About Me</h2>
+            <div class="about-content">
+                <div class="about-left">
+                    <div class="profile-photo-container">
+                        <div class="profile-photo">
+                            <img src="profile-photo.jpg" alt="Unmesh Achar" id="profile-img">
+                            <div class="photo-glow"></div>
                         </div>
                     </div>
-                    
-                    <h1 class="hero-title">
-                        <span class="title-line">Hello, I'm</span>
-                        <span class="name-line">
-                            <span class="name-highlight">Unmesh Achar</span>
-                            <div class="name-glitch-layers">
-                                <span class="glitch-layer" data-text="Unmesh Achar">Unmesh Achar</span>
-                                <span class="glitch-layer" data-text="Unmesh Achar">Unmesh Achar</span>
-                            </div>
-                        </span>
-                    </h1>
-                    
-                    <div class="hero-subtitle">
-                        <div class="typewriter-container">
-                            <span class="typewriter-prefix">I</span>
-                            <span class="typewriter-text" id="typewriter-text">Build AI Systems</span>
-                            <span class="cursor">|</span>
-                        </div>
-                    </div>
-                    
-                    <p class="hero-description">
-                        Computer Engineering Graduate Student at NYU specializing in Machine Learning, 
-                        Computer Vision, and AI research. Published researcher with 99.43% accuracy 
-                        in medical diagnosis systems.
-                    </p>
-                    
-                    <div class="hero-stats">
-                        <div class="stat-item">
-                            <span class="stat-number">3.83</span>
-                            <span class="stat-label">NYU GPA</span>
-                        </div>
-                        <div class="stat-divider"></div>
-                        <div class="stat-item">
-                            <span class="stat-number">2</span>
-                            <span class="stat-label">Publications</span>
-                        </div>
-                        <div class="stat-divider"></div>
-                        <div class="stat-item">
-                            <span class="stat-number">99.43%</span>
-                            <span class="stat-label">AI Accuracy</span>
-                        </div>
-                    </div>
-                    
-                    <div class="hero-actions">
-                        <a href="#projects" class="hero-btn primary-btn">
-                            <span class="btn-text">View Projects</span>
-                            <div class="btn-bg"></div>
-                            <div class="btn-pulse"></div>
+                    <div class="social-links-about">
+                        <a href="https://www.linkedin.com/in/unmesh-achar-319467210/" class="social-link-new" target="_blank">
+                            <i class="fab fa-linkedin"></i>
                         </a>
-                        <a href="#contact" class="hero-btn secondary-btn">
-                            <span class="btn-text">Get In Touch</span>
-                            <div class="btn-bg"></div>
-                            <div class="btn-hologram"></div>
-                        </a>
-                        <a href="resume-unmesh-achar.pdf" target="_blank" class="hero-btn tertiary-btn">
-                            <i class="fas fa-download"></i>
-                            <span class="btn-text">Resume</span>
-                            <div class="btn-bg"></div>
+                        <a href="https://github.com/Unmesh30" class="social-link-new" target="_blank">
+                            <i class="fab fa-github"></i>
                         </a>
                     </div>
                 </div>
-                
-                <!-- Scroll Indicator -->
-                <div class="scroll-indicator">
-                    <div class="scroll-line"></div>
-                    <div class="scroll-dot"></div>
-                    <span class="scroll-text">SCROLL TO EXPLORE</span>
-                </div>
-            </div>
-            
-            <!-- Floating Elements -->
-            <div class="floating-elements">
-                <div class="floating-cube cube-1"></div>
-                <div class="floating-cube cube-2"></div>
-                <div class="floating-cube cube-3"></div>
-                <div class="floating-sphere sphere-1"></div>
-                <div class="floating-sphere sphere-2"></div>
-            </div>
-        </section>
-
-        <!-- About Section -->
-        <section id="about" class="about">
-            <div class="container">
-                <div class="section-header">
-                    <h2 class="section-title">
-                        <span class="title-text">About Me</span>
-                        <div class="title-line"></div>
-                    </h2>
-                    <p class="section-subtitle">Getting to know the person behind the code</p>
-                </div>
-                
-                <div class="about-content">
-                    <div class="about-visual">
-                        <div class="profile-container">
-                            <div class="profile-image-wrapper">
-                                <img src="profile-photo.jpg" alt="Unmesh Achar" class="profile-image" id="profile-image">
-                                <div class="image-overlay"></div>
-                                <div class="scan-line"></div>
-                            </div>
-                            <div class="profile-status">
-                                <div class="status-indicator active"></div>
-                                <span class="status-text">AVAILABLE FOR OPPORTUNITIES</span>
-                            </div>
-                        </div>
-                        
-                        <div class="quick-stats">
-                            <div class="quick-stat">
-                                <div class="stat-icon">
-                                    <i class="fas fa-map-marker-alt"></i>
-                                </div>
-                                <div class="stat-info">
-                                    <span class="stat-value">New York, NY</span>
-                                    <span class="stat-label">Location</span>
-                                </div>
-                            </div>
-                            <div class="quick-stat">
-                                <div class="stat-icon">
-                                    <i class="fas fa-graduation-cap"></i>
-                                </div>
-                                <div class="stat-info">
-                                    <span class="stat-value">NYU Tandon</span>
-                                    <span class="stat-label">Current</span>
-                                </div>
-                            </div>
-                            <div class="quick-stat">
-                                <div class="stat-icon">
-                                    <i class="fas fa-code"></i>
-                                </div>
-                                <div class="stat-info">
-                                    <span class="stat-value">3+ Years</span>
-                                    <span class="stat-label">Experience</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    
+                <div class="about-right">
                     <div class="about-text">
-                        <div class="text-content">
-                            <div class="intro-text">
-                                <h3>Hello! I'm Unmesh Achar</h3>
-                                <p>
-                                    I'm a Computer Engineering graduate student at New York University with a 
-                                    passion for pushing the boundaries of artificial intelligence and machine learning. 
-                                    My work focuses on developing clinically validated AI systems that solve real-world problems.
-                                </p>
-                            </div>
-                            
-                            <div class="highlights">
-                                <div class="highlight-item">
-                                    <div class="highlight-icon">
-                                        <i class="fas fa-trophy"></i>
-                                    </div>
-                                    <p>
-                                        <strong>Published Researcher:</strong> Achieved 99.43% accuracy in psoriasis detection 
-                                        systems with research published in Nature Scientific Reports.
-                                    </p>
-                                </div>
-                                
-                                <div class="highlight-item">
-                                    <div class="highlight-icon">
-                                        <i class="fas fa-brain"></i>
-                                    </div>
-                                    <p>
-                                        <strong>AI Specialist:</strong> Expert in Computer Vision, CNN architectures, 
-                                        Transfer Learning, and Deep Learning applications in medical diagnosis.
-                                    </p>
-                                </div>
-                                
-                                <div class="highlight-item">
-                                    <div class="highlight-icon">
-                                        <i class="fas fa-rocket"></i>
-                                    </div>
-                                    <p>
-                                        <strong>Innovation Focus:</strong> Constantly exploring cutting-edge technologies 
-                                        and contributing to open-source projects that make a difference.
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <!-- Live Activity Dashboard -->
-                        <div class="activity-dashboard">
-                            <h4 class="dashboard-title">Live Activity</h4>
-                            <div class="activity-grid">
-                                <!-- GitHub Activity -->
-                                <div class="activity-card github-activity">
-                                    <div class="activity-header">
-                                        <div class="activity-icon">
-                                            <i class="fab fa-github"></i>
-                                        </div>
-                                        <div class="activity-info">
-                                            <h5>GitHub</h5>
-                                            <span class="activity-username">@Unmesh30</span>
-                                        </div>
-                                        <div class="activity-status online"></div>
-                                    </div>
-                                    <div class="activity-stats">
-                                        <div class="activity-stat">
-                                            <span class="stat-number" id="github-repos">--</span>
-                                            <span class="stat-label">Repositories</span>
-                                        </div>
-                                        <div class="activity-stat">
-                                            <span class="stat-number" id="github-commits">--</span>
-                                            <span class="stat-label">Commits (2025)</span>
-                                        </div>
-                                    </div>
-                                </div>
-                                
-                                <!-- LeetCode Activity -->
-                                <div class="activity-card leetcode-activity">
-                                    <div class="activity-header">
-                                        <div class="activity-icon">
-                                            <i class="fas fa-code"></i>
-                                        </div>
-                                        <div class="activity-info">
-                                            <h5>LeetCode</h5>
-                                            <span class="activity-username">@UnmeshXD</span>
-                                        </div>
-                                        <div class="activity-status online"></div>
-                                    </div>
-                                    <div class="activity-stats">
-                                        <div class="activity-stat">
-                                            <span class="stat-number" id="leetcode-solved">--</span>
-                                            <span class="stat-label">Problems Solved</span>
-                                        </div>
-                                        <div class="activity-stat">
-                                            <span class="stat-number" id="leetcode-streak">--</span>
-                                            <span class="stat-label">Day Streak</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                        <h3>Hello! I'm Unmesh Achar</h3>
+                        <p>I'm a Computer Engineering graduate student at New York University with a strong background in Machine Learning, Computer Vision, and AI research. My work focuses on developing clinically validated AI systems for medical diagnosis and real-world applications.</p>
+                        <p>I have published research in Nature Scientific Reports and contributed to cutting-edge projects in dermatology AI, achieving 99.43% accuracy in psoriasis detection systems.</p>
+                        <p>When I'm not coding, I enjoy exploring new technologies, contributing to open-source projects, and staying up-to-date with the latest advancements in AI and machine learning.</p>
                     </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Education Section -->
-        <section id="education" class="education">
-            <div class="container">
-                <div class="section-header">
-                    <h2 class="section-title">
-                        <span class="title-text">Education</span>
-                        <div class="title-line"></div>
-                    </h2>
-                    <p class="section-subtitle">Academic journey and achievements</p>
-                </div>
-                
-                <div class="education-timeline">
-                    <div class="timeline-line"></div>
-                    
-                    <div class="timeline-item current">
-                        <div class="timeline-marker">
-                            <div class="marker-core"></div>
-                            <div class="marker-ring"></div>
+                    <div class="about-stats">
+                        <div class="stat">
+                            <h3>3.83</h3>
+                            <p>NYU GPA</p>
                         </div>
-                        <div class="timeline-content">
-                            <div class="education-card">
-                                <div class="card-header">
-                                    <div class="institution-logo">
-                                        <i class="fas fa-university"></i>
-                                    </div>
-                                    <div class="institution-info">
-                                        <h3>Master's in Computer Engineering</h3>
-                                        <h4>New York University</h4>
-                                        <span class="timeline-date">September 2024 - May 2026</span>
-                                    </div>
-                                    <div class="education-status current-status">CURRENT</div>
-                                </div>
-                                
-                                <div class="card-content">
-                                    <div class="gpa-display">
-                                        <span class="gpa-value">3.83</span>
-                                        <span class="gpa-scale">/4.0</span>
-                                        <span class="gpa-label">Cumulative GPA</span>
-                                    </div>
-                                    
-                                    <div class="coursework">
-                                        <h5>Relevant Coursework:</h5>
-                                        <div class="course-tags">
-                                            <span class="course-tag">Machine Learning</span>
-                                            <span class="course-tag">Computer System Architecture</span>
-                                            <span class="course-tag">Big Data</span>
-                                            <span class="course-tag">Java Programming</span>
-                                            <span class="course-tag">System Engineering</span>
-                                            <span class="course-tag">Data Visualization</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                        <div class="stat">
+                            <h3>2</h3>
+                            <p>Publications</p>
+                        </div>
+                        <div class="stat">
+                            <h3>5+</h3>
+                            <p>Major Projects</p>
+                        </div>
+                        <div class="stat">
+                            <h3>3+</h3>
+                            <p>Years Experience</p>
                         </div>
                     </div>
                     
-                    <div class="timeline-item completed">
-                        <div class="timeline-marker">
-                            <div class="marker-core"></div>
-                            <div class="marker-ring"></div>
-                        </div>
-                        <div class="timeline-content">
-                            <div class="education-card">
-                                <div class="card-header">
-                                    <div class="institution-logo">
-                                        <i class="fas fa-graduation-cap"></i>
-                                    </div>
-                                    <div class="institution-info">
-                                        <h3>Bachelor's in Computer Science and Engineering</h3>
-                                        <h4>Kalinga Institute of Industrial Technology</h4>
-                                        <span class="timeline-date">August 2020 - June 2024</span>
-                                    </div>
-                                    <div class="education-status completed-status">COMPLETED</div>
-                                </div>
-                                
-                                <div class="card-content">
-                                    <div class="gpa-display">
-                                        <span class="gpa-value">8.24</span>
-                                        <span class="gpa-scale">/10.0</span>
-                                        <span class="gpa-label">Cumulative CGPA</span>
-                                    </div>
-                                    
-                                    <div class="coursework">
-                                        <h5>Relevant Coursework:</h5>
-                                        <div class="course-tags">
-                                            <span class="course-tag">Engineering Mathematics</span>
-                                            <span class="course-tag">Database Management</span>
-                                            <span class="course-tag">Artificial Intelligence</span>
-                                            <span class="course-tag">Software Engineering</span>
-                                            <span class="course-tag">Operating Systems</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Skills Section -->
-        <section id="skills" class="skills">
-            <div class="container">
-                <div class="section-header">
-                    <h2 class="section-title">
-                        <span class="title-text">Technical Arsenal</span>
-                        <div class="title-line"></div>
-                    </h2>
-                    <p class="section-subtitle">Technologies and frameworks I wield</p>
-                </div>
-                
-                <div class="skills-showcase">
-                    <!-- 3D Skills Orbit -->
-                    <div class="skills-orbit-container">
-                        <div class="skills-orbit" id="skills-orbit">
-                            <div class="orbit-center">
-                                <div class="center-core">
-                                    <i class="fas fa-brain"></i>
-                                </div>
-                                <div class="center-text">AI/ML</div>
-                            </div>
-                            
-                            <!-- Programming Languages -->
-                            <div class="skill-node programming" data-category="programming">
-                                <div class="node-content">
-                                    <i class="fab fa-python"></i>
-                                    <span>Python</span>
-                                </div>
-                                <div class="node-orbit">
-                                    <div class="orbit-item">Java</div>
-                                    <div class="orbit-item">C++</div>
-                                    <div class="orbit-item">SQL</div>
-                                </div>
-                            </div>
-                            
-                            <!-- AI/ML -->
-                            <div class="skill-node ai-ml" data-category="ai-ml">
-                                <div class="node-content">
-                                    <i class="fas fa-project-diagram"></i>
-                                    <span>CNN</span>
-                                </div>
-                                <div class="node-orbit">
-                                    <div class="orbit-item">Transfer Learning</div>
-                                    <div class="orbit-item">Computer Vision</div>
-                                    <div class="orbit-item">Deep Learning</div>
-                                </div>
-                            </div>
-                            
-                            <!-- Frameworks -->
-                            <div class="skill-node frameworks" data-category="frameworks">
-                                <div class="node-content">
-                                    <i class="fas fa-cogs"></i>
-                                    <span>TensorFlow</span>
-                                </div>
-                                <div class="node-orbit">
-                                    <div class="orbit-item">MediaPipe</div>
-                                    <div class="orbit-item">Gradio</div>
-                                    <div class="orbit-item">Streamlit</div>
-                                </div>
-                            </div>
-                            
-                            <!-- Cloud & Big Data -->
-                            <div class="skill-node cloud" data-category="cloud">
-                                <div class="node-content">
-                                    <i class="fas fa-cloud"></i>
-                                    <span>Azure</span>
-                                </div>
-                                <div class="node-orbit">
-                                    <div class="orbit-item">Hadoop</div>
-                                    <div class="orbit-item">Spark</div>
-                                    <div class="orbit-item">Hive</div>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <!-- Skill Details Panel -->
-                        <div class="skill-details-panel" id="skill-details-panel">
-                            <div class="panel-header">
-                                <h4 id="skill-category-title">Hover over a node to explore</h4>
-                                <div class="panel-close">
-                                    <i class="fas fa-times"></i>
-                                </div>
-                            </div>
-                            <div class="panel-content">
-                                <p id="skill-category-description">Discover the technologies and frameworks I work with</p>
-                                <div class="skill-proficiency">
-                                    <div class="proficiency-bar">
-                                        <div class="proficiency-fill" id="skill-proficiency-fill"></div>
-                                    </div>
-                                    <span class="proficiency-text" id="skill-proficiency-text">Expert Level</span>
-                                </div>
-                                <div class="skill-examples" id="skill-examples">
-                                    <!-- Dynamic skill examples -->
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <!-- Skills Matrix -->
-                    <div class="skills-matrix">
-                        <h4>Proficiency Matrix</h4>
-                        <div class="matrix-grid">
-                            <div class="matrix-category">
-                                <h5>Programming Languages</h5>
-                                <div class="skill-bars">
-                                    <div class="skill-bar">
-                                        <span class="skill-name">Python</span>
-                                        <div class="skill-progress">
-                                            <div class="progress-fill" style="--progress: 95%"></div>
-                                        </div>
-                                        <span class="skill-percentage">95%</span>
-                                    </div>
-                                    <div class="skill-bar">
-                                        <span class="skill-name">Java</span>
-                                        <div class="skill-progress">
-                                            <div class="progress-fill" style="--progress: 85%"></div>
-                                        </div>
-                                        <span class="skill-percentage">85%</span>
-                                    </div>
-                                    <div class="skill-bar">
-                                        <span class="skill-name">C++</span>
-                                        <div class="skill-progress">
-                                            <div class="progress-fill" style="--progress: 80%"></div>
-                                        </div>
-                                        <span class="skill-percentage">80%</span>
-                                    </div>
-                                </div>
-                            </div>
-                            
-                            <div class="matrix-category">
-                                <h5>AI/ML & Computer Vision</h5>
-                                <div class="skill-bars">
-                                    <div class="skill-bar">
-                                        <span class="skill-name">CNN & Transfer Learning</span>
-                                        <div class="skill-progress">
-                                            <div class="progress-fill" style="--progress: 95%"></div>
-                                        </div>
-                                        <span class="skill-percentage">95%</span>
-                                    </div>
-                                    <div class="skill-bar">
-                                        <span class="skill-name">Computer Vision</span>
-                                        <div class="skill-progress">
-                                            <div class="progress-fill" style="--progress: 90%"></div>
-                                        </div>
-                                        <span class="skill-percentage">90%</span>
-                                    </div>
-                                    <div class="skill-bar">
-                                        <span class="skill-name">Deep Learning</span>
-                                        <div class="skill-progress">
-                                            <div class="progress-fill" style="--progress: 88%"></div>
-                                        </div>
-                                        <span class="skill-percentage">88%</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- AI Showcase Section -->
-        <section id="ai-showcase" class="ai-showcase">
-            <div class="container">
-                <div class="section-header">
-                    <h2 class="section-title">
-                        <span class="title-text">AI & Neural Networks</span>
-                        <div class="title-line"></div>
-                    </h2>
-                    <p class="section-subtitle">Interactive demonstrations of machine learning expertise</p>
-                </div>
-                
-                <div class="showcase-grid">
-                    <!-- Neural Network Visualizer -->
-                    <div class="showcase-card neural-visualizer">
-                        <div class="card-header">
-                            <div class="card-icon">
-                                <i class="fas fa-project-diagram"></i>
-                            </div>
-                            <div class="card-title">
-                                <h3>Neural Network Visualizer</h3>
-                                <p>Interactive CNN Architecture</p>
-                            </div>
-                            <div class="card-controls">
-                                <button class="control-btn" id="nn-play-btn">
-                                    <i class="fas fa-play"></i>
-                                </button>
-                                <button class="control-btn" id="nn-reset-btn">
-                                    <i class="fas fa-redo"></i>
-                                </button>
-                            </div>
-                        </div>
-                        
-                        <div class="neural-network-container">
-                            <div class="network-canvas" id="network-canvas">
-                                <!-- Dynamic neural network visualization -->
-                            </div>
-                            
-                            <div class="network-info">
-                                <div class="model-architecture">
-                                    <h5>Model: MobileNet + Transfer Learning</h5>
-                                    <div class="architecture-details">
-                                        <div class="detail-row">
-                                            <span class="detail-label">Input:</span>
-                                            <span class="detail-value">224x224x3</span>
-                                        </div>
-                                        <div class="detail-row">
-                                            <span class="detail-label">Base Model:</span>
-                                            <span class="detail-value">MobileNet (ImageNet)</span>
-                                        </div>
-                                        <div class="detail-row">
-                                            <span class="detail-label">Fine-tuning:</span>
-                                            <span class="detail-value">Last 5 layers</span>
-                                        </div>
-                                        <div class="detail-row">
-                                            <span class="detail-label">Accuracy:</span>
-                                            <span class="detail-value highlight">99.43%</span>
-                                        </div>
-                                    </div>
-                                </div>
-                                
-                                <div class="performance-metrics">
-                                    <div class="metric-item">
-                                        <span class="metric-value">0.994</span>
-                                        <span class="metric-label">AUC Score</span>
-                                    </div>
-                                    <div class="metric-item">
-                                        <span class="metric-value">98.2%</span>
-                                        <span class="metric-label">Precision</span>
-                                    </div>
-                                    <div class="metric-item">
-                                        <span class="metric-value">99.1%</span>
-                                        <span class="metric-label">Recall</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <!-- Research Impact Dashboard -->
-                    <div class="showcase-card research-impact">
-                        <div class="card-header">
-                            <div class="card-icon">
-                                <i class="fas fa-chart-line"></i>
-                            </div>
-                            <div class="card-title">
-                                <h3>Research Impact</h3>
-                                <p>Live Publication Metrics</p>
-                            </div>
-                            <div class="card-controls">
-                                <button class="control-btn" id="refresh-research-btn">
-                                    <i class="fas fa-sync"></i>
-                                </button>
-                            </div>
-                        </div>
-                        
-                        <div class="research-content">
-                            <div class="publication-cards">
-                                <div class="publication-card nature">
-                                    <div class="pub-header">
-                                        <div class="journal-icon">
-                                            <i class="fas fa-microscope"></i>
-                                        </div>
-                                        <div class="journal-info">
-                                            <h5>Nature Scientific Reports</h5>
-                                            <span class="pub-date">November 2024</span>
-                                        </div>
-                                    </div>
-                                    <div class="pub-metrics">
-                                        <div class="metric">
-                                            <span class="metric-number" id="nature-citations">--</span>
-                                            <span class="metric-text">Citations</span>
-                                        </div>
-                                        <div class="metric">
-                                            <span class="metric-number" id="nature-reads">--</span>
-                                            <span class="metric-text">Reads</span>
-                                        </div>
-                                    </div>
-                                </div>
-                                
-                                <div class="publication-card ijdv">
-                                    <div class="pub-header">
-                                        <div class="journal-icon">
-                                            <i class="fas fa-user-md"></i>
-                                        </div>
-                                        <div class="journal-info">
-                                            <h5>Indian Journal of Dermatology</h5>
-                                            <span class="pub-date">March 2025</span>
-                                        </div>
-                                    </div>
-                                    <div class="pub-metrics">
-                                        <div class="metric">
-                                            <span class="metric-number" id="ijdv-citations">--</span>
-                                            <span class="metric-text">Citations</span>
-                                        </div>
-                                        <div class="metric">
-                                            <span class="metric-number">27</span>
-                                            <span class="metric-text">Studies</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            
-                            <div class="impact-visualization">
-                                <canvas id="impact-chart" width="400" height="200"></canvas>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <!-- Algorithm Playground -->
-                    <div class="showcase-card algorithm-playground">
-                        <div class="card-header">
-                            <div class="card-icon">
-                                <i class="fas fa-robot"></i>
-                            </div>
-                            <div class="card-title">
-                                <h3>Algorithm Playground</h3>
-                                <p>Interactive ML Techniques</p>
-                            </div>
-                            <div class="card-controls">
-                                <select id="algorithm-selector">
-                                    <option value="cnn">Convolutional Neural Network</option>
-                                    <option value="transfer-learning">Transfer Learning</option>
-                                    <option value="data-augmentation">Data Augmentation</option>
-                                </select>
-                            </div>
-                        </div>
-                        
-                        <div class="playground-content">
-                            <div class="algorithm-demo" id="algorithm-demo">
-                                <!-- Interactive algorithm demonstration -->
-                                <div class="demo-canvas" id="demo-canvas">
-                                    <canvas id="algorithm-canvas" width="400" height="300"></canvas>
-                                </div>
-                                
-                                <div class="demo-controls">
-                                    <button class="demo-btn" id="run-demo">
-                                        <i class="fas fa-play"></i>
-                                        Run Demo
-                                    </button>
-                                    <div class="parameter-controls">
-                                        <div class="control-group">
-                                            <label>Learning Rate:</label>
-                                            <input type="range" id="learning-rate" min="0.0001" max="0.01" step="0.0001" value="0.001">
-                                            <span id="lr-value">0.001</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            
-                            <div class="algorithm-explanation">
-                                <h5 id="algo-title">Convolutional Neural Networks</h5>
-                                <p id="algo-description">
-                                    CNNs use convolution operations to detect local features and patterns in images,
-                                    making them ideal for computer vision tasks like medical image analysis.
-                                </p>
-                                <div class="code-snippet">
-                                    <pre><code id="algo-code">
-# MobileNet Transfer Learning
-base_model = MobileNet(
-    weights='imagenet',
-    include_top=False,
-    input_shape=(224, 224, 3)
-)
-
-model = Sequential([
-    base_model,
-    GlobalAveragePooling2D(),
-    Dense(128, activation='relu'),
-    Dense(2, activation='softmax')
-])
-                                    </code></pre>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- LeetCode Playground Section -->
-        <section id="leetcode" class="leetcode-playground">
-            <div class="container">
-                <div class="section-header">
-                    <h2 class="section-title">
-                        <span class="title-text">LeetCode Mastery</span>
-                        <div class="title-line"></div>
-                    </h2>
-                    <p class="section-subtitle">Algorithm analysis and problem-solving visualization</p>
-                </div>
-                
-                <div class="leetcode-dashboard">
-                    <!-- Profile Overview -->
-                    <div class="leetcode-profile">
-                        <div class="profile-card">
-                            <div class="profile-avatar">
-                                <div class="avatar-container">
-                                    <i class="fas fa-user-ninja"></i>
-                                </div>
-                                <div class="status-indicator online"></div>
-                            </div>
-                            <div class="profile-info">
-                                <h3>@UnmeshXD</h3>
-                                <p>Algorithm Enthusiast</p>
-                                <a href="https://leetcode.com/u/UnmeshXD/" target="_blank" class="profile-link">
-                                    <i class="fas fa-external-link-alt"></i>
-                                    View Profile
-                                </a>
-                            </div>
-                        </div>
-                        
-                        <div class="stats-overview">
-                            <div class="stat-card">
-                                <div class="stat-icon">
-                                    <i class="fas fa-trophy"></i>
-                                </div>
-                                <div class="stat-content">
-                                    <span class="stat-number" id="lc-ranking">--</span>
-                                    <span class="stat-label">Global Rank</span>
-                                </div>
-                            </div>
-                            <div class="stat-card">
-                                <div class="stat-icon">
-                                    <i class="fas fa-fire"></i>
-                                </div>
-                                <div class="stat-content">
-                                    <span class="stat-number" id="lc-streak">--</span>
-                                    <span class="stat-label">Day Streak</span>
-                                </div>
-                            </div>
-                            <div class="stat-card">
-                                <div class="stat-icon">
-                                    <i class="fas fa-check-circle"></i>
-                                </div>
-                                <div class="stat-content">
-                                    <span class="stat-number" id="lc-acceptance">--</span>
-                                    <span class="stat-label">Acceptance</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <!-- Algorithm Visualizer -->
-                    <div class="algorithm-visualizer">
-                        <div class="visualizer-header">
-                            <h4>Algorithm Visualizer</h4>
-                            <select id="algo-selector">
-                                <option value="binary-search">Binary Search</option>
-                                <option value="merge-sort">Merge Sort</option>
-                                <option value="dfs">Depth-First Search</option>
-                                <option value="bfs">Breadth-First Search</option>
-                            </select>
-                        </div>
-                        
-                        <div class="visualizer-canvas" id="visualizer-canvas">
-                            <!-- Algorithm visualization area -->
-                            <div class="array-container" id="array-container">
-                                <div class="array-element" data-value="1">1</div>
-                                <div class="array-element" data-value="3">3</div>
-                                <div class="array-element" data-value="5">5</div>
-                                <div class="array-element" data-value="7">7</div>
-                                <div class="array-element" data-value="9">9</div>
-                                <div class="array-element" data-value="11">11</div>
-                                <div class="array-element" data-value="13">13</div>
-                                <div class="array-element" data-value="15">15</div>
-                            </div>
-                            
-                            <div class="search-controls">
-                                <input type="number" id="search-target" placeholder="Target" value="7">
-                                <button class="search-btn" id="start-search">
-                                    <i class="fas fa-search"></i>
-                                    Search
-                                </button>
-                            </div>
-                        </div>
-                        
-                        <div class="complexity-info">
-                            <div class="complexity-card">
-                                <span class="complexity-label">Time:</span>
-                                <span class="complexity-value" id="time-complexity">O(log n)</span>
-                            </div>
-                            <div class="complexity-card">
-                                <span class="complexity-label">Space:</span>
-                                <span class="complexity-value" id="space-complexity">O(1)</span>
-                            </div>
-                            <div class="complexity-card">
-                                <span class="complexity-label">Steps:</span>
-                                <span class="complexity-value" id="step-count">0</span>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <!-- Problem Patterns -->
-                    <div class="problem-patterns">
-                        <h4>Problem-Solving Patterns</h4>
-                        <div class="pattern-grid">
-                            <div class="pattern-item">
-                                <div class="pattern-icon">
-                                    <i class="fas fa-sitemap"></i>
-                                </div>
-                                <div class="pattern-info">
-                                    <span class="pattern-name">Two Pointers</span>
-                                    <div class="pattern-progress">
-                                        <div class="progress-fill" style="--progress: 85%"></div>
-                                    </div>
-                                    <span class="pattern-percentage">85%</span>
-                                </div>
-                            </div>
-                            
-                            <div class="pattern-item">
-                                <div class="pattern-icon">
-                                    <i class="fas fa-project-diagram"></i>
-                                </div>
-                                <div class="pattern-info">
-                                    <span class="pattern-name">Dynamic Programming</span>
-                                    <div class="pattern-progress">
-                                        <div class="progress-fill" style="--progress: 72%"></div>
-                                    </div>
-                                    <span class="pattern-percentage">72%</span>
-                                </div>
-                            </div>
-                            
-                            <div class="pattern-item">
-                                <div class="pattern-icon">
-                                    <i class="fas fa-search"></i>
-                                </div>
-                                <div class="pattern-info">
-                                    <span class="pattern-name">Binary Search</span>
-                                    <div class="pattern-progress">
-                                        <div class="progress-fill" style="--progress: 90%"></div>
-                                    </div>
-                                    <span class="pattern-percentage">90%</span>
-                                </div>
-                            </div>
-                            
-                            <div class="pattern-item">
-                                <div class="pattern-icon">
-                                    <i class="fas fa-share-alt"></i>
-                                </div>
-                                <div class="pattern-info">
-                                    <span class="pattern-name">Graph Algorithms</span>
-                                    <div class="pattern-progress">
-                                        <div class="progress-fill" style="--progress: 68%"></div>
-                                    </div>
-                                    <span class="pattern-percentage">68%</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <!-- Activity Heatmap -->
-                    <div class="activity-heatmap">
-                        <h4>Coding Activity</h4>
-                        <div class="heatmap-container" id="activity-heatmap">
-                            <!-- Heatmap generated dynamically -->
-                        </div>
-                        <div class="heatmap-legend">
-                            <span>Less</span>
-                            <div class="legend-squares">
-                                <div class="legend-square level-0"></div>
-                                <div class="legend-square level-1"></div>
-                                <div class="legend-square level-2"></div>
-                                <div class="legend-square level-3"></div>
-                                <div class="legend-square level-4"></div>
-                            </div>
-                            <span>More</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Projects Section -->
-        <section id="projects" class="projects">
-            <div class="container">
-                <div class="section-header">
-                    <h2 class="section-title">
-                        <span class="title-text">Featured Projects</span>
-                        <div class="title-line"></div>
-                    </h2>
-                    <p class="section-subtitle">Innovative solutions and cutting-edge implementations</p>
-                </div>
-                
-                <div class="projects-grid">
-                    <!-- NYC Risk & Route Project -->
-                    <div class="project-card featured">
-                        <div class="project-visual">
-                            <div class="project-icon">
-                                <i class="fas fa-map-marked-alt"></i>
-                            </div>
-                            <div class="project-overlay">
-                                <div class="tech-stack">
-                                    <span class="tech-tag python">Python</span>
-                                    <span class="tech-tag ml">Random Forest</span>
-                                    <span class="tech-tag web">Streamlit</span>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <div class="project-content">
-                            <div class="project-header">
-                                <h3>NYC Risk & Route Prediction</h3>
-                                <div class="project-status">
-                                    <span class="status-indicator deployed"></span>
-                                    <span class="status-text">Deployed</span>
-                                </div>
-                            </div>
-                            
-                            <p class="project-description">
-                                Interactive Streamlit app with integrated GoMaps & Geopy APIs for real-time 
-                                visual navigation and incident heatmaps across 200+ geozones using Random Forests 
-                                achieving 92% accuracy.
-                            </p>
-                            
-                            <div class="project-metrics">
-                                <div class="metric">
-                                    <span class="metric-value">92%</span>
-                                    <span class="metric-label">Accuracy</span>
-                                </div>
-                                <div class="metric">
-                                    <span class="metric-value">200+</span>
-                                    <span class="metric-label">Geozones</span>
-                                </div>
-                            </div>
-                            
-                            <div class="project-actions">
-                                <a href="https://github.com/Unmesh30/NYC-Risk-Route-Prediction" target="_blank" class="project-btn primary">
-                                    <i class="fab fa-github"></i>
-                                    <span>View Code</span>
-                                </a>
-                                <button class="project-btn secondary" onclick="showProjectDetails('nyc-risk')">
-                                    <i class="fas fa-info-circle"></i>
-                                    <span>Details</span>
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <!-- Acne Detection Project -->
-                    <div class="project-card">
-                        <div class="project-visual">
-                            <div class="project-icon">
-                                <i class="fas fa-user-md"></i>
-                            </div>
-                            <div class="project-overlay">
-                                <div class="tech-stack">
-                                    <span class="tech-tag ai">MobileNet</span>
-                                    <span class="tech-tag cv">Computer Vision</span>
-                                    <span class="tech-tag web">Gradio</span>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <div class="project-content">
-                            <div class="project-header">
-                                <h3>Acne Disease Detection</h3>
-                                <div class="project-status">
-                                    <span class="status-indicator completed"></span>
-                                    <span class="status-text">Completed</span>
-                                </div>
-                            </div>
-                            
-                            <p class="project-description">
-                                Fine-tuned MobileNet for facial acne classification achieving 95.64% accuracy. 
-                                Built Gradio-based interface for real-time inference with 90%+ validation precision.
-                            </p>
-                            
-                            <div class="project-metrics">
-                                <div class="metric">
-                                    <span class="metric-value">95.64%</span>
-                                    <span class="metric-label">Accuracy</span>
-                                </div>
-                                <div class="metric">
-                                    <span class="metric-value">90%+</span>
-                                    <span class="metric-label">Precision</span>
-                                </div>
-                            </div>
-                            
-                            <div class="project-actions">
-                                <a href="https://github.com/Unmesh30/Acne-Disease-Detection" target="_blank" class="project-btn primary">
-                                    <i class="fab fa-github"></i>
-                                    <span>View Code</span>
-                                </a>
-                                <button class="project-btn secondary" onclick="showProjectDetails('acne-detection')">
-                                    <i class="fas fa-info-circle"></i>
-                                    <span>Details</span>
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <!-- Mind Controlled Smart Home -->
-                    <div class="project-card">
-                        <div class="project-visual">
-                            <div class="project-icon">
-                                <i class="fas fa-brain"></i>
-                            </div>
-                            <div class="project-overlay">
-                                <div class="tech-stack">
-                                    <span class="tech-tag bci">BCI</span>
-                                    <span class="tech-tag ai">CNN-RNN</span>
-                                    <span class="tech-tag iot">IoT</span>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <div class="project-content">
-                            <div class="project-header">
-                                <h3>Mind Controlled Smart Home</h3>
-                                <div class="project-status">
-                                    <span class="status-indicator research"></span>
-                                    <span class="status-text">Research</span>
-                                </div>
-                            </div>
-                            
-                            <p class="project-description">
-                                Non-invasive BCI-powered smart home concept leveraging EEG signal acquisition 
-                                and CNN-RNN modeling to detect intent and trigger IoT-based appliance control.
-                            </p>
-                            
-                            <div class="project-actions">
-                                <a href="https://drive.google.com/file/d/132OmEdXy0moUGWcoqLAEklKAbO_BIoKM/view?usp=sharing" 
-                                   target="_blank" class="project-btn primary">
-                                    <i class="fas fa-file-alt"></i>
-                                    <span>Research Paper</span>
-                                </a>
-                                <a href="https://youtu.be/niVvKLKCf7I" target="_blank" class="project-btn secondary">
-                                    <i class="fas fa-play-circle"></i>
-                                    <span>Demo Video</span>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <!-- Air-Piano Project -->
-                    <div class="project-card">
-                        <div class="project-visual">
-                            <div class="project-icon">
-                                <i class="fas fa-hand-paper"></i>
-                            </div>
-                            <div class="project-overlay">
-                                <div class="tech-stack">
-                                    <span class="tech-tag cv">MediaPipe</span>
-                                    <span class="tech-tag audio">MIDI</span>
-                                    <span class="tech-tag python">Python</span>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <div class="project-content">
-                            <div class="project-header">
-                                <h3>Air-Piano: Touchless MIDI</h3>
-                                <div class="project-status">
-                                    <span class="status-indicator completed"></span>
-                                    <span class="status-text">Completed</span>
-                                </div>
-                            </div>
-                            
-                            <p class="project-description">
-                                Real-time touchless MIDI instrument using MediaPipe hand tracking to detect 
-                                finger gestures and trigger chord playback via Fluidsynth with multi-threaded sustain logic.
-                            </p>
-                            
-                            <div class="project-actions">
-                                <a href="https://github.com/Unmesh30/Aeras-Piano" target="_blank" class="project-btn primary">
-                                    <i class="fab fa-github"></i>
-                                    <span>View Code</span>
-                                </a>
-                                <button class="project-btn secondary" onclick="showProjectDetails('air-piano')">
-                                    <i class="fas fa-info-circle"></i>
-                                    <span>Details</span>
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <!-- Nexus Shell Project -->
-                    <div class="project-card">
-                        <div class="project-visual">
-                            <div class="project-icon">
-                                <i class="fas fa-terminal"></i>
-                            </div>
-                            <div class="project-overlay">
-                                <div class="tech-stack">
-                                    <span class="tech-tag c">C</span>
-                                    <span class="tech-tag systems">Systems</span>
-                                    <span class="tech-tag unix">Unix</span>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <div class="project-content">
-                            <div class="project-header">
-                                <h3>Nexus Shell</h3>
-                                <div class="project-status">
-                                    <span class="status-indicator completed"></span>
-                                    <span class="status-text">Completed</span>
-                                </div>
-                            </div>
-                            
-                            <p class="project-description">
-                                Complete shell implementation in C featuring command parsing, process management, 
-                                and built-in commands. Demonstrates systems programming and low-level process control.
-                            </p>
-                            
-                            <div class="project-actions">
-                                <a href="https://github.com/Unmesh30/nexus-shell" target="_blank" class="project-btn primary">
-                                    <i class="fab fa-github"></i>
-                                    <span>View Code</span>
-                                </a>
-                                <button class="project-btn secondary" onclick="showProjectDetails('nexus-shell')">
-                                    <i class="fas fa-info-circle"></i>
-                                    <span>Details</span>
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Experience Section -->
-        <section id="experience" class="experience">
-            <div class="container">
-                <div class="section-header">
-                    <h2 class="section-title">
-                        <span class="title-text">Work Experience</span>
-                        <div class="title-line"></div>
-                    </h2>
-                    <p class="section-subtitle">Professional journey and achievements</p>
-                </div>
-                
-                <div class="experience-timeline">
-                    <div class="timeline-line"></div>
-                    
-                    <!-- Current/Future Experience -->
-                    <div class="timeline-item current">
-                        <div class="timeline-marker">
-                            <div class="marker-core"></div>
-                            <div class="marker-pulse"></div>
-                        </div>
-                        
-                        <div class="timeline-content">
-                            <div class="experience-card">
-                                <div class="card-header">
-                                    <div class="company-logo">
-                                        <i class="fas fa-building"></i>
-                                    </div>
-                                    <div class="experience-info">
-                                        <h3>Nesternship Intern — AI-ML in Data Quality and Governance</h3>
-                                        <h4>Nestlé India Ltd. (Indian Headquarters)</h4>
-                                        <span class="experience-date">May 2025 - July 2025</span>
-                                    </div>
-                                    <div class="experience-status upcoming">UPCOMING</div>
-                                </div>
-                                
-                                <div class="card-content">
-                                    <div class="achievements">
-                                        <div class="achievement-item">
-                                            <div class="achievement-icon">
-                                                <i class="fas fa-cogs"></i>
-                                            </div>
-                                            <p>
-                                                Developed secure, branch-level order response system using Power Apps 
-                                                and SharePoint Lists, enforcing region-specific access and real-time validation
-                                            </p>
-                                        </div>
-                                        
-                                        <div class="achievement-item">
-                                            <div class="achievement-icon">
-                                                <i class="fas fa-sync-alt"></i>
-                                            </div>
-                                            <p>
-                                                Automated ingestion of multi-sheet Excel files with Power Automate, 
-                                                ensuring duplicate-free updates via daily ID-based syncs
-                                            </p>
-                                        </div>
-                                        
-                                        <div class="achievement-item">
-                                            <div class="achievement-icon">
-                                                <i class="fas fa-chart-line"></i>
-                                            </div>
-                                            <p>
-                                                Designed email automation logic for dynamic links and attachments, 
-                                                reducing manual overhead by 60%
-                                            </p>
-                                        </div>
-                                    </div>
-                                    
-                                    <div class="tech-stack">
-                                        <span class="tech-tag">Power Apps</span>
-                                        <span class="tech-tag">SharePoint</span>
-                                        <span class="tech-tag">Power Automate</span>
-                                        <span class="tech-tag">Excel</span>
-                                        <span class="tech-tag">Data Governance</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <!-- Research Internship -->
-                    <div class="timeline-item completed">
-                        <div class="timeline-marker">
-                            <div class="marker-core"></div>
-                            <div class="marker-ring"></div>
-                        </div>
-                        
-                        <div class="timeline-content">
-                            <div class="experience-card">
-                                <div class="card-header">
-                                    <div class="company-logo">
-                                        <i class="fas fa-university"></i>
-                                    </div>
-                                    <div class="experience-info">
-                                        <h3>Research Intern</h3>
-                                        <h4>National Institute of Technical Teachers' Training and Research, Kolkata</h4>
-                                        <span class="experience-date">May 2023 - July 2023</span>
-                                    </div>
-                                    <div class="experience-status completed">COMPLETED</div>
-                                </div>
-                                
-                                <div class="card-content">
-                                    <div class="project-focus">
-                                        <h5>Project: Deep Transfer Learning for Computer-Assisted Diagnosis of Skin Psoriasis</h5>
-                                    </div>
-                                    
-                                    <div class="achievements">
-                                        <div class="achievement-item">
-                                            <div class="achievement-icon">
-                                                <i class="fas fa-microscope"></i>
-                                            </div>
-                                            <p>
-                                                Built clinically validated psoriasis detection system using deep transfer learning 
-                                                (MobileNet, VGG16, VGG19, ResNet-50) on 893 curated image patches
-                                            </p>
-                                        </div>
-                                        
-                                        <div class="achievement-item">
-                                            <div class="achievement-icon">
-                                                <i class="fas fa-cog"></i>
-                                            </div>
-                                            <p>
-                                                Engineered patch-based preprocessing and image normalization workflows, 
-                                                optimizing model performance to achieve state-of-the-art results
-                                            </p>
-                                        </div>
-                                        
-                                        <div class="achievement-item">
-                                            <div class="achievement-icon">
-                                                <i class="fas fa-users"></i>
-                                            </div>
-                                            <p>
-                                                Led cross-functional collaboration with dermatologists and AI researchers, 
-                                                contributing to published Nature Scientific Reports paper (AUC: 0.994, Acc: 99.43%)
-                                            </p>
-                                        </div>
-                                    </div>
-                                    
-                                    <div class="research-metrics">
-                                        <div class="metric-item">
-                                            <span class="metric-value">99.43%</span>
-                                            <span class="metric-label">Accuracy Achieved</span>
-                                        </div>
-                                        <div class="metric-item">
-                                            <span class="metric-value">0.994</span>
-                                            <span class="metric-label">AUC Score</span>
-                                        </div>
-                                        <div class="metric-item">
-                                            <span class="metric-value">893</span>
-                                            <span class="metric-label">Image Patches</span>
-                                        </div>
-                                    </div>
-                                    
-                                    <div class="tech-stack">
-                                        <span class="tech-tag">MobileNet</span>
-                                        <span class="tech-tag">VGG16/19</span>
-                                        <span class="tech-tag">ResNet-50</span>
-                                        <span class="tech-tag">Transfer Learning</span>
-                                        <span class="tech-tag">Computer Vision</span>
-                                        <span class="tech-tag">Medical AI</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Publications Section -->
-        <section id="publications" class="publications">
-            <div class="container">
-                <div class="section-header">
-                    <h2 class="section-title">
-                        <span class="title-text">Research Publications</span>
-                        <div class="title-line"></div>
-                    </h2>
-                    <p class="section-subtitle">Contributing to the advancement of AI in healthcare</p>
-                </div>
-                
-                <div class="publications-grid">
-                    <!-- Nature Scientific Reports Publication -->
-                    <div class="publication-card featured">
-                        <div class="publication-header">
-                            <div class="journal-badge nature">
-                                <div class="journal-icon">
-                                    <i class="fas fa-microscope"></i>
-                                </div>
-                                <div class="journal-info">
-                                    <span class="journal-name">Nature Scientific Reports</span>
-                                    <span class="journal-impact">Impact Factor: 4.996</span>
-                                </div>
-                            </div>
-                            <div class="publication-date">November 2024</div>
-                        </div>
-                        
-                        <div class="publication-content">
-                            <h3>CAD-PsorNet: deep transfer learning for computer-assisted diagnosis of skin Psoriasis</h3>
-                            
-                            <div class="authors">
-                                <span class="author-me">Unmesh Achar</span>, 
-                                <span class="author">Soumya Ranjan Nayak</span>, 
-                                <span class="author">Sanjay Agrawal</span>
-                            </div>
-                            
-                            <p class="publication-abstract">
-                                Achieved 99.43% accuracy and AUC of 0.994 with fine-tuned MobileNet on psoriasis vs. 
-                                healthy skin patch classification. This research demonstrates the potential of transfer 
-                                learning in medical diagnosis applications.
-                            </p>
-                            
-                            <div class="publication-metrics">
-                                <div class="metric-card">
-                                    <div class="metric-icon">
-                                        <i class="fas fa-quote-right"></i>
-                                    </div>
-                                    <div class="metric-info">
-                                        <span class="metric-value" id="nature-pub-citations">--</span>
-                                        <span class="metric-label">Citations</span>
-                                    </div>
-                                </div>
-                                
-                                <div class="metric-card">
-                                    <div class="metric-icon">
-                                        <i class="fas fa-eye"></i>
-                                    </div>
-                                    <div class="metric-info">
-                                        <span class="metric-value" id="nature-pub-reads">--</span>
-                                        <span class="metric-label">Reads</span>
-                                    </div>
-                                </div>
-                                
-                                <div class="metric-card">
-                                    <div class="metric-icon">
-                                        <i class="fas fa-award"></i>
-                                    </div>
-                                    <div class="metric-info">
-                                        <span class="metric-value">Q1</span>
-                                        <span class="metric-label">Quartile</span>
-                                    </div>
-                                </div>
-                            </div>
-                            
-                            <div class="publication-actions">
-                                <a href="https://www.nature.com/articles/s41598-024-76852-6" target="_blank" class="pub-btn primary">
-                                    <i class="fas fa-external-link-alt"></i>
-                                    <span>Read Paper</span>
-                                </a>
-                                <button class="pub-btn secondary" onclick="showCitation('nature-paper')">
-                                    <i class="fas fa-quote-left"></i>
-                                    <span>Cite</span>
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <!-- IJDV Publication -->
-                    <div class="publication-card">
-                        <div class="publication-header">
-                            <div class="journal-badge ijdv">
-                                <div class="journal-icon">
-                                    <i class="fas fa-user-md"></i>
-                                </div>
-                                <div class="journal-info">
-                                    <span class="journal-name">Indian Journal of Dermatology</span>
-                                    <span class="journal-impact">Indexed in PubMed</span>
-                                </div>
-                            </div>
-                            <div class="publication-date">March 2025</div>
-                        </div>
-                        
-                        <div class="publication-content">
-                            <h3>Artificial Intelligence in Dermatology: A Systematized Review</h3>
-                            
-                            <div class="authors">
-                                <span class="author-me">Unmesh Achar</span>, 
-                                <span class="author">Contributing Authors</span>
-                            </div>
-                            
-                            <p class="publication-abstract">
-                                Comprehensive analysis of 27 studies highlighting AI's accuracy (up to 99.5%) and 
-                                challenges across different skin types, including bias considerations in Fitzpatrick Type 6 classifications.
-                            </p>
-                            
-                            <div class="publication-metrics">
-                                <div class="metric-card">
-                                    <div class="metric-icon">
-                                        <i class="fas fa-quote-right"></i>
-                                    </div>
-                                    <div class="metric-info">
-                                        <span class="metric-value" id="ijdv-pub-citations">--</span>
-                                        <span class="metric-label">Citations</span>
-                                    </div>
-                                </div>
-                                
-                                <div class="metric-card">
-                                    <div class="metric-icon">
-                                        <i class="fas fa-search"></i>
-                                    </div>
-                                    <div class="metric-info">
-                                        <span class="metric-value">27</span>
-                                        <span class="metric-label">Studies Analyzed</span>
-                                    </div>
-                                </div>
-                                
-                                <div class="metric-card">
-                                    <div class="metric-icon">
-                                        <i class="fas fa-percentage"></i>
-                                    </div>
-                                    <div class="metric-info">
-                                        <span class="metric-value">99.5%</span>
-                                        <span class="metric-label">Peak Accuracy</span>
-                                    </div>
-                                </div>
-                            </div>
-                            
-                            <div class="publication-actions">
-                                <a href="https://journals.lww.com/ijdv/abstract/9900/artificial_intelligence in dermatology a.152.aspx" 
-                                   target="_blank" class="pub-btn primary">
-                                    <i class="fas fa-external-link-alt"></i>
-                                    <span>Read Paper</span>
-                                </a>
-                                <button class="pub-btn secondary" onclick="showCitation('ijdv-paper')">
-                                    <i class="fas fa-quote-left"></i>
-                                    <span>Cite</span>
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Contact Section -->
-        <section id="contact" class="contact">
-            <div class="container">
-                <div class="section-header">
-                    <h2 class="section-title">
-                        <span class="title-text">Get In Touch</span>
-                        <div class="title-line"></div>
-                    </h2>
-                    <p class="section-subtitle">Let's build the future together</p>
-                </div>
-                
-                <div class="contact-content">
-                    <div class="contact-info">
-                        <div class="contact-intro">
-                            <h3>Let's Connect</h3>
-                            <p>
-                                I'm always excited to discuss new opportunities, research collaborations, 
-                                or innovative AI projects. Whether you're a recruiter, researcher, or 
-                                fellow developer, I'd love to hear from you!
-                            </p>
-                        </div>
-                        
-                        <div class="contact-methods">
-                            <div class="contact-method">
-                                <div class="method-icon">
-                                    <i class="fas fa-envelope"></i>
-                                </div>
-                                <div class="method-info">
-                                    <span class="method-label">Email</span>
-                                    <a href="mailto:unmeshachar02@gmail.com" class="method-value">
-                                        unmeshachar02@gmail.com
-                                    </a>
-                                </div>
-                            </div>
-                            
-                            <div class="contact-method">
-                                <div class="method-icon">
-                                    <i class="fas fa-phone"></i>
-                                </div>
-                                <div class="method-info">
-                                    <span class="method-label">Phone</span>
-                                    <a href="tel:+16465925245" class="method-value">
-                                        +1 (646) 592-5245
-                                    </a>
-                                </div>
-                            </div>
-                            
-                            <div class="contact-method">
-                                <div class="method-icon">
-                                    <i class="fas fa-map-marker-alt"></i>
-                                </div>
-                                <div class="method-info">
-                                    <span class="method-label">Location</span>
-                                    <span class="method-value">New York, NY</span>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <div class="social-connect">
-                            <h4>Connect on Social</h4>
-                            <div class="social-links">
-                                <a href="https://www.linkedin.com/in/unmesh-achar-319467210/" target="_blank" class="social-link linkedin">
-                                    <div class="social-icon">
-                                        <i class="fab fa-linkedin"></i>
-                                    </div>
-                                    <span class="social-text">LinkedIn</span>
-                                </a>
-                                
-                                <a href="https://github.com/Unmesh30" target="_blank" class="social-link github">
-                                    <div class="social-icon">
+                    <div class="activity-stats">
+                        <h4>Live Activity</h4>
+                        <div class="live-stats-grid">
+                            <!-- GitHub Stats Card -->
+                            <div class="stats-card github-card">
+                                <div class="stats-header">
+                                    <div class="stats-icon">
                                         <i class="fab fa-github"></i>
                                     </div>
-                                    <span class="social-text">GitHub</span>
-                                </a>
+                                    <div class="stats-info">
+                                        <h3>GitHub</h3>
+                                        <span class="username">@Unmesh30</span>
+                                    </div>
+                                </div>
                                 
-                                <a href="https://leetcode.com/u/UnmeshXD/" target="_blank" class="social-link leetcode">
-                                    <div class="social-icon">
+                                <div class="stats-content">
+                                    <div class="main-stat">
+                                        <span class="stat-number" id="github-repos">--</span>
+                                        <span class="stat-label">Public Repositories</span>
+                                    </div>
+                                    
+                                    <div class="sub-stats">
+                                        <div class="sub-stat">
+                                            <span class="sub-number" id="github-followers">--</span>
+                                            <span class="sub-label">Followers</span>
+                                        </div>
+                                        <div class="sub-stat">
+                                            <span class="sub-number" id="github-stars">--</span>
+                                            <span class="sub-label">Total Stars</span>
+                                        </div>
+                                        <div class="sub-stat">
+                                            <span class="sub-number" id="github-commits">--</span>
+                                            <span class="sub-label">Commits (2024)</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="languages-section" id="github-languages">
+                                    <div class="loading-text">Loading languages...</div>
+                                </div>
+                            </div>
+                            
+                            <!-- LeetCode Stats Card -->
+                            <div class="stats-card leetcode-card">
+                                <div class="stats-header">
+                                    <div class="stats-icon leetcode-icon">
                                         <i class="fas fa-code"></i>
                                     </div>
-                                    <span class="social-text">LeetCode</span>
-                                </a>
-                            </div>
-                        </div>
-                        
-                        <div class="availability-status">
-                            <div class="status-indicator available"></div>
-                            <div class="status-info">
-                                <span class="status-text">Available for Opportunities</span>
-                                <span class="status-desc">Open to full-time positions and research collaborations</span>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="contact-form-container">
-                        <div class="form-header">
-                            <h4>Send a Message</h4>
-                            <p>Quick and direct communication</p>
-                        </div>
-                        
-                        <div class="mailto-form" id="mailto-form">
-                            <div class="form-grid">
-                                <div class="form-group">
-                                    <label for="name">Name</label>
-                                    <input type="text" id="name" name="name" required>
-                                    <div class="form-line"></div>
+                                    <div class="stats-info">
+                                        <h3>LeetCode</h3>
+                                        <span class="username">@UnmeshXD</span>
+                                    </div>
                                 </div>
                                 
-                                <div class="form-group">
-                                    <label for="email">Email</label>
-                                    <input type="email" id="email" name="email" required>
-                                    <div class="form-line"></div>
+                                <div class="stats-content">
+                                    <div class="main-stat">
+                                        <span class="stat-number" id="leetcode-total">--</span>
+                                        <span class="stat-label">Problems Solved</span>
+                                    </div>
+                                    
+                                    <div class="difficulty-stats">
+                                        <div class="difficulty-item easy">
+                                            <span class="difficulty-count" id="leetcode-easy">--</span>
+                                            <span class="difficulty-label">Easy</span>
+                                        </div>
+                                        <div class="difficulty-item medium">
+                                            <span class="difficulty-count" id="leetcode-medium">--</span>
+                                            <span class="difficulty-label">Medium</span>
+                                        </div>
+                                        <div class="difficulty-item hard">
+                                            <span class="difficulty-count" id="leetcode-hard">--</span>
+                                            <span class="difficulty-label">Hard</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="recent-activities" id="leetcode-activities">
+                                    <h4>Recent Activities</h4>
+                                    <div class="activity-list">
+                                        <div class="loading-text">Loading recent activities...</div>
+                                    </div>
+                                </div>
+                                
+                                <div class="leetcode-links">
+                                    <a href="https://leetcode.com/u/UnmeshXD/" target="_blank" class="leetcode-link">
+                                        View Profile <i class="fas fa-external-link-alt"></i>
+                                    </a>
                                 </div>
                             </div>
-                            
-                            <div class="form-group">
-                                <label for="subject">Subject</label>
-                                <select id="subject" name="subject" required>
-                                    <option value="">Select a topic</option>
-                                    <option value="Job Opportunity">Job Opportunity</option>
-                                    <option value="Research Collaboration">Research Collaboration</option>
-                                    <option value="Project Inquiry">Project Inquiry</option>
-                                    <option value="General Inquiry">General Inquiry</option>
-                                </select>
-                                <div class="form-line"></div>
-                            </div>
-                            
-                            <div class="form-group">
-                                <label for="message">Message</label>
-                                <textarea id="message" name="message" rows="5" required 
-                                         placeholder="Tell me about your project, opportunity, or how we can work together..."></textarea>
-                                <div class="form-line"></div>
-                            </div>
-                            
-                            <button type="button" class="contact-btn" id="send-email-btn">
-                                <span class="btn-text">Send Message</span>
-                                <div class="btn-loading">
-                                    <div class="loading-spinner"></div>
-                                </div>
-                                <div class="btn-success">
-                                    <i class="fas fa-check"></i>
-                                </div>
-                            </button>
-                        </div>
-                        
-                        <div class="form-note">
-                            <i class="fas fa-info-circle"></i>
-                            <span>Opens your default email client with pre-filled information</span>
                         </div>
                     </div>
                 </div>
             </div>
-        </section>
-    </main>
+        </div>
+    </section>
 
-    <!-- Footer -->
-    <footer class="footer">
+    <section id="education" class="education">
         <div class="container">
-            <div class="footer-content">
-                <div class="footer-left">
-                    <div class="footer-logo">
-                        <span class="logo-text">Unmesh Achar</span>
-                        <span class="logo-subtitle">AI Engineer & Researcher</span>
+            <h2 class="section-title">Education</h2>
+            <div class="education-timeline">
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <h3>Master's in Computer Engineering</h3>
+                        <h4>New York University</h4>
+                        <span class="timeline-date">09/2024 - 05/2026</span>
+                        <p>Cumulative GPA: 3.833/4.0</p>
+                        <p>Relevant Coursework: Machine Learning, Computer System Architecture, Big Data, Java, System Engineering, Data Visualization</p>
                     </div>
-                    <p class="footer-description">
-                        Building the future through artificial intelligence and innovative technology solutions.
-                    </p>
                 </div>
-                
-                <div class="footer-links">
-                    <div class="link-group">
-                        <h5>Quick Links</h5>
-                        <a href="#about">About</a>
-                        <a href="#projects">Projects</a>
-                        <a href="#publications">Publications</a>
-                        <a href="#contact">Contact</a>
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <h3>Bachelor's in Computer Science and Engineering</h3>
+                        <h4>Kalinga Institute of Industrial Technology</h4>
+                        <span class="timeline-date">08/2020 - 06/2024</span>
+                        <p>Cumulative CGPA: 8.24/10</p>
+                        <p>Relevant Coursework: Engineering Mathematics, DBMS, AI, Software Engineering, Operating System</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="toolbox" class="toolbox">
+        <div class="container">
+            <h2 class="section-title">Toolbox</h2>
+            <div class="skills-3d-container">
+                <div class="skills-orbit">
+                    <div class="skill-cube programming">
+                        <div class="cube-face front">
+                            <i class="fas fa-code"></i>
+                            <span>Programming</span>
+                        </div>
+                        <div class="cube-face back">Python</div>
+                        <div class="cube-face right">C++</div>
+                        <div class="cube-face left">Java</div>
+                        <div class="cube-face top">SQL</div>
+                        <div class="cube-face bottom">Spark</div>
                     </div>
                     
-                    <div class="link-group">
-                        <h5>Connect</h5>
-                        <a href="https://www.linkedin.com/in/unmesh-achar-319467210/" target="_blank">LinkedIn</a>
-                        <a href="https://github.com/Unmesh30" target="_blank">GitHub</a>
-                        <a href="mailto:unmeshachar02@gmail.com">Email</a>
-                        <a href="resume-unmesh-achar.pdf" target="_blank">Resume</a>
+                    <div class="skill-cube database">
+                        <div class="cube-face front">
+                            <i class="fas fa-database"></i>
+                            <span>Database</span>
+                        </div>
+                        <div class="cube-face back">MySQL</div>
+                        <div class="cube-face right">MongoDB</div>
+                        <div class="cube-face left">Data</div>
+                        <div class="cube-face top">NoSQL</div>
+                        <div class="cube-face bottom">SQL</div>
+                    </div>
+                    
+                    <div class="skill-cube ai-ml">
+                        <div class="cube-face front">
+                            <i class="fas fa-brain"></i>
+                            <span>AI & ML</span>
+                        </div>
+                        <div class="cube-face back">CNN</div>
+                        <div class="cube-face right">Transfer Learning</div>
+                        <div class="cube-face left">Computer Vision</div>
+                        <div class="cube-face top">Deep Learning</div>
+                        <div class="cube-face bottom">Neural Networks</div>
+                    </div>
+                    
+                    <div class="skill-cube cloud-tech">
+                        <div class="cube-face front">
+                            <i class="fas fa-cloud"></i>
+                            <span>Cloud & Big Data</span>
+                        </div>
+                        <div class="cube-face back">Microsoft Azure</div>
+                        <div class="cube-face right">Hadoop</div>
+                        <div class="cube-face left">Hive</div>
+                        <div class="cube-face top">Big Data</div>
+                        <div class="cube-face bottom">Cloud Computing</div>
+                    </div>
+                    
+                    <div class="skill-cube tools">
+                        <div class="cube-face front">
+                            <i class="fas fa-tools"></i>
+                            <span>Tools & Frameworks</span>
+                        </div>
+                        <div class="cube-face back">MediaPipe</div>
+                        <div class="cube-face right">Fluidsynth</div>
+                        <div class="cube-face left">Computer Vision</div>
+                        <div class="cube-face top">Data Processing</div>
+                        <div class="cube-face bottom">Audio Processing</div>
+                    </div>
+                </div>
+                
+                <div class="skills-info-panel">
+                    <h3 id="skill-title">Hover over a cube to explore</h3>
+                    <p id="skill-description">Discover the technologies and frameworks I work with</p>
+                    <div id="skill-tags"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="projects" class="projects">
+        <div class="container">
+            <h2 class="section-title">Projects</h2>
+            <div class="projects-grid">
+                <div class="project-card">
+                    <div class="project-image">
+                        <i class="fas fa-map-marked-alt"></i>
+                    </div>
+                    <div class="project-content">
+                        <h3>NYC Risk & Route Prediction Application</h3>
+                        <p>Deployed an interactive Streamlit app with integrated GoMaps & Geopy APIs for real-time visual navigation and incident heatmaps across 200+ geozones using Random Forests (92% accuracy).</p>
+                        <div class="project-tech">
+                            <span class="tech-tag">Python</span>
+                            <span class="tech-tag">Streamlit</span>
+                            <span class="tech-tag">Random Forest</span>
+                            <span class="tech-tag">GoMaps API</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="https://github.com/Unmesh30/NYC-Risk-Route-Prediction" class="project-link"><i class="fab fa-github"></i> Code</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <div class="project-image">
+                        <i class="fas fa-user-md"></i>
+                    </div>
+                    <div class="project-content">
+                        <h3>Detection of Acne Disease Prediction</h3>
+                        <p>Achieved 95.64% accuracy using fine-tuned MobileNet for facial acne classification. Built a Gradio-based interface for real-time inference with 90%+ validation precision.</p>
+                        <div class="project-tech">
+                            <span class="tech-tag">MobileNet</span>
+                            <span class="tech-tag">Gradio</span>
+                            <span class="tech-tag">CNN</span>
+                            <span class="tech-tag">Computer Vision</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="https://github.com/Unmesh30/Acne-Disease-Detection" class="project-link"><i class="fab fa-github"></i> Code</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <div class="project-image">
+                        <i class="fas fa-brain"></i>
+                    </div>
+                    <div class="project-content">
+                        <h3>Mind Controlled Smart Home System</h3>
+                        <p>Proposed a non-invasive BCI-powered smart home concept leveraging EEG signal acquisition and CNN-RNN modeling to detect intent and trigger IoT-based appliance control.</p>
+                        <div class="project-tech">
+                            <span class="tech-tag">BCI</span>
+                            <span class="tech-tag">CNN-RNN</span>
+                            <span class="tech-tag">IoT</span>
+                            <span class="tech-tag">Jetson Xavier</span>
+                            <span class="tech-tag">System Engineering</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="https://drive.google.com/file/d/132OmEdXy0moUGWcoqLAEklKAbO_BIoKM/view?usp=sharing" class="project-link report-link" target="_blank"><i class="fas fa-file-alt"></i> Report</a>
+                            <a href="https://youtu.be/niVvKLKCf7I" class="project-link demo-link" target="_blank"><i class="fas fa-play-circle"></i> Overview</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <div class="project-image">
+                        <i class="fas fa-hand-paper"></i>
+                    </div>
+                    <div class="project-content">
+                        <h3>Air-Piano: Touchless MIDI Instrument</h3>
+                        <p>Implemented a real-time, touchless MIDI instrument using cvzone/MediaPipe hand tracking to detect finger gestures and trigger chord playback via Fluidsynth, with multi-threaded sustain logic for smooth audio output.</p>
+                        <div class="project-tech">
+                            <span class="tech-tag">MediaPipe</span>
+                            <span class="tech-tag">Fluidsynth</span>
+                            <span class="tech-tag">Computer Vision</span>
+                            <span class="tech-tag">MIDI</span>
+                            <span class="tech-tag">CVZone</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="https://github.com/Unmesh30/Aeras-Piano" class="project-link"><i class="fab fa-github"></i> Code</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <div class="project-image">
+                        <i class="fas fa-terminal"></i>
+                    </div>
+                    <div class="project-content">
+                        <h3>Nexus Shell</h3>
+                        <p>A complete shell implementation in C featuring command parsing, process management, and built-in commands. Demonstrates systems programming concepts and low-level process control.</p>
+                        <div class="project-tech">
+                            <span class="tech-tag">C</span>
+                            <span class="tech-tag">Systems Programming</span>
+                            <span class="tech-tag">Process Management</span>
+                            <span class="tech-tag">Unix Shell</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="https://github.com/Unmesh30/nexus-shell" class="project-link"><i class="fab fa-github"></i> Code</a>
+                        </div>
                     </div>
                 </div>
             </div>
-            
-            <div class="footer-bottom">
-                <div class="footer-copyright">
-                    <span>&copy; 2025 Unmesh Achar. All rights reserved.</span>
-                </div>
-                <div class="footer-status">
-                    <div class="status-dot"></div>
-                    <span>System Online</span>
+        </div>
+    </section>
+
+    <section id="bucket-list" class="bucket-list">
+        <div class="container">
+            <h2 class="section-title">Bucket List</h2>
+            <p class="bucket-intro">Goals and dreams I'm working towards - both personal and professional aspirations that drive my journey.</p>
+            <div class="bucket-grid">
+                <!-- Bucket list items will be added here -->
+                <div class="bucket-placeholder">
+                    <div class="placeholder-icon">
+                        <i class="fas fa-plus-circle"></i>
+                    </div>
+                    <h3>Add Your Goals</h3>
+                    <p>Your bucket list items will appear here</p>
                 </div>
             </div>
+        </div>
+    </section>
+
+    <section id="experience" class="experience">
+        <div class="container">
+            <h2 class="section-title">Work Experience</h2>
+            <div class="experience-timeline">
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <h3>Research Intern</h3>
+                        <h4>National Institute of Technical Teachers' Training and Research, Kolkata</h4>
+                        <span class="timeline-date">05/2023 - 07/2023</span>
+                        <p><strong>Project:</strong> "Deep Transfer Learning for Computer-Assisted Diagnosis of Skin Psoriasis Infection"</p>
+                        <ul>
+                            <li>Built a clinically validated psoriasis detection system using deep transfer learning (MobileNet, VGG16, VGG19, ResNet-50) on 893 curated image patches</li>
+                            <li>Engineered patch-based preprocessing and image normalization workflows, optimizing model performance</li>
+                            <li>Led cross-functional collaboration with dermatologists and AI researchers, contributing to a published Scientific Reports paper (AUC: 0.994, Acc: 99.43%)</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <h3>Nesternship Intern — AI-ML in Data Quality and Governance</h3>
+                        <h4>Nestlé India Ltd. (Indian Headquarters)</h4>
+                        <span class="timeline-date">05/2024 - 07/2024</span>
+                        <ul>
+                            <li>Developed a secure, branch-level order response system using Power Apps and SharePoint Lists, enforcing region-specific access and real-time validation</li>
+                            <li>Automated ingestion of multi-sheet Excel files with Power Automate, ensuring duplicate-free updates to SharePoint via daily ID-based syncs</li>
+                            <li>Designed email automation logic for dynamic links and attachments, improving response turnaround and reducing manual overhead by 60%</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="publications" class="publications">
+        <div class="container">
+            <h2 class="section-title">Publications</h2>
+            <div class="publications-grid">
+                <div class="publication-card">
+                    <div class="publication-content">
+                        <h3>CAD-PsorNet: deep transfer learning for computer-assisted diagnosis of skin Psoriasis</h3>
+                        <h4>Nature Scientific Reports</h4>
+                        <span class="publication-date">November 2024</span>
+                        <p>Achieved 99.43% accuracy and AUC of 0.994 with fine-tuned MobileNet on psoriasis vs. healthy skin patch classification.</p>
+                        <div class="publication-links">
+                            <a href="https://www.nature.com/articles/s41598-024-76852-6" class="publication-link"><i class="fas fa-external-link-alt"></i> View Paper</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="publication-card">
+                    <div class="publication-content">
+                        <h3>Artificial Intelligence in Dermatology: A Systematized Review</h3>
+                        <h4>Indian Journal of Dermatology & Venereology</h4>
+                        <span class="publication-date">March 2025</span>
+                        <p>Analyzed 27 studies; highlighted AI's accuracy (up to 99.5%) and challenges across skin types, including bias in Fitzpatrick Type 6.</p>
+                        <div class="publication-links">
+                            <a href="https://journals.lww.com/ijdv/abstract/9900/artificial_intelligence in dermatology a.152.aspx" class="publication-link"><i class="fas fa-external-link-alt"></i> View Paper</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="contact">
+        <div class="container">
+            <h2 class="section-title">Get In Touch</h2>
+            <div class="contact-content">
+                <div class="contact-info">
+                    <h3>Let's Connect</h3>
+                    <p>I'm always open to discussing new opportunities, research collaborations, or just having a chat about AI and technology!</p>
+                    <div class="contact-item">
+                        <i class="fas fa-envelope"></i>
+                        <span>unmeshachar02@gmail.com</span>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-phone"></i>
+                        <span>+1 (646) 592-5245</span>
+                    </div>
+                    <div class="social-links">
+                        <a href="https://www.linkedin.com/in/unmesh-achar-319467210/" class="social-link"><i class="fab fa-linkedin"></i></a>
+                        <a href="https://github.com/Unmesh30" class="social-link"><i class="fab fa-github"></i></a>
+                    </div>
+                </div>
+                <form class="contact-form" id="contact-form">
+                    <div class="form-group">
+                        <input type="text" id="sender-name" placeholder="Your Name" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="email" id="sender-email" placeholder="Your Email" required>
+                    </div>
+                    <div class="form-group">
+                        <textarea id="message-text" placeholder="Your Message" rows="5" required></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Send Message</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2024 Unmesh Achar. All rights reserved.</p>
         </div>
     </footer>
 
-    <!-- Back to Top Button -->
-    <button class="back-to-top" id="back-to-top">
-        <i class="fas fa-arrow-up"></i>
-        <div class="btn-ripple"></div>
-    </button>
+    <!-- Floating Resume Button -->
+    <div class="floating-resume-btn">
+        <a href="resume-unmesh-achar.pdf" class="resume-floating-link" target="_blank">
+            <i class="fas fa-download"></i>
+            <span>My Resume</span>
+        </a>
+    </div>
 
-    <!-- Scripts -->
     <script src="script.js"></script>
-    
-    <!-- Analytics (placeholder for future implementation) -->
-    <script>
-        // Web Analytics implementation would go here
-        console.log('Portfolio loaded successfully');
-        
-        // Mark page as fully loaded
-        window.addEventListener('load', () => {
-            performance.mark('page-loaded');
-            console.log('Page fully loaded');
-        });
-    </script>
 </body>
 </html>
