@@ -2,17 +2,8 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, viewport-fit=cover">
-    <meta name="mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <meta name="theme-color" content="#0a0a0a">
-    <meta name="apple-mobile-web-app-title" content="Unmesh Achar">
-    
-    <!-- Touch Icons for PWA -->
-    <link rel="apple-touch-icon" sizes="180x180" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 180 180'%3E%3Crect fill='%23000' width='180' height='180'/%3E%3Ctext x='90' y='100' text-anchor='middle' fill='%2300caff' font-size='60' font-family='monospace'%3EUA%3C/text%3E%3C/svg%3E">
-    <link rel="icon" type="image/png" sizes="32x32" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect fill='%23000' width='32' height='32'/%3E%3Ctext x='16' y='20' text-anchor='middle' fill='%2300caff' font-size='12' font-family='monospace'%3EUA%3C/text%3E%3C/svg%3E">
-    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Restored to original version -->
     <title>Unmesh Achar - Computer Engineering Graduate</title>
     <link rel="stylesheet" href="styles.css">
     <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Orbitron:wght@400;700;900&family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
@@ -37,118 +28,13 @@
                 <li><a href="#bucket-list" class="nav-link">Bucket List</a></li>
                 <li><a href="#contact" class="nav-link">Contact</a></li>
             </ul>
-            <div class="hamburger" id="mobile-menu-toggle">
-                <span class="bar bar-1"></span>
-                <span class="bar bar-2"></span>
-                <span class="bar bar-3"></span>
-                <div class="cyber-pulse"></div>
+            <div class="hamburger">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
             </div>
         </div>
     </nav>
-
-    <!-- Mobile Navigation Overlay -->
-    <div class="mobile-nav-overlay" id="mobile-nav-overlay">
-        <div class="mobile-nav-background">
-            <div class="cyber-grid"></div>
-            <div class="mobile-particles"></div>
-        </div>
-        <div class="mobile-nav-content">
-            <div class="mobile-nav-header">
-                <h2 class="mobile-nav-title">Navigation</h2>
-                <button class="mobile-nav-close" id="mobile-nav-close">
-                    <i class="fas fa-times"></i>
-                </button>
-            </div>
-            <nav class="mobile-nav-menu">
-                <a href="#home" class="mobile-nav-link" data-section="home">
-                    <div class="nav-link-icon"><i class="fas fa-home"></i></div>
-                    <div class="nav-link-text">
-                        <span class="nav-link-title">Home</span>
-                        <span class="nav-link-desc">Welcome</span>
-                    </div>
-                    <div class="nav-link-arrow"><i class="fas fa-chevron-right"></i></div>
-                </a>
-                <a href="#about" class="mobile-nav-link" data-section="about">
-                    <div class="nav-link-icon"><i class="fas fa-user"></i></div>
-                    <div class="nav-link-text">
-                        <span class="nav-link-title">About Me</span>
-                        <span class="nav-link-desc">My story</span>
-                    </div>
-                    <div class="nav-link-arrow"><i class="fas fa-chevron-right"></i></div>
-                </a>
-                <a href="#education" class="mobile-nav-link" data-section="education">
-                    <div class="nav-link-icon"><i class="fas fa-graduation-cap"></i></div>
-                    <div class="nav-link-text">
-                        <span class="nav-link-title">Education</span>
-                        <span class="nav-link-desc">Academic journey</span>
-                    </div>
-                    <div class="nav-link-arrow"><i class="fas fa-chevron-right"></i></div>
-                </a>
-                <a href="#toolbox" class="mobile-nav-link" data-section="toolbox">
-                    <div class="nav-link-icon"><i class="fas fa-tools"></i></div>
-                    <div class="nav-link-text">
-                        <span class="nav-link-title">Toolbox</span>
-                        <span class="nav-link-desc">Skills & tech</span>
-                    </div>
-                    <div class="nav-link-arrow"><i class="fas fa-chevron-right"></i></div>
-                </a>
-                <a href="#projects" class="mobile-nav-link" data-section="projects">
-                    <div class="nav-link-icon"><i class="fas fa-code"></i></div>
-                    <div class="nav-link-text">
-                        <span class="nav-link-title">Projects</span>
-                        <span class="nav-link-desc">My work</span>
-                    </div>
-                    <div class="nav-link-arrow"><i class="fas fa-chevron-right"></i></div>
-                </a>
-                <a href="#experience" class="mobile-nav-link" data-section="experience">
-                    <div class="nav-link-icon"><i class="fas fa-briefcase"></i></div>
-                    <div class="nav-link-text">
-                        <span class="nav-link-title">Experience</span>
-                        <span class="nav-link-desc">Work history</span>
-                    </div>
-                    <div class="nav-link-arrow"><i class="fas fa-chevron-right"></i></div>
-                </a>
-                <a href="#publications" class="mobile-nav-link" data-section="publications">
-                    <div class="nav-link-icon"><i class="fas fa-file-alt"></i></div>
-                    <div class="nav-link-text">
-                        <span class="nav-link-title">Publications</span>
-                        <span class="nav-link-desc">Research papers</span>
-                    </div>
-                    <div class="nav-link-arrow"><i class="fas fa-chevron-right"></i></div>
-                </a>
-                <a href="#bucket-list" class="mobile-nav-link" data-section="bucket-list">
-                    <div class="nav-link-icon"><i class="fas fa-list-ul"></i></div>
-                    <div class="nav-link-text">
-                        <span class="nav-link-title">Bucket List</span>
-                        <span class="nav-link-desc">Goals & dreams</span>
-                    </div>
-                    <div class="nav-link-arrow"><i class="fas fa-chevron-right"></i></div>
-                </a>
-                <a href="#contact" class="mobile-nav-link" data-section="contact">
-                    <div class="nav-link-icon"><i class="fas fa-envelope"></i></div>
-                    <div class="nav-link-text">
-                        <span class="nav-link-title">Contact</span>
-                        <span class="nav-link-desc">Get in touch</span>
-                    </div>
-                    <div class="nav-link-arrow"><i class="fas fa-chevron-right"></i></div>
-                </a>
-            </nav>
-            <div class="mobile-nav-footer">
-                <div class="mobile-social-links">
-                    <a href="https://www.linkedin.com/in/unmesh-achar-319467210/" class="mobile-social-link" target="_blank">
-                        <i class="fab fa-linkedin"></i>
-                    </a>
-                    <a href="https://github.com/Unmesh30" class="mobile-social-link" target="_blank">
-                        <i class="fab fa-github"></i>
-                    </a>
-                </div>
-                <p class="mobile-nav-signature">Unmesh Achar &copy; 2024</p>
-            </div>
-        </div>
-    </div>
-
-    <!-- Mobile Touch Feedback -->
-    <div class="touch-feedback" id="touch-feedback"></div>
 
     <section id="home" class="hero">
         <div id="three-canvas"></div>
