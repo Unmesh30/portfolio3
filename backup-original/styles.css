@@ -3241,23 +3241,454 @@ section {
     font-size: 0.9rem;
 }
 
-/* Responsive Design */
-@media (max-width: 768px) {
-    .publications-grid {
-        grid-template-columns: 1fr;
+/* Hamburger Menu - Hidden by default */
+.hamburger {
+    display: none;
+    flex-direction: column;
+    cursor: pointer;
+    z-index: 1001;
+}
+
+.bar {
+    width: 25px;
+    height: 3px;
+    background: var(--neon-cyan);
+    margin: 3px 0;
+    transition: 0.3s;
+    box-shadow: 0 0 5px var(--neon-cyan);
+}
+
+.hamburger.active .bar:nth-child(1) {
+    transform: rotate(-45deg) translate(-5px, 6px);
+    box-shadow: 0 0 10px var(--neon-pink);
+    background: var(--neon-pink);
+}
+
+.hamburger.active .bar:nth-child(2) {
+    opacity: 0;
+}
+
+.hamburger.active .bar:nth-child(3) {
+    transform: rotate(45deg) translate(-5px, -6px);
+    box-shadow: 0 0 10px var(--neon-pink);
+    background: var(--neon-pink);
+}
+
+/* Comprehensive Mobile Responsive Design */
+@media (max-width: 1024px) {
+    .container {
+        padding: 0 15px;
     }
     
+    .skills-3d-container {
+        grid-template-columns: 1fr;
+        gap: 3rem;
+    }
+    
+    .skills-orbit {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 2rem;
+    }
+    
+    .projects-grid {
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    }
+}
+
+@media (max-width: 768px) {
+    /* Navigation Mobile */
+    .hamburger {
+        display: flex;
+    }
+    
+    .nav-menu {
+        position: fixed;
+        left: -100%;
+        top: 70px;
+        flex-direction: column;
+        background: rgba(10, 10, 10, 0.95);
+        backdrop-filter: blur(20px);
+        width: 100%;
+        text-align: center;
+        transition: 0.3s;
+        box-shadow: 0 10px 27px rgba(0, 0, 0, 0.05);
+        border-top: 1px solid rgba(0, 202, 255, 0.2);
+        z-index: 1000;
+        padding: 2rem 0;
+        height: calc(100vh - 70px);
+        overflow-y: auto;
+    }
+    
+    .nav-menu.active {
+        left: 0;
+    }
+    
+    .nav-menu li {
+        margin: 1.5rem 0;
+    }
+    
+    .nav-menu a {
+        font-size: 1.2rem;
+        padding: 1rem;
+        display: block;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    
+    .nav-logo h2 {
+        font-size: 1.2rem;
+    }
+    
+    /* Hero Section Mobile */
+    .hero-content {
+        padding: 2rem 1rem;
+        text-align: center;
+    }
+    
+    .glitch-text h1 {
+        font-size: 2.5rem;
+        line-height: 1.2;
+    }
+    
+    .cyber-subtitle {
+        font-size: 1.3rem;
+        margin: 1.5rem 0;
+    }
+    
+    .hero-description {
+        font-size: 1rem;
+        margin: 2rem 0;
+        line-height: 1.6;
+    }
+    
+    .hero-buttons {
+        flex-direction: column;
+        gap: 1rem;
+        align-items: center;
+    }
+    
+    .btn {
+        width: 100%;
+        max-width: 280px;
+        padding: 1rem 2rem;
+        font-size: 1rem;
+    }
+    
+    /* About Section Mobile */
+    .about-content {
+        grid-template-columns: 1fr;
+        gap: 3rem;
+        text-align: center;
+    }
+    
+    .about-left {
+        order: 1;
+    }
+    
+    .about-right {
+        order: 2;
+    }
+    
+    .about-stats {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1rem;
+    }
+    
+    .live-stats-grid {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+    
+    .stats-card {
+        min-height: auto;
+    }
+    
+    .sub-stats {
+        grid-template-columns: 1fr;
+        gap: 0.5rem;
+    }
+    
+    .difficulty-stats {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+    
+    /* Education & Experience Timeline Mobile */
+    .education-timeline,
+    .experience-timeline {
+        padding: 0 1rem;
+    }
+    
+    .education-timeline::before,
+    .experience-timeline::before {
+        left: 30px;
+    }
+    
+    .timeline-item {
+        width: 100%;
+        justify-content: flex-start;
+        margin-left: 0;
+        padding-left: 4rem;
+    }
+    
+    .timeline-item:nth-child(even) {
+        justify-content: flex-start;
+        margin-left: 0;
+        padding-left: 4rem;
+    }
+    
+    .timeline-dot {
+        left: 20px !important;
+        right: auto !important;
+    }
+    
+    .timeline-content {
+        max-width: 100%;
+        margin-left: 0 !important;
+        margin-right: 0 !important;
+    }
+    
+    .timeline-content::after {
+        display: none;
+    }
+    
+    /* Skills Section Mobile */
+    .skills-orbit {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+    
+    .skill-cube {
+        width: 150px;
+        height: 150px;
+        margin: 0 auto;
+    }
+    
+    .cube-face {
+        width: 150px;
+        height: 150px;
+        font-size: 0.8rem;
+    }
+    
+    .cube-face i {
+        font-size: 1.5rem;
+    }
+    
+    .skills-info-panel {
+        padding: 1.5rem;
+        margin-top: 2rem;
+    }
+    
+    /* Projects Grid Mobile */
+    .projects-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+    
+    .project-card {
+        margin: 0 auto;
+        max-width: 100%;
+    }
+    
+    .project-tech {
+        flex-wrap: wrap;
+        gap: 0.5rem;
+    }
+    
+    .tech-tag {
+        font-size: 0.7rem;
+        padding: 0.3rem 0.6rem;
+    }
+    
+    /* Publications Mobile */
+    .publications-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+    
+    .publication-card {
+        padding: 1.5rem;
+    }
+    
+    /* Contact Section Mobile */
     .contact-content {
         grid-template-columns: 1fr;
         gap: 2rem;
     }
     
-    .publication-card {
-        padding: 2rem;
+    .contact-info,
+    .contact-form {
+        padding: 1.5rem;
+    }
+    
+    .form-group input,
+    .form-group textarea {
+        font-size: 16px; /* Prevents zoom on iOS */
+    }
+    
+    /* Floating Elements Mobile - Reduce or hide */
+    .floating-elements {
+        display: none;
+    }
+    
+    .neural-network {
+        opacity: 0.3;
+    }
+    
+    /* Floating Resume Button Mobile */
+    .floating-resume-btn {
+        bottom: 20px;
+        right: 20px;
+    }
+    
+    .resume-floating-link {
+        padding: 10px 16px;
+        font-size: 0.8rem;
+    }
+    
+    .resume-floating-link span {
+        display: none;
+    }
+    
+    /* Bucket List Mobile */
+    .bucket-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+    
+    /* Section Titles Mobile */
+    .section-title {
+        font-size: 2.5rem;
+        text-align: center;
+        margin-bottom: 2rem;
+    }
+    
+    /* Three.js Canvas Mobile */
+    #three-canvas {
+        height: 50vh;
+    }
+    
+    /* Scroll Indicator Mobile */
+    .scroll-indicator {
+        bottom: 20px;
+        right: 20px;
+        transform: scale(0.8);
+    }
+}
+
+@media (max-width: 480px) {
+    /* Extra small screens */
+    .container {
+        padding: 0 10px;
+    }
+    
+    .hero-content {
+        padding: 1rem 0.5rem;
+    }
+    
+    .glitch-text h1 {
+        font-size: 2rem;
+    }
+    
+    .cyber-subtitle {
+        font-size: 1.1rem;
+    }
+    
+    .hero-description {
+        font-size: 0.9rem;
+        margin: 1.5rem 0;
+    }
+    
+    .about-stats {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+    
+    .skill-cube {
+        width: 120px;
+        height: 120px;
+    }
+    
+    .cube-face {
+        width: 120px;
+        height: 120px;
+        font-size: 0.7rem;
+    }
+    
+    .cube-face i {
+        font-size: 1.2rem;
+    }
+    
+    .section-title {
+        font-size: 2rem;
+    }
+    
+    .timeline-content {
+        padding: 1.5rem;
     }
     
     .contact-info,
     .contact-form {
-        padding: 2rem;
+        padding: 1rem;
+    }
+    
+    .nav-menu a {
+        font-size: 1.1rem;
+    }
+    
+    #three-canvas {
+        height: 40vh;
+    }
+}
+
+/* Landscape orientation on mobile */
+@media (max-width: 768px) and (orientation: landscape) {
+    .hero {
+        height: 100vh;
+    }
+    
+    .hero-content {
+        padding: 1rem;
+    }
+    
+    .glitch-text h1 {
+        font-size: 2rem;
+    }
+    
+    .nav-menu {
+        height: calc(100vh - 70px);
+    }
+    
+    #three-canvas {
+        height: 60vh;
+    }
+}
+
+/* High DPI screens */
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+    .profile-photo img {
+        image-rendering: -webkit-optimize-contrast;
+        image-rendering: crisp-edges;
+    }
+}
+
+/* Reduce animations for users who prefer reduced motion */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+    
+    .floating-elements,
+    .neural-network {
+        animation: none;
+    }
+    
+    .glitch-text::before,
+    .glitch-text::after {
+        animation: none;
     }
 }
