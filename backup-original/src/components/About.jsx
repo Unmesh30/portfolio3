@@ -2,81 +2,131 @@ import React from 'react';
 import styled from 'styled-components';
 import { motion } from 'framer-motion';
 
+// Mobile-first section with proper spacing
 const AboutSection = styled.section`
   min-height: 100vh;
-  padding: 8rem 0 4rem;
+  padding: 6rem 0 3rem; /* Mobile-first: smaller padding */
   background: linear-gradient(135deg, #0f0f0f 0%, #1a1a1a 50%, #0f0f0f 100%);
   position: relative;
   overflow: hidden;
 
-  @media (max-width: 768px) {
-    padding: 6rem 0 3rem;
+  /* Enhanced for larger screens */
+  @media (min-width: 769px) {
+    padding: 8rem 0 4rem;
   }
 `;
 
+// Mobile-first container with flex layout
 const AboutContainer = styled.div`
   max-width: 1200px;
   margin: 0 auto;
-  padding: 0 2rem;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 4rem;
+  padding: 0 1rem; /* Mobile-first: smaller padding */
+  display: flex;
+  flex-direction: column; /* Mobile-first: stack vertically */
+  gap: 2rem;
   align-items: center;
+  text-align: center;
 
-  @media (max-width: 968px) {
-    grid-template-columns: 1fr;
+  /* Enhanced for tablets */
+  @media (min-width: 769px) {
+    padding: 0 2rem;
     gap: 3rem;
-    text-align: center;
   }
 
-  @media (max-width: 768px) {
-    padding: 0 1rem;
-    gap: 2rem;
+  /* Desktop layout */
+  @media (min-width: 1024px) {
+    flex-direction: row;
+    gap: 4rem;
+    text-align: left;
+    align-items: flex-start;
   }
 `;
 
+// Mobile-first content container
 const AboutContent = styled.div`
   z-index: 2;
+  width: 100%;
+  max-width: 600px; /* Prevent text from being too wide on larger screens */
+  
+  /* Desktop: flex to take available space */
+  @media (min-width: 1024px) {
+    flex: 1;
+    max-width: none;
+  }
 `;
 
+// Mobile-first title with better sizing
 const SectionTitle = styled(motion.h2)`
   font-family: 'Orbitron', monospace;
-  font-size: clamp(2rem, 4vw, 3rem);
+  font-size: 2.5rem; /* Mobile-first: fixed readable size */
   font-weight: 900;
-  margin-bottom: 2rem;
+  margin-bottom: 1.5rem;
   background: linear-gradient(45deg, #00ff88, #ff0088);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
   position: relative;
+  line-height: 1.2;
 
   &::after {
     content: '';
     position: absolute;
     bottom: -10px;
-    left: 0;
+    left: 50%; /* Mobile-first: centered */
+    transform: translateX(-50%);
     width: 80px;
     height: 3px;
     background: linear-gradient(45deg, #00ff88, #ff0088);
     border-radius: 2px;
   }
 
-  @media (max-width: 968px) {
+  /* Enhanced for larger mobile screens */
+  @media (min-width: 480px) {
+    font-size: 2.8rem;
+    margin-bottom: 2rem;
+  }
+
+  /* Tablet and larger */
+  @media (min-width: 769px) {
+    font-size: 3.2rem;
+  }
+
+  /* Desktop: left align */
+  @media (min-width: 1024px) {
+    text-align: left;
+    
     &::after {
-      left: 50%;
-      transform: translateX(-50%);
+      left: 0;
+      transform: none;
     }
   }
 `;
 
+// Mobile-first text with proper sizing
 const AboutText = styled(motion.p)`
-  font-size: clamp(1rem, 1.2vw, 1.1rem);
+  font-size: 1rem; /* Mobile-first: minimum readable size */
   color: rgba(255, 255, 255, 0.85);
-  line-height: 1.8;
+  line-height: 1.7;
   margin-bottom: 1.5rem;
+  max-width: 100%;
   
   &:last-child {
     margin-bottom: 0;
+  }
+
+  /* Enhanced readability for larger screens */
+  @media (min-width: 480px) {
+    font-size: 1.1rem;
+    line-height: 1.8;
+  }
+
+  @media (min-width: 769px) {
+    font-size: 1.15rem;
+  }
+
+  /* Desktop: left align */
+  @media (min-width: 1024px) {
+    text-align: left;
   }
 `;
 
@@ -86,17 +136,27 @@ const HighlightText = styled.span`
   text-shadow: 0 0 5px rgba(0, 255, 136, 0.3);
 `;
 
+// Mobile-first image container
 const AboutImageContainer = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
   position: relative;
+  width: 100%;
+  order: -1; /* Mobile-first: image at top */
+  
+  /* Desktop: normal order */
+  @media (min-width: 1024px) {
+    order: 0;
+    flex-shrink: 0;
+  }
 `;
 
+// Mobile-first responsive image
 const AboutImage = styled(motion.div)`
   width: 100%;
-  max-width: 400px;
-  height: 400px;
+  max-width: 280px; /* Mobile-first: smaller size */
+  height: 280px;
   background: linear-gradient(135deg, #00ff88 0%, #ff0088 100%);
   border-radius: 20px;
   position: relative;
@@ -115,9 +175,22 @@ const AboutImage = styled(motion.div)`
     z-index: 1;
   }
 
-  @media (max-width: 768px) {
+  /* Enhanced for larger mobile screens */
+  @media (min-width: 480px) {
     max-width: 320px;
     height: 320px;
+  }
+
+  /* Tablet size */
+  @media (min-width: 769px) {
+    max-width: 360px;
+    height: 360px;
+  }
+
+  /* Desktop size */
+  @media (min-width: 1024px) {
+    max-width: 400px;
+    height: 400px;
   }
 `;
 
@@ -144,56 +217,100 @@ const AboutIcon = styled.div`
   }
 `;
 
+// Mobile-first stats container
 const AboutStats = styled(motion.div)`
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-  gap: 2rem;
-  margin-top: 3rem;
+  grid-template-columns: repeat(2, 1fr); /* Mobile-first: 2 columns */
+  gap: 1rem;
+  margin-top: 2rem;
+  width: 100%;
 
-  @media (max-width: 768px) {
+  /* Enhanced for larger mobile screens */
+  @media (min-width: 480px) {
     gap: 1.5rem;
+    margin-top: 2.5rem;
+  }
+
+  /* Tablet and larger: 4 columns */
+  @media (min-width: 769px) {
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2rem;
+    margin-top: 3rem;
+  }
+
+  /* Desktop: full width */
+  @media (min-width: 1024px) {
+    margin-left: -4rem; /* Extend beyond content width */
+    margin-right: -4rem;
+    padding: 0 4rem;
   }
 `;
 
+// Mobile-first stat items with touch-friendly design
 const StatItem = styled(motion.div)`
   text-align: center;
-  padding: 1.5rem;
+  padding: 1rem; /* Mobile-first: smaller padding */
   background: rgba(0, 255, 136, 0.05);
   border: 1px solid rgba(0, 255, 136, 0.2);
   border-radius: 12px;
   transition: all 0.3s ease;
+  cursor: pointer; /* Mobile-friendly interaction */
 
-  &:hover {
+  &:hover, &:active {
     background: rgba(0, 255, 136, 0.1);
     border-color: rgba(0, 255, 136, 0.4);
-    transform: translateY(-5px);
+    transform: translateY(-3px);
   }
 
-  @media (max-width: 768px) {
-    padding: 1rem;
+  /* Enhanced for larger screens */
+  @media (min-width: 480px) {
+    padding: 1.2rem;
+  }
+
+  @media (min-width: 769px) {
+    padding: 1.5rem;
+    
+    &:hover {
+      transform: translateY(-5px);
+    }
   }
 `;
 
+// Mobile-first stat numbers
 const StatNumber = styled.div`
   font-family: 'Orbitron', monospace;
-  font-size: 2rem;
+  font-size: 1.5rem; /* Mobile-first: readable size */
   font-weight: 900;
   color: #00ff88;
   margin-bottom: 0.5rem;
+  text-shadow: 0 0 10px rgba(0, 255, 136, 0.3);
 
-  @media (max-width: 768px) {
-    font-size: 1.5rem;
+  /* Enhanced for larger screens */
+  @media (min-width: 480px) {
+    font-size: 1.8rem;
+  }
+
+  @media (min-width: 769px) {
+    font-size: 2rem;
   }
 `;
 
+// Mobile-first stat labels
 const StatLabel = styled.div`
-  font-size: 0.9rem;
+  font-size: 0.8rem; /* Mobile-first: readable size */
   color: rgba(255, 255, 255, 0.7);
   text-transform: uppercase;
   letter-spacing: 1px;
+  font-weight: 600;
+  line-height: 1.3;
 
-  @media (max-width: 768px) {
-    font-size: 0.8rem;
+  /* Enhanced for larger screens */
+  @media (min-width: 480px) {
+    font-size: 0.85rem;
+  }
+
+  @media (min-width: 769px) {
+    font-size: 0.9rem;
   }
 `;
 
@@ -312,8 +429,47 @@ const About = () => {
           variants={containerVariants}
           initial="hidden"
           whileInView="visible"
-          viewport={{ once: true, amount: 0.3 }}
+          viewport={{ once: true, amount: 0.2 }}
+          style={{ width: '100%', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '2rem' }}
         >
+          {/* Mobile-first: Image at top */}
+          <AboutImageContainer>
+            <AboutImage
+              initial={{ scale: 0, rotate: -180 }}
+              whileInView={{ scale: 1, rotate: 0 }}
+              viewport={{ once: true }}
+              transition={{ 
+                type: "spring",
+                stiffness: 120,
+                damping: 15,
+                delay: 0.2
+              }}
+              whileHover={{ 
+                scale: 1.05,
+                boxShadow: "0 25px 50px rgba(0, 255, 136, 0.3)"
+              }}
+              whileTap={{ scale: 0.98 }} // Mobile touch feedback
+            >
+              <AboutImageContent>
+                <AboutIcon>🚀</AboutIcon>
+                <div style={{ 
+                  fontSize: '1.1rem', 
+                  fontWeight: '600',
+                  background: 'linear-gradient(45deg, #00ff88, #ff0088)',
+                  WebkitBackgroundClip: 'text',
+                  WebkitTextFillColor: 'transparent',
+                  backgroundClip: 'text',
+                  '@media (min-width: 480px)': {
+                    fontSize: '1.2rem'
+                  }
+                }}>
+                  Innovation
+                </div>
+              </AboutImageContent>
+            </AboutImage>
+          </AboutImageContainer>
+
+          {/* Content section */}
           <AboutContent>
             <SectionTitle variants={itemVariants}>
               About Me
@@ -339,76 +495,57 @@ const About = () => {
           </AboutContent>
         </motion.div>
 
-        <AboutImageContainer>
-          <AboutImage
-            initial={{ scale: 0, rotate: -180 }}
-            whileInView={{ scale: 1, rotate: 0 }}
-            viewport={{ once: true }}
-            transition={{ 
-              type: "spring",
-              stiffness: 100,
-              damping: 15,
-              delay: 0.3
-            }}
-            whileHover={{ 
-              scale: 1.05,
-              boxShadow: "0 25px 50px rgba(0, 255, 136, 0.3)"
-            }}
-          >
-            <AboutImageContent>
-              <AboutIcon>🚀</AboutIcon>
-              <div style={{ 
-                fontSize: '1.2rem', 
-                fontWeight: '600',
-                background: 'linear-gradient(45deg, #00ff88, #ff0088)',
-                WebkitBackgroundClip: 'text',
-                WebkitTextFillColor: 'transparent',
-                backgroundClip: 'text'
-              }}>
-                Innovation
-              </div>
-            </AboutImageContent>
-          </AboutImage>
-        </AboutImageContainer>
-      </AboutContainer>
-
-      <motion.div
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true, amount: 0.3 }}
-        style={{ maxWidth: '1200px', margin: '0 auto', padding: '0 2rem' }}
-      >
-        <AboutStats>
+        {/* Stats section - integrated into main container */}
+        <AboutStats
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.3 }}
+          variants={{
+            hidden: { opacity: 0, y: 50 },
+            visible: {
+              opacity: 1,
+              y: 0,
+              transition: {
+                staggerChildren: 0.1,
+                delayChildren: 0.5,
+              },
+            },
+          }}
+        >
           <StatItem
             variants={statsVariants}
-            whileHover={{ y: -10 }}
+            whileHover={{ y: -5, scale: 1.02 }}
+            whileTap={{ scale: 0.98 }} // Mobile touch feedback
           >
             <StatNumber>3+</StatNumber>
             <StatLabel>Years Experience</StatLabel>
           </StatItem>
           <StatItem
             variants={statsVariants}
-            whileHover={{ y: -10 }}
+            whileHover={{ y: -5, scale: 1.02 }}
+            whileTap={{ scale: 0.98 }}
           >
             <StatNumber>15+</StatNumber>
             <StatLabel>Projects Completed</StatLabel>
           </StatItem>
           <StatItem
             variants={statsVariants}
-            whileHover={{ y: -10 }}
+            whileHover={{ y: -5, scale: 1.02 }}
+            whileTap={{ scale: 0.98 }}
           >
             <StatNumber>10+</StatNumber>
             <StatLabel>Technologies Mastered</StatLabel>
           </StatItem>
           <StatItem
             variants={statsVariants}
-            whileHover={{ y: -10 }}
+            whileHover={{ y: -5, scale: 1.02 }}
+            whileTap={{ scale: 0.98 }}
           >
             <StatNumber>24/7</StatNumber>
             <StatLabel>Problem Solver</StatLabel>
           </StatItem>
         </AboutStats>
-      </motion.div>
+      </AboutContainer>
     </AboutSection>
   );
 };

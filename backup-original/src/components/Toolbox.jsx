@@ -2,31 +2,36 @@ import React from 'react';
 import styled from 'styled-components';
 import { motion } from 'framer-motion';
 
+// Mobile-first toolbox section
 const ToolboxSection = styled.section`
   min-height: 100vh;
-  padding: 8rem 0 4rem;
+  padding: 6rem 0 3rem; /* Mobile-first: smaller padding */
   background: linear-gradient(135deg, #0f0f0f 0%, #1a1a1a 50%, #0f0f0f 100%);
   position: relative;
   overflow: hidden;
 
-  @media (max-width: 768px) {
-    padding: 6rem 0 3rem;
+  /* Enhanced for larger screens */
+  @media (min-width: 769px) {
+    padding: 8rem 0 4rem;
   }
 `;
 
+// Mobile-first container
 const ToolboxContainer = styled.div`
   max-width: 1200px;
   margin: 0 auto;
-  padding: 0 2rem;
+  padding: 0 1rem; /* Mobile-first: smaller padding */
 
-  @media (max-width: 768px) {
-    padding: 0 1rem;
+  /* Enhanced for larger screens */
+  @media (min-width: 769px) {
+    padding: 0 2rem;
   }
 `;
 
+// Mobile-first section title
 const SectionTitle = styled(motion.h2)`
   font-family: 'Orbitron', monospace;
-  font-size: clamp(2rem, 4vw, 3rem);
+  font-size: 2.5rem; /* Mobile-first: fixed size */
   font-weight: 900;
   text-align: center;
   margin-bottom: 1rem;
@@ -34,105 +39,195 @@ const SectionTitle = styled(motion.h2)`
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
+  line-height: 1.2;
+
+  /* Enhanced for larger screens */
+  @media (min-width: 480px) {
+    font-size: 2.8rem;
+  }
+
+  @media (min-width: 769px) {
+    font-size: 3.2rem;
+  }
 `;
 
+// Mobile-first subtitle
 const SectionSubtitle = styled(motion.p)`
   text-align: center;
-  font-size: 1.1rem;
+  font-size: 1rem; /* Mobile-first: readable size */
   color: rgba(255, 255, 255, 0.7);
-  margin-bottom: 4rem;
+  margin-bottom: 2.5rem;
   max-width: 600px;
   margin-left: auto;
   margin-right: auto;
+  line-height: 1.6;
+  padding: 0 1rem;
 
-  @media (max-width: 768px) {
+  /* Enhanced for larger screens */
+  @media (min-width: 480px) {
+    font-size: 1.05rem;
     margin-bottom: 3rem;
-    font-size: 1rem;
+  }
+
+  @media (min-width: 769px) {
+    font-size: 1.1rem;
+    margin-bottom: 4rem;
+    padding: 0;
   }
 `;
 
+// Mobile-first toolbox grid
 const ToolboxGrid = styled.div`
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 3rem;
-  margin-bottom: 4rem;
+  grid-template-columns: 1fr; /* Mobile-first: single column */
+  gap: 2rem;
+  margin-bottom: 3rem;
 
-  @media (max-width: 768px) {
-    grid-template-columns: 1fr;
-    gap: 2rem;
+  /* Enhanced for larger mobile screens */
+  @media (min-width: 600px) {
+    gap: 2.5rem;
+  }
+
+  /* Tablet: 2 columns */
+  @media (min-width: 769px) {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 3rem;
+    margin-bottom: 4rem;
+  }
+
+  /* Desktop: auto-fit with proper minimum */
+  @media (min-width: 1024px) {
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   }
 `;
 
+// Mobile-first category card
 const CategoryCard = styled(motion.div)`
   background: rgba(0, 255, 136, 0.05);
   border: 1px solid rgba(0, 255, 136, 0.2);
   border-radius: 20px;
-  padding: 2rem;
+  padding: 1.5rem; /* Mobile-first: smaller padding */
   text-align: center;
   position: relative;
   backdrop-filter: blur(10px);
   transition: all 0.3s ease;
+  cursor: pointer; /* Mobile-friendly interaction */
 
-  &:hover {
+  &:hover, &:active {
     background: rgba(0, 255, 136, 0.1);
     border-color: rgba(0, 255, 136, 0.4);
-    transform: translateY(-10px);
-    box-shadow: 0 25px 50px rgba(0, 255, 136, 0.2);
+    transform: translateY(-5px);
+    box-shadow: 0 20px 40px rgba(0, 255, 136, 0.2);
+  }
+
+  /* Enhanced for larger screens */
+  @media (min-width: 480px) {
+    padding: 1.8rem;
+  }
+
+  @media (min-width: 769px) {
+    padding: 2rem;
+    
+    &:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 25px 50px rgba(0, 255, 136, 0.2);
+    }
+  }
+
+  @media (min-width: 1024px) {
+    &:hover {
+      transform: translateY(-10px);
+    }
   }
 `;
 
+// Mobile-first category icon
 const CategoryIcon = styled.div`
-  font-size: 3rem;
+  font-size: 2.5rem; /* Mobile-first: readable size */
   margin-bottom: 1rem;
   background: linear-gradient(45deg, #00ff88, #ff0088);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
 
-  @media (max-width: 768px) {
-    font-size: 2.5rem;
+  /* Enhanced for larger screens */
+  @media (min-width: 480px) {
+    font-size: 2.8rem;
+  }
+
+  @media (min-width: 769px) {
+    font-size: 3rem;
   }
 `;
 
+// Mobile-first category title
 const CategoryTitle = styled.h3`
   font-family: 'Orbitron', monospace;
-  font-size: 1.4rem;
+  font-size: 1.2rem; /* Mobile-first: readable size */
   font-weight: 700;
   color: #00ff88;
   margin-bottom: 1.5rem;
   text-shadow: 0 0 10px rgba(0, 255, 136, 0.3);
+  line-height: 1.3;
 
-  @media (max-width: 768px) {
-    font-size: 1.2rem;
+  /* Enhanced for larger screens */
+  @media (min-width: 480px) {
+    font-size: 1.3rem;
+  }
+
+  @media (min-width: 769px) {
+    font-size: 1.4rem;
   }
 `;
 
+// Mobile-first skills grid - MAJOR IMPROVEMENT
 const SkillsGrid = styled.div`
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
-  gap: 1rem;
+  grid-template-columns: repeat(3, 1fr); /* Mobile-first: 3 columns maximum */
+  gap: 0.8rem;
+  justify-items: center;
 
-  @media (max-width: 768px) {
-    grid-template-columns: repeat(auto-fill, minmax(70px, 1fr));
-    gap: 0.8rem;
+  /* Enhanced for larger mobile screens */
+  @media (min-width: 480px) {
+    grid-template-columns: repeat(4, 1fr); /* 4 columns on larger mobile */
+    gap: 1rem;
+  }
+
+  /* Tablet and larger */
+  @media (min-width: 769px) {
+    grid-template-columns: repeat(auto-fill, minmax(90px, 1fr));
+    gap: 1.2rem;
+  }
+
+  /* Desktop */
+  @media (min-width: 1024px) {
+    grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+    gap: 1.5rem;
   }
 `;
 
+// Mobile-first skill item with proper touch targets
 const SkillItem = styled(motion.div)`
   background: rgba(255, 0, 136, 0.1);
   border: 1px solid rgba(255, 0, 136, 0.3);
   border-radius: 12px;
-  padding: 1rem 0.5rem;
+  padding: 1rem 0.5rem; /* Mobile-first: adequate padding */
   text-align: center;
   cursor: pointer;
   transition: all 0.3s ease;
   position: relative;
   overflow: hidden;
+  min-height: 80px; /* Ensure minimum touch target size */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
 
-  &:hover {
+  &:hover, &:active {
     background: rgba(255, 0, 136, 0.2);
     border-color: rgba(255, 0, 136, 0.5);
-    transform: translateY(-5px) scale(1.05);
+    transform: translateY(-3px) scale(1.02);
   }
 
   &::before {
@@ -148,7 +243,7 @@ const SkillItem = styled(motion.div)`
     opacity: 0;
   }
 
-  &:hover::before {
+  &:hover::before, &:active::before {
     opacity: 1;
     animation: shine 1.5s ease-in-out;
   }
@@ -161,28 +256,59 @@ const SkillItem = styled(motion.div)`
       transform: translateX(100%) translateY(100%) rotate(45deg);
     }
   }
-`;
 
-const SkillIcon = styled.div`
-  font-size: 1.8rem;
-  margin-bottom: 0.5rem;
+  /* Enhanced for larger screens */
+  @media (min-width: 480px) {
+    min-height: 85px;
+    padding: 1.1rem 0.6rem;
+  }
 
-  @media (max-width: 768px) {
-    font-size: 1.5rem;
+  @media (min-width: 769px) {
+    min-height: 90px;
+    padding: 1.2rem 0.8rem;
+    
+    &:hover {
+      transform: translateY(-5px) scale(1.05);
+    }
   }
 `;
 
+// Mobile-first skill icon
+const SkillIcon = styled.div`
+  font-size: 1.4rem; /* Mobile-first: readable size */
+  margin-bottom: 0.4rem;
+  line-height: 1;
+
+  /* Enhanced for larger screens */
+  @media (min-width: 480px) {
+    font-size: 1.6rem;
+    margin-bottom: 0.5rem;
+  }
+
+  @media (min-width: 769px) {
+    font-size: 1.8rem;
+  }
+`;
+
+// Mobile-first skill name
 const SkillName = styled.div`
-  font-size: 0.75rem;
+  font-size: 0.65rem; /* Mobile-first: readable size */
   font-weight: 600;
   color: #ffffff;
   text-transform: uppercase;
   letter-spacing: 0.5px;
   z-index: 1;
   relative;
+  line-height: 1.2;
+  text-align: center;
 
-  @media (max-width: 768px) {
+  /* Enhanced for larger screens */
+  @media (min-width: 480px) {
     font-size: 0.7rem;
+  }
+
+  @media (min-width: 769px) {
+    font-size: 0.75rem;
   }
 `;
 

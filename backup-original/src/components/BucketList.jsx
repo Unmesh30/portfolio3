@@ -2,31 +2,40 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import { motion, AnimatePresence } from 'framer-motion';
 
+// Mobile-first: Start at 320px, scale up
 const BucketListSection = styled.section`
   min-height: 100vh;
-  padding: 8rem 0 4rem;
+  padding: 4rem 0 3rem;
   background: linear-gradient(135deg, #0f0f0f 0%, #1a1a1a 50%, #0f0f0f 100%);
   position: relative;
   overflow: hidden;
 
-  @media (max-width: 768px) {
-    padding: 6rem 0 3rem;
+  @media (min-width: 768px) {
+    padding: 6rem 0 4rem;
+  }
+
+  @media (min-width: 1024px) {
+    padding: 8rem 0 4rem;
   }
 `;
 
 const BucketListContainer = styled.div`
   max-width: 1200px;
   margin: 0 auto;
-  padding: 0 2rem;
+  padding: 0 1rem;
 
-  @media (max-width: 768px) {
-    padding: 0 1rem;
+  @media (min-width: 768px) {
+    padding: 0 1.5rem;
+  }
+
+  @media (min-width: 1024px) {
+    padding: 0 2rem;
   }
 `;
 
 const SectionTitle = styled(motion.h2)`
   font-family: 'Orbitron', monospace;
-  font-size: clamp(2rem, 4vw, 3rem);
+  font-size: 1.75rem;
   font-weight: 900;
   text-align: center;
   margin-bottom: 1rem;
@@ -34,88 +43,179 @@ const SectionTitle = styled(motion.h2)`
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
+  line-height: 1.2;
+
+  @media (min-width: 480px) {
+    font-size: 2rem;
+  }
+
+  @media (min-width: 768px) {
+    font-size: 2.5rem;
+  }
+
+  @media (min-width: 1024px) {
+    font-size: 3rem;
+  }
 `;
 
 const SectionSubtitle = styled(motion.p)`
   text-align: center;
-  font-size: 1.1rem;
+  font-size: 0.95rem;
   color: rgba(255, 255, 255, 0.7);
-  margin-bottom: 3rem;
-  max-width: 600px;
+  margin-bottom: 2rem;
+  max-width: 100%;
   margin-left: auto;
   margin-right: auto;
+  line-height: 1.5;
+  padding: 0 0.5rem;
 
-  @media (max-width: 768px) {
-    margin-bottom: 2rem;
+  @media (min-width: 480px) {
     font-size: 1rem;
+    max-width: 500px;
   }
-`;
 
-const CategoryFilter = styled(motion.div)`
-  display: flex;
-  justify-content: center;
-  gap: 1rem;
-  margin-bottom: 4rem;
-  flex-wrap: wrap;
+  @media (min-width: 768px) {
+    font-size: 1.1rem;
+    margin-bottom: 2.5rem;
+    max-width: 600px;
+  }
 
-  @media (max-width: 768px) {
-    gap: 0.5rem;
+  @media (min-width: 1024px) {
     margin-bottom: 3rem;
   }
 `;
 
+// Mobile-first: Stack filter buttons on mobile
+const CategoryFilter = styled(motion.div)`
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  margin-bottom: 2rem;
+  align-items: center;
+
+  @media (min-width: 480px) {
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.6rem;
+  }
+
+  @media (min-width: 768px) {
+    gap: 0.8rem;
+    margin-bottom: 3rem;
+  }
+
+  @media (min-width: 1024px) {
+    gap: 1rem;
+    margin-bottom: 3rem; /* Show stats first, then categories */
+  }
+`;
+
+// Mobile-first: Full-width buttons on mobile
 const FilterButton = styled(motion.button)`
   background: ${props => props.active ? 'linear-gradient(45deg, #00ff88, #ff0088)' : 'transparent'};
   border: 2px solid ${props => props.active ? 'transparent' : '#00ff88'};
   color: ${props => props.active ? '#0f0f0f' : '#00ff88'};
-  padding: 0.8rem 1.5rem;
-  border-radius: 25px;
+  padding: 0.75rem 1.2rem;
+  border-radius: 20px;
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 1px;
   cursor: pointer;
   transition: all 0.3s ease;
-  font-size: 0.9rem;
+  font-size: 0.75rem;
+  min-height: 44px;
+  min-width: 160px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  @media (min-width: 480px) {
+    width: auto;
+    min-width: 140px;
+    font-size: 0.8rem;
+    padding: 0.7rem 1.1rem;
+  }
+
+  @media (min-width: 768px) {
+    font-size: 0.85rem;
+    padding: 0.75rem 1.3rem;
+    border-radius: 22px;
+  }
+
+  @media (min-width: 1024px) {
+    font-size: 0.9rem;
+    padding: 0.8rem 1.5rem;
+    border-radius: 25px;
+  }
 
   &:hover {
     background: ${props => props.active ? 'linear-gradient(45deg, #00ff88, #ff0088)' : '#00ff88'};
     color: #0f0f0f;
     transform: translateY(-2px);
   }
-
-  @media (max-width: 768px) {
-    padding: 0.6rem 1rem;
-    font-size: 0.8rem;
-  }
 `;
 
+// Mobile-first: Single column layout that becomes grid on larger screens
 const BucketGrid = styled.div`
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-  gap: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
 
-  @media (max-width: 768px) {
+  @media (min-width: 768px) {
+    display: grid;
     grid-template-columns: 1fr;
-    gap: 1.5rem;
+    gap: 1.75rem;
+  }
+
+  @media (min-width: 1024px) {
+    grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
+    gap: 2rem;
+  }
+
+  @media (min-width: 1400px) {
+    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
   }
 `;
 
+// Mobile-first: Bucket card with proper mobile layout
 const BucketCard = styled(motion.div)`
   background: rgba(0, 255, 136, 0.05);
   border: 1px solid rgba(0, 255, 136, 0.2);
-  border-radius: 20px;
-  padding: 2rem;
+  border-radius: 16px;
+  padding: 1.5rem;
   position: relative;
   backdrop-filter: blur(10px);
   transition: all 0.3s ease;
   cursor: pointer;
   overflow: hidden;
+  width: 100%;
+
+  @media (min-width: 480px) {
+    padding: 1.75rem;
+    border-radius: 18px;
+  }
+
+  @media (min-width: 768px) {
+    padding: 2rem;
+    border-radius: 20px;
+  }
 
   &:hover {
     background: rgba(0, 255, 136, 0.1);
     border-color: rgba(0, 255, 136, 0.4);
-    transform: translateY(-10px);
-    box-shadow: 0 25px 50px rgba(0, 255, 136, 0.2);
+    transform: translateY(-5px);
+    box-shadow: 0 15px 30px rgba(0, 255, 136, 0.15);
+
+    @media (min-width: 768px) {
+      transform: translateY(-8px);
+      box-shadow: 0 20px 40px rgba(0, 255, 136, 0.18);
+    }
+
+    @media (min-width: 1024px) {
+      transform: translateY(-10px);
+      box-shadow: 0 25px 50px rgba(0, 255, 136, 0.2);
+    }
   }
 
   &::before {
@@ -140,10 +240,10 @@ const BucketCard = styled(motion.div)`
     &::after {
       content: '✓';
       position: absolute;
-      top: 15px;
-      right: 15px;
-      width: 30px;
-      height: 30px;
+      top: 12px;
+      right: 12px;
+      width: 26px;
+      height: 26px;
       background: linear-gradient(45deg, #00ff88, #00cc66);
       border-radius: 50%;
       display: flex;
@@ -151,27 +251,60 @@ const BucketCard = styled(motion.div)`
       justify-content: center;
       color: #0f0f0f;
       font-weight: bold;
-      font-size: 1.2rem;
+      font-size: 1rem;
+
+      @media (min-width: 768px) {
+        top: 15px;
+        right: 15px;
+        width: 30px;
+        height: 30px;
+        font-size: 1.2rem;
+      }
     }
   `}
 `;
 
+// Mobile-first: Flexible header layout
 const GoalHeader = styled.div`
   display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
+  flex-direction: column;
+  gap: 0.75rem;
   margin-bottom: 1rem;
+
+  @media (min-width: 480px) {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+
+  @media (min-width: 768px) {
+    margin-bottom: 1.25rem;
+  }
 `;
 
+// Mobile-first: Icon sizing
 const GoalIcon = styled.div`
-  font-size: 2.5rem;
-  margin-bottom: 1rem;
+  font-size: 2rem;
+  margin-bottom: 0.75rem;
+  align-self: center;
+
+  @media (min-width: 480px) {
+    font-size: 2.2rem;
+    margin-bottom: 1rem;
+    align-self: flex-start;
+  }
+
+  @media (min-width: 768px) {
+    font-size: 2.5rem;
+  }
   
   ${props => props.completed && `
     filter: saturate(1.5) brightness(1.2);
   `}
 `;
 
+// Mobile-first: Category badge
 const GoalCategory = styled.span`
   background: ${props => 
     props.category === 'travel' ? 'linear-gradient(45deg, #00ff88, #00cc66)' :
@@ -181,26 +314,54 @@ const GoalCategory = styled.span`
     'linear-gradient(45deg, #00ffff, #0088cc)'
   };
   color: #0f0f0f;
-  padding: 0.3rem 0.8rem;
-  border-radius: 15px;
-  font-size: 0.7rem;
+  padding: 0.4rem 0.9rem;
+  border-radius: 12px;
+  font-size: 0.65rem;
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 1px;
   flex-shrink: 0;
+  align-self: flex-start;
+  min-height: 24px;
+  display: inline-flex;
+  align-items: center;
+
+  @media (min-width: 480px) {
+    font-size: 0.68rem;
+    padding: 0.35rem 0.85rem;
+    border-radius: 13px;
+  }
+
+  @media (min-width: 768px) {
+    font-size: 0.7rem;
+    padding: 0.3rem 0.8rem;
+    border-radius: 15px;
+  }
 `;
 
+// Mobile-first: Goal title with proper mobile sizing
 const GoalTitle = styled.h3`
   font-family: 'Orbitron', monospace;
-  font-size: 1.3rem;
+  font-size: 1rem;
   font-weight: 700;
   color: ${props => props.completed ? '#00ff88' : '#ffffff'};
   margin-bottom: 0.5rem;
-  text-shadow: ${props => props.completed ? '0 0 15px rgba(0, 255, 136, 0.5)' : 'none'};
-  line-height: 1.3;
+  text-shadow: ${props => props.completed ? '0 0 12px rgba(0, 255, 136, 0.4)' : 'none'};
+  line-height: 1.25;
+  padding-right: ${props => props.completed ? '35px' : '0'}; /* Make room for checkmark */
 
-  @media (max-width: 768px) {
+  @media (min-width: 480px) {
     font-size: 1.1rem;
+    line-height: 1.3;
+  }
+
+  @media (min-width: 768px) {
+    font-size: 1.2rem;
+    text-shadow: ${props => props.completed ? '0 0 15px rgba(0, 255, 136, 0.5)' : 'none'};
+  }
+
+  @media (min-width: 1024px) {
+    font-size: 1.3rem;
   }
 
   ${props => props.completed && `
@@ -210,55 +371,113 @@ const GoalTitle = styled.h3`
   `}
 `;
 
+// Mobile-first: Goal description
 const GoalDescription = styled.p`
   color: rgba(255, 255, 255, 0.8);
-  line-height: 1.6;
-  margin-bottom: 1.5rem;
-  font-size: 0.95rem;
+  line-height: 1.5;
+  margin-bottom: 1rem;
+  font-size: 0.87rem;
+
+  @media (min-width: 480px) {
+    line-height: 1.55;
+    font-size: 0.9rem;
+  }
+
+  @media (min-width: 768px) {
+    line-height: 1.6;
+    font-size: 0.95rem;
+    margin-bottom: 1.25rem;
+  }
+
+  @media (min-width: 1024px) {
+    margin-bottom: 1.5rem;
+  }
 `;
 
+// Mobile-first: Progress bar with better mobile visibility
 const ProgressBar = styled.div`
   width: 100%;
-  height: 6px;
+  height: 8px;
   background: rgba(255, 255, 255, 0.1);
-  border-radius: 3px;
-  margin-bottom: 1rem;
+  border-radius: 4px;
+  margin-bottom: 0.75rem;
   overflow: hidden;
+
+  @media (min-width: 768px) {
+    height: 6px;
+    border-radius: 3px;
+    margin-bottom: 1rem;
+  }
 `;
 
 const ProgressFill = styled(motion.div)`
   height: 100%;
   background: linear-gradient(90deg, #00ff88, #ff0088);
-  border-radius: 3px;
+  border-radius: 4px;
   width: ${props => props.progress}%;
+
+  @media (min-width: 768px) {
+    border-radius: 3px;
+  }
 `;
 
+// Mobile-first: Progress text
 const ProgressText = styled.div`
-  font-size: 0.85rem;
+  font-size: 0.8rem;
   color: rgba(255, 255, 255, 0.7);
-  margin-bottom: 1rem;
+  margin-bottom: 0.75rem;
   text-align: right;
+  font-weight: 600;
+
+  @media (min-width: 768px) {
+    font-size: 0.85rem;
+    margin-bottom: 1rem;
+  }
 `;
 
+// Mobile-first: Goal steps list
 const GoalSteps = styled.ul`
   list-style: none;
   padding: 0;
-  margin: 1rem 0;
+  margin: 0.75rem 0;
+
+  @media (min-width: 768px) {
+    margin: 1rem 0;
+  }
 `;
 
+// Mobile-first: Step items with proper mobile spacing
 const GoalStep = styled.li`
   color: rgba(255, 255, 255, 0.8);
-  font-size: 0.85rem;
-  line-height: 1.5;
-  margin-bottom: 0.5rem;
+  font-size: 0.8rem;
+  line-height: 1.4;
+  margin-bottom: 0.4rem;
   position: relative;
-  padding-left: 1.2rem;
+  padding-left: 1.1rem;
+  min-height: 1.1rem;
+
+  @media (min-width: 480px) {
+    font-size: 0.82rem;
+    line-height: 1.45;
+    margin-bottom: 0.45rem;
+  }
+
+  @media (min-width: 768px) {
+    font-size: 0.85rem;
+    line-height: 1.5;
+    margin-bottom: 0.5rem;
+    padding-left: 1.2rem;
+  }
 
   &::before {
     content: ${props => props.completed ? '"✅"' : '"⭕"'};
     position: absolute;
     left: 0;
-    font-size: 0.8rem;
+    font-size: 0.75rem;
+
+    @media (min-width: 768px) {
+      font-size: 0.8rem;
+    }
   }
 
   &:last-child {
@@ -271,30 +490,50 @@ const GoalStep = styled.li`
   `}
 `;
 
+// Mobile-first: Timeline text
 const Timeline = styled.div`
   font-family: 'Space Mono', monospace;
-  font-size: 0.8rem;
+  font-size: 0.75rem;
   color: rgba(255, 0, 136, 0.8);
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 1px;
-  margin-top: 1rem;
+  margin-top: 0.75rem;
+
+  @media (min-width: 768px) {
+    font-size: 0.8rem;
+    margin-top: 1rem;
+  }
 `;
 
+// Mobile-first: Stats container with proper mobile layout
 const StatsContainer = styled(motion.div)`
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 2rem;
-  margin-bottom: 4rem;
-  padding: 2rem;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+  margin-bottom: 2rem;
+  padding: 1.5rem;
   background: rgba(0, 255, 136, 0.05);
   border: 1px solid rgba(0, 255, 136, 0.2);
-  border-radius: 20px;
+  border-radius: 16px;
   backdrop-filter: blur(10px);
 
-  @media (max-width: 768px) {
-    padding: 1.5rem;
+  @media (min-width: 480px) {
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.25rem;
+  }
+
+  @media (min-width: 768px) {
     gap: 1.5rem;
+    padding: 2rem;
+    border-radius: 18px;
+    margin-bottom: 2.5rem;
+  }
+
+  @media (min-width: 1024px) {
+    gap: 2rem;
+    border-radius: 20px;
+    margin-bottom: 3rem; /* Move stats above filters for better UX */
   }
 `;
 
@@ -302,25 +541,51 @@ const StatItem = styled.div`
   text-align: center;
 `;
 
+// Mobile-first: Stat numbers with appropriate mobile sizing
 const StatNumber = styled.div`
   font-family: 'Orbitron', monospace;
-  font-size: 2.5rem;
+  font-size: 1.5rem;
   font-weight: 900;
   color: #00ff88;
-  margin-bottom: 0.5rem;
-  text-shadow: 0 0 15px rgba(0, 255, 136, 0.5);
+  margin-bottom: 0.3rem;
+  text-shadow: 0 0 12px rgba(0, 255, 136, 0.4);
 
-  @media (max-width: 768px) {
+  @media (min-width: 480px) {
+    font-size: 1.75rem;
+    margin-bottom: 0.4rem;
+  }
+
+  @media (min-width: 768px) {
     font-size: 2rem;
+    margin-bottom: 0.5rem;
+    text-shadow: 0 0 15px rgba(0, 255, 136, 0.5);
+  }
+
+  @media (min-width: 1024px) {
+    font-size: 2.5rem;
   }
 `;
 
+// Mobile-first: Stat labels with proper mobile sizing
 const StatLabel = styled.div`
-  font-size: 0.9rem;
+  font-size: 0.75rem;
   color: rgba(255, 255, 255, 0.7);
   text-transform: uppercase;
   letter-spacing: 1px;
   font-weight: 600;
+  line-height: 1.2;
+
+  @media (min-width: 480px) {
+    font-size: 0.8rem;
+  }
+
+  @media (min-width: 768px) {
+    font-size: 0.85rem;
+  }
+
+  @media (min-width: 1024px) {
+    font-size: 0.9rem;
+  }
 `;
 
 const FloatingElements = styled.div`
@@ -333,18 +598,82 @@ const FloatingElements = styled.div`
   z-index: 1;
 `;
 
+// Mobile-first: Smaller floating elements for mobile
 const FloatingDream = styled(motion.div)`
   position: absolute;
-  font-size: 1.5rem;
-  opacity: 0.1;
+  font-size: 1rem;
+  opacity: 0.06;
   color: #00ff88;
 
-  &.dream-1 { top: 10%; left: 5%; }
-  &.dream-2 { top: 25%; right: 8%; }
-  &.dream-3 { bottom: 35%; left: 10%; }
-  &.dream-4 { bottom: 20%; right: 12%; }
-  &.dream-5 { top: 60%; left: 15%; }
-  &.dream-6 { top: 45%; right: 20%; }
+  @media (min-width: 768px) {
+    font-size: 1.2rem;
+    opacity: 0.08;
+  }
+
+  @media (min-width: 1024px) {
+    font-size: 1.5rem;
+    opacity: 0.1;
+  }
+
+  &.dream-1 { 
+    top: 8%; 
+    left: 3%; 
+
+    @media (min-width: 768px) {
+      top: 10%;
+      left: 5%;
+    }
+  }
+
+  &.dream-2 { 
+    top: 20%; 
+    right: 5%; 
+
+    @media (min-width: 768px) {
+      top: 25%;
+      right: 8%;
+    }
+  }
+
+  &.dream-3 { 
+    bottom: 40%; 
+    left: 6%; 
+
+    @media (min-width: 768px) {
+      bottom: 35%;
+      left: 10%;
+    }
+  }
+
+  &.dream-4 { 
+    bottom: 25%; 
+    right: 8%; 
+
+    @media (min-width: 768px) {
+      bottom: 20%;
+      right: 12%;
+    }
+  }
+
+  &.dream-5 { 
+    top: 65%; 
+    left: 10%; 
+
+    @media (min-width: 768px) {
+      top: 60%;
+      left: 15%;
+    }
+  }
+
+  &.dream-6 { 
+    top: 50%; 
+    right: 15%; 
+
+    @media (min-width: 768px) {
+      top: 45%;
+      right: 20%;
+    }
+  }
 `;
 
 const BucketList = () => {

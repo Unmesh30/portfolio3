@@ -2,97 +2,141 @@ import React from 'react';
 import styled from 'styled-components';
 import { motion } from 'framer-motion';
 
+// Mobile-first: Start at 320px, scale up
 const ExperienceSection = styled.section`
   min-height: 100vh;
-  padding: 8rem 0 4rem;
+  padding: 4rem 0 3rem;
   background: linear-gradient(135deg, #0f0f0f 0%, #1a1a1a 50%, #0f0f0f 100%);
   position: relative;
   overflow: hidden;
 
-  @media (max-width: 768px) {
-    padding: 6rem 0 3rem;
+  @media (min-width: 768px) {
+    padding: 6rem 0 4rem;
+  }
+
+  @media (min-width: 1024px) {
+    padding: 8rem 0 4rem;
   }
 `;
 
 const ExperienceContainer = styled.div`
   max-width: 1200px;
   margin: 0 auto;
-  padding: 0 2rem;
+  padding: 0 1rem;
 
-  @media (max-width: 768px) {
-    padding: 0 1rem;
+  @media (min-width: 768px) {
+    padding: 0 1.5rem;
+  }
+
+  @media (min-width: 1024px) {
+    padding: 0 2rem;
   }
 `;
 
 const SectionTitle = styled(motion.h2)`
   font-family: 'Orbitron', monospace;
-  font-size: clamp(2rem, 4vw, 3rem);
+  font-size: 1.75rem;
   font-weight: 900;
   text-align: center;
-  margin-bottom: 3rem;
+  margin-bottom: 2rem;
   background: linear-gradient(45deg, #00ff88, #ff0088);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
   position: relative;
+  line-height: 1.2;
+
+  @media (min-width: 480px) {
+    font-size: 2rem;
+    margin-bottom: 2.5rem;
+  }
+
+  @media (min-width: 768px) {
+    font-size: 2.5rem;
+    margin-bottom: 3rem;
+  }
+
+  @media (min-width: 1024px) {
+    font-size: 3rem;
+  }
 
   &::after {
     content: '';
     position: absolute;
-    bottom: -15px;
+    bottom: -10px;
     left: 50%;
     transform: translateX(-50%);
-    width: 80px;
+    width: 60px;
     height: 3px;
     background: linear-gradient(45deg, #00ff88, #ff0088);
     border-radius: 2px;
+
+    @media (min-width: 768px) {
+      bottom: -15px;
+      width: 80px;
+    }
   }
 `;
 
+// Mobile-first timeline: Stack vertically, simple layout
 const ExperienceTimeline = styled.div`
   position: relative;
-  max-width: 900px;
-  margin: 0 auto;
+  max-width: 100%;
 
   &::before {
     content: '';
     position: absolute;
-    left: 50%;
+    left: 20px;
     top: 0;
     bottom: 0;
     width: 3px;
     background: linear-gradient(180deg, #00ff88, #ff0088, #00ff88);
-    transform: translateX(-50%);
     border-radius: 3px;
     box-shadow: 0 0 10px rgba(0, 255, 136, 0.3);
 
-    @media (max-width: 968px) {
+    @media (min-width: 768px) {
       left: 30px;
     }
+
+    @media (min-width: 1200px) {
+      left: 50%;
+      transform: translateX(-50%);
+    }
+  }
+
+  @media (min-width: 768px) {
+    max-width: 900px;
+    margin: 0 auto;
   }
 `;
 
+// Mobile-first: Stack all items vertically with consistent padding
 const ExperienceItem = styled(motion.div)`
   position: relative;
-  margin-bottom: 4rem;
-  display: flex;
-  align-items: center;
+  margin-bottom: 2.5rem;
+  padding-left: 60px;
 
-  &:nth-child(odd) {
-    justify-content: flex-end;
-    
-    @media (max-width: 968px) {
-      justify-content: flex-start;
-      padding-left: 80px;
-    }
+  @media (min-width: 480px) {
+    padding-left: 70px;
   }
 
-  &:nth-child(even) {
-    justify-content: flex-start;
-    
-    @media (max-width: 968px) {
+  @media (min-width: 768px) {
+    padding-left: 80px;
+    margin-bottom: 3rem;
+  }
+
+  @media (min-width: 1200px) {
+    display: flex;
+    align-items: center;
+    margin-bottom: 4rem;
+    padding-left: 0;
+
+    &:nth-child(odd) {
+      justify-content: flex-end;
+    }
+
+    &:nth-child(even) {
       justify-content: flex-start;
-      padding-left: 80px;
     }
   }
 
@@ -101,52 +145,98 @@ const ExperienceItem = styled(motion.div)`
   }
 `;
 
+// Mobile-first: Simple timeline node positioning
 const TimelineNode = styled(motion.div)`
   position: absolute;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-  width: 25px;
-  height: 25px;
+  left: 20px;
+  top: 1rem;
+  transform: translateX(-50%);
+  width: 20px;
+  height: 20px;
   background: linear-gradient(45deg, #00ff88, #ff0088);
   border-radius: 50%;
   z-index: 2;
-  box-shadow: 0 0 25px rgba(0, 255, 136, 0.6);
+  box-shadow: 0 0 20px rgba(0, 255, 136, 0.6);
   display: flex;
   align-items: center;
   justify-content: center;
 
   &::before {
     content: '';
-    width: 10px;
-    height: 10px;
+    width: 8px;
+    height: 8px;
     background: #0f0f0f;
     border-radius: 50%;
   }
 
-  @media (max-width: 968px) {
+  @media (min-width: 768px) {
     left: 30px;
+    width: 25px;
+    height: 25px;
+    top: 1.5rem;
+
+    &::before {
+      width: 10px;
+      height: 10px;
+    }
+  }
+
+  @media (min-width: 1200px) {
+    left: 50%;
+    top: 50%;
     transform: translate(-50%, -50%);
   }
 `;
 
+// Mobile-first: Full-width cards that stack vertically
 const ExperienceCard = styled(motion.div)`
   background: rgba(0, 255, 136, 0.05);
   border: 1px solid rgba(0, 255, 136, 0.2);
-  border-radius: 20px;
-  padding: 2.5rem;
-  width: calc(50% - 60px);
-  max-width: 420px;
+  border-radius: 16px;
+  padding: 1.5rem;
+  width: 100%;
   backdrop-filter: blur(15px);
   transition: all 0.3s ease;
   position: relative;
   overflow: hidden;
 
+  @media (min-width: 480px) {
+    padding: 2rem;
+    border-radius: 20px;
+  }
+
+  @media (min-width: 768px) {
+    padding: 2.5rem;
+  }
+
+  @media (min-width: 1200px) {
+    width: calc(50% - 60px);
+    max-width: 420px;
+
+    ${ExperienceItem}:nth-child(odd) & {
+      margin-right: 60px;
+    }
+
+    ${ExperienceItem}:nth-child(even) & {
+      margin-left: 60px;
+    }
+  }
+
   &:hover {
     background: rgba(0, 255, 136, 0.1);
     border-color: rgba(0, 255, 136, 0.4);
-    transform: translateY(-15px) scale(1.02);
-    box-shadow: 0 30px 60px rgba(0, 255, 136, 0.25);
+    transform: translateY(-5px);
+    box-shadow: 0 15px 30px rgba(0, 255, 136, 0.15);
+
+    @media (min-width: 768px) {
+      transform: translateY(-10px);
+      box-shadow: 0 20px 40px rgba(0, 255, 136, 0.2);
+    }
+
+    @media (min-width: 1200px) {
+      transform: translateY(-15px) scale(1.02);
+      box-shadow: 0 30px 60px rgba(0, 255, 136, 0.25);
+    }
   }
 
   &::before {
@@ -163,114 +253,187 @@ const ExperienceCard = styled(motion.div)`
   &:hover::before {
     left: 100%;
   }
-
-  @media (max-width: 968px) {
-    width: 100%;
-    max-width: none;
-  }
-
-  ${ExperienceItem}:nth-child(odd) & {
-    margin-right: 60px;
-    
-    @media (max-width: 968px) {
-      margin-right: 0;
-    }
-  }
-
-  ${ExperienceItem}:nth-child(even) & {
-    margin-left: 60px;
-    
-    @media (max-width: 968px) {
-      margin-left: 0;
-    }
-  }
 `;
 
+// Mobile-first: Company logo positioning and sizing
 const CompanyLogo = styled.div`
   position: absolute;
-  top: -15px;
-  right: 20px;
-  width: 50px;
-  height: 50px;
+  top: -10px;
+  right: 15px;
+  width: 36px;
+  height: 36px;
   background: linear-gradient(45deg, #00ff88, #ff0088);
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 1.5rem;
+  font-size: 1rem;
   font-weight: bold;
   color: #0f0f0f;
-  box-shadow: 0 5px 15px rgba(0, 255, 136, 0.3);
+  box-shadow: 0 3px 10px rgba(0, 255, 136, 0.3);
 
-  @media (max-width: 768px) {
+  @media (min-width: 480px) {
     width: 40px;
     height: 40px;
-    font-size: 1.2rem;
-    right: 15px;
+    font-size: 1.1rem;
+  }
+
+  @media (min-width: 768px) {
+    top: -15px;
+    right: 20px;
+    width: 45px;
+    height: 45px;
+    font-size: 1.3rem;
+    box-shadow: 0 5px 15px rgba(0, 255, 136, 0.3);
+  }
+
+  @media (min-width: 1024px) {
+    width: 50px;
+    height: 50px;
+    font-size: 1.5rem;
   }
 `;
 
+// Mobile-first: Job title sizing
 const JobTitle = styled.h3`
   font-family: 'Orbitron', monospace;
-  font-size: 1.4rem;
+  font-size: 1.1rem;
   font-weight: 700;
   color: #00ff88;
   margin-bottom: 0.5rem;
   text-shadow: 0 0 10px rgba(0, 255, 136, 0.3);
+  line-height: 1.3;
+  padding-right: 50px; /* Make room for logo on mobile */
 
-  @media (max-width: 768px) {
+  @media (min-width: 480px) {
     font-size: 1.2rem;
+  }
+
+  @media (min-width: 768px) {
+    font-size: 1.3rem;
+  }
+
+  @media (min-width: 1024px) {
+    font-size: 1.4rem;
   }
 `;
 
+// Mobile-first: Company name sizing
 const CompanyName = styled.h4`
-  font-size: 1.1rem;
+  font-size: 0.95rem;
   color: #ffffff;
   margin-bottom: 0.5rem;
   font-weight: 600;
 
-  @media (max-width: 768px) {
+  @media (min-width: 480px) {
     font-size: 1rem;
+  }
+
+  @media (min-width: 768px) {
+    font-size: 1.05rem;
+  }
+
+  @media (min-width: 1024px) {
+    font-size: 1.1rem;
   }
 `;
 
+// Mobile-first: Duration text
 const JobDuration = styled.div`
   font-family: 'Space Mono', monospace;
-  font-size: 0.9rem;
+  font-size: 0.8rem;
   color: rgba(255, 0, 136, 0.8);
   font-weight: 600;
-  margin-bottom: 1.5rem;
+  margin-bottom: 1rem;
   text-transform: uppercase;
   letter-spacing: 1px;
+
+  @media (min-width: 768px) {
+    font-size: 0.85rem;
+    margin-bottom: 1.25rem;
+  }
+
+  @media (min-width: 1024px) {
+    font-size: 0.9rem;
+    margin-bottom: 1.5rem;
+  }
 `;
 
+// Mobile-first: Description text
 const JobDescription = styled.p`
   color: rgba(255, 255, 255, 0.85);
-  line-height: 1.7;
-  margin-bottom: 1.5rem;
-  font-size: 0.95rem;
+  line-height: 1.6;
+  margin-bottom: 1rem;
+  font-size: 0.9rem;
+
+  @media (min-width: 480px) {
+    font-size: 0.92rem;
+    line-height: 1.65;
+  }
+
+  @media (min-width: 768px) {
+    font-size: 0.95rem;
+    line-height: 1.7;
+    margin-bottom: 1.25rem;
+  }
+
+  @media (min-width: 1024px) {
+    margin-bottom: 1.5rem;
+  }
 `;
 
+// Mobile-first: Achievements list
 const Achievements = styled.ul`
   list-style: none;
   padding: 0;
-  margin: 1.5rem 0;
+  margin: 1rem 0;
+
+  @media (min-width: 768px) {
+    margin: 1.25rem 0;
+  }
+
+  @media (min-width: 1024px) {
+    margin: 1.5rem 0;
+  }
 `;
 
+// Mobile-first: Achievement items with proper touch target sizing
 const Achievement = styled.li`
   color: rgba(255, 255, 255, 0.8);
-  font-size: 0.9rem;
-  line-height: 1.6;
-  margin-bottom: 0.8rem;
+  font-size: 0.85rem;
+  line-height: 1.5;
+  margin-bottom: 0.6rem;
   position: relative;
-  padding-left: 1.5rem;
+  padding-left: 1.2rem;
+  min-height: 1.2rem; /* Ensure readability */
 
   &::before {
     content: '⚡';
     position: absolute;
     left: 0;
     color: #ff0088;
-    font-size: 0.8rem;
+    font-size: 0.75rem;
+  }
+
+  @media (min-width: 480px) {
+    font-size: 0.87rem;
+    line-height: 1.55;
+  }
+
+  @media (min-width: 768px) {
+    font-size: 0.9rem;
+    line-height: 1.6;
+    margin-bottom: 0.7rem;
+    padding-left: 1.4rem;
+
+    &::before {
+      font-size: 0.8rem;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    margin-bottom: 0.8rem;
+    padding-left: 1.5rem;
   }
 
   &:last-child {
@@ -278,25 +441,51 @@ const Achievement = styled.li`
   }
 `;
 
+// Mobile-first: Skill tags with proper spacing
 const SkillTags = styled.div`
   display: flex;
   flex-wrap: wrap;
-  gap: 0.5rem;
+  gap: 0.4rem;
   margin-top: 1rem;
+
+  @media (min-width: 480px) {
+    gap: 0.45rem;
+  }
+
+  @media (min-width: 768px) {
+    gap: 0.5rem;
+  }
 `;
 
+// Mobile-first: Skill tag sizing with minimum touch target
 const SkillTag = styled.span`
   background: rgba(255, 0, 136, 0.2);
   color: #ff0088;
-  padding: 0.3rem 0.8rem;
-  border-radius: 15px;
-  font-size: 0.75rem;
+  padding: 0.35rem 0.7rem;
+  border-radius: 12px;
+  font-size: 0.7rem;
   font-weight: 600;
   border: 1px solid rgba(255, 0, 136, 0.3);
   text-transform: uppercase;
   letter-spacing: 0.5px;
+  min-height: 28px;
+  display: inline-flex;
+  align-items: center;
+
+  @media (min-width: 480px) {
+    padding: 0.3rem 0.75rem;
+    font-size: 0.72rem;
+    border-radius: 13px;
+  }
+
+  @media (min-width: 768px) {
+    padding: 0.3rem 0.8rem;
+    font-size: 0.75rem;
+    border-radius: 15px;
+  }
 `;
 
+// Mobile-first: Floating elements with appropriate sizing
 const FloatingElements = styled.div`
   position: absolute;
   top: 0;
@@ -307,16 +496,77 @@ const FloatingElements = styled.div`
   z-index: 1;
 `;
 
+// Mobile-first: Smaller floating elements that don't interfere with content
 const FloatingBriefcase = styled(motion.div)`
   position: absolute;
-  font-size: 2rem;
-  opacity: 0.1;
+  font-size: 1.2rem;
+  opacity: 0.08;
   color: #00ff88;
 
-  &.briefcase-1 { top: 15%; left: 10%; }
-  &.briefcase-2 { top: 30%; right: 15%; }
-  &.briefcase-3 { bottom: 25%; left: 20%; }
-  &.briefcase-4 { bottom: 40%; right: 10%; }
+  @media (min-width: 768px) {
+    font-size: 1.5rem;
+    opacity: 0.1;
+  }
+
+  @media (min-width: 1024px) {
+    font-size: 2rem;
+  }
+
+  &.briefcase-1 { 
+    top: 12%; 
+    left: 5%;
+    
+    @media (min-width: 768px) {
+      top: 15%;
+      left: 8%;
+    }
+
+    @media (min-width: 1024px) {
+      left: 10%;
+    }
+  }
+
+  &.briefcase-2 { 
+    top: 25%; 
+    right: 8%; 
+
+    @media (min-width: 768px) {
+      top: 30%;
+      right: 12%;
+    }
+
+    @media (min-width: 1024px) {
+      right: 15%;
+    }
+  }
+
+  &.briefcase-3 { 
+    bottom: 30%; 
+    left: 8%; 
+
+    @media (min-width: 768px) {
+      bottom: 25%;
+      left: 15%;
+    }
+
+    @media (min-width: 1024px) {
+      left: 20%;
+    }
+  }
+
+  &.briefcase-4 { 
+    bottom: 45%; 
+    right: 5%; 
+
+    @media (min-width: 768px) {
+      bottom: 40%;
+      right: 8%;
+    }
+
+    @media (min-width: 1024px) {
+      right: 10%;
+    }
+  }
 `;
 
 const Experience = () => {
